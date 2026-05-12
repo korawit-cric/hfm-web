@@ -1,6 +1,6 @@
 import { linksApi } from '@repo/api-client';
 import type { Link } from '@repo/prisma';
-import { serverFetch } from '../lib/fetch/server';
+import { serverFetch } from '../../lib/fetch/server';
 
 /**
  * Server-side service for fetching links

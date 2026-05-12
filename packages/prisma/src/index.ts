@@ -1,11 +1,18 @@
+import path from 'node:path';
+
 import { PrismaClient } from '@prisma/client';
 import { PrismaPg } from '@prisma/adapter-pg';
+import { config } from 'dotenv';
 import pg from 'pg';
+
+// Nest (and other consumers) do not load root `.env` by default; match prisma.config.ts.
+config({ path: path.join(__dirname, '..', '.env') });
+config({ path: path.join(__dirname, '..', '..', '..', '.env') });
 
 const prismaClientSingleton = () => {
   const connectionString =
     process.env.DATABASE_URL ||
-    'postgresql://postgres:postgres@localhost:5433/monex-root-template-v2-db?schema=public';
+    'postgresql://postgres:postgres@localhost:5433/hfm-db?schema=public';
 
   const pool = new pg.Pool({ connectionString });
   const adapter = new PrismaPg(pool);

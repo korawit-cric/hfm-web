@@ -4,8 +4,8 @@ import { Injectable } from '@nestjs/common';
 export class AppService {
   getInfo() {
     return {
-      name: 'NestJS API',
-      description: 'REST API with Prisma ORM',
+      name: 'HFM API',
+      description: 'REST API for hfm-web (NestJS, Prisma)',
       version: '1.0.0',
       docs: '/api',
       endpoints: {

@@ -73,6 +73,7 @@ export function InputDemo() {
               label="Email"
               disabled
               value="user@example.com"
+              readOnly
               id="input-filled-disabled"
             />
           </div>

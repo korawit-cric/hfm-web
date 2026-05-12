@@ -1,26 +1,25 @@
-# With-NestJs | API
+# HFM API
+
+NestJS application for the **hfm-web** monorepo.
 
 ## Getting Started
 
-First, run the development server:
+From the repo root:
 
 ```bash
-pnpm run dev
-# Also works with NPM, YARN, BUN, ...
+npm run dev --filter=hfm-api
 ```
 
-By default, your server will run at [localhost:3000](http://localhost:3000). You can use your favorite API platform like [Insomnia](https://insomnia.rest/) or [Postman](https://www.postman.com/) to test your APIs
+By default the server listens on **`API_PORT`** (see root `.env`), commonly [http://localhost:3001](http://localhost:3001). Use [Insomnia](https://insomnia.rest/), [Postman](https://www.postman.com/), or the Swagger UI at **`/api`** to explore endpoints.
 
-You can start editing the demo **APIs** by modifying [linksService](./src/links/links.service.ts) provider.
+You can start editing the demo **APIs** by modifying [links.service.ts](./src/links/links.service.ts).
 
-### Important Note 🚧
+### Important Note
 
-If you plan to `build` or `test` the app. Please make sure to build the `packages/*` first.
+If you plan to `build` or `test` the app, build `packages/*` first.
 
 ## Learn More
 
-Learn more about `NestJs` with following resources:
-
-- [Official Documentation](https://docs.nestjs.com) - A progressive Node.js framework for building efficient, reliable and scalable server-side applications.
-- [Official NestJS Courses](https://courses.nestjs.com) - Learn everything you need to master NestJS and tackle modern backend applications at any scale.
-- [GitHub Repo](https://github.com/nestjs/nest)
+- [NestJS documentation](https://docs.nestjs.com)
+- [NestJS courses](https://courses.nestjs.com)
+- [NestJS on GitHub](https://github.com/nestjs/nest)

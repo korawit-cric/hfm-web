@@ -1,5 +1,6 @@
 'use client';
 
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { createContext, useContext, useState, type ReactNode } from 'react';
 
 interface ClientContextValue {
@@ -24,6 +25,18 @@ interface ClientProviderProps {
 }
 
 export function ClientProvider({ children }: ClientProviderProps) {
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            staleTime: 60 * 1000,
+            refetchOnWindowFocus: false,
+          },
+        },
+      }),
+  );
+
   const [user, setUser] = useState<{ id: string; name: string } | null>(null);
 
   const login = (userData: { id: string; name: string }) => {
@@ -35,15 +48,17 @@ export function ClientProvider({ children }: ClientProviderProps) {
   };
 
   return (
-    <ClientContext.Provider
-      value={{
-        user,
-        isAuthenticated: !!user,
-        login,
-        logout,
-      }}
-    >
-      {children}
-    </ClientContext.Provider>
+    <QueryClientProvider client={queryClient}>
+      <ClientContext.Provider
+        value={{
+          user,
+          isAuthenticated: !!user,
+          login,
+          logout,
+        }}
+      >
+        {children}
+      </ClientContext.Provider>
+    </QueryClientProvider>
   );
 }

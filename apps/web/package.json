@@ -1,5 +1,5 @@
 {
-  "name": "web",
+  "name": "hfm-frontend",
   "version": "0.1.0",
   "type": "module",
   "private": true,
@@ -20,6 +20,7 @@
     "@repo/icons": "*",
     "@tanstack/react-query": "^5.80.7",
     "next": "^16.0.7",
+    "next-intl": "^4.11.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.0.0",

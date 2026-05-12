@@ -1,14 +1,15 @@
 export const dynamic = 'force-dynamic';
 
 import Image from 'next/image';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
+import type { ComponentType, SVGProps } from 'react';
 
-import { getLinks } from '../../services/links.service';
-import { FeatureBadge } from '../../components/feature-badge';
-import { LinksClient } from '../../components/links-client';
-import { ButtonDemo } from '../../components/button-demo';
-import { InputDemo } from '../../components/input-demo';
-import { TextareaDemo } from '../../components/textarea-demo';
-import { FormDemo } from '../../components/form-demo';
+import { getLinks, LinksClient } from '../../../features/links';
+import { FeatureBadge } from '../../../components/feature-badge';
+import { ButtonDemo } from '../../../components/button-demo';
+import { InputDemo } from '../../../components/input-demo';
+import { TextareaDemo } from '../../../components/textarea-demo';
+import { FormDemo } from '../../../components/form-demo';
 import {
   AddFile,
   AddUser,
@@ -30,7 +31,6 @@ import {
   Send,
   Trash,
 } from '@repo/icons';
-import { ComponentType, SVGProps } from 'react';
 
 type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
 
@@ -39,7 +39,15 @@ interface IconItem {
   component: IconComponent;
 }
 
-export default async function Home() {
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export default async function Home({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
+  const t = await getTranslations('HomePage');
   const links = await getLinks();
 
   const icons: IconItem[] = [
@@ -69,7 +77,7 @@ export default async function Home() {
         {/* Logo */}
         <Image
           src="/turborepo-dark.svg"
-          alt="Turborepo"
+          alt={t('logoAlt')}
           width={160}
           height={34}
           className="mb-8"
@@ -77,16 +85,14 @@ export default async function Home() {
         />
 
         {/* Intro */}
-        <h1 className="mb-4 text-3xl font-bold">Turborepo + Prisma Demo</h1>
-        <p className="text-primary-500 mb-8">
-          Fetching data from PostgreSQL via NestJS API and Prisma ORM.
-        </p>
+        <h1 className="mb-4 text-3xl font-bold">{t('title')}</h1>
+        <p className="text-primary-500 mb-8">{t('intro')}</p>
 
         {/* Badges */}
         <div className="mb-8 flex flex-wrap gap-2">
-          <FeatureBadge label="Next.js 16" />
-          <FeatureBadge label="Prisma 7" />
-          <FeatureBadge label="Local Component" highlight />
+          <FeatureBadge label={t('badges.nextjs')} />
+          <FeatureBadge label={t('badges.prisma')} />
+          <FeatureBadge label={t('badges.localComponent')} highlight />
         </div>
 
         {/* Button Variants Demo */}
@@ -103,9 +109,11 @@ export default async function Home() {
 
         {/* Icon Showcase */}
         <section className="border-surface mt-8 border-t pt-8">
-          <h2 className="mb-4 text-xl font-semibold">Icon Showcase</h2>
+          <h2 className="mb-4 text-xl font-semibold">
+            {t('iconShowcase.title')}
+          </h2>
           <p className="text-foreground/70 mb-6 text-sm">
-            All available icons from @repo/icons package
+            {t('iconShowcase.description')}
           </p>
           <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
             {icons.map(({ name, component: Icon }) => (
@@ -119,7 +127,9 @@ export default async function Home() {
             ))}
             <div className="flex flex-col items-center rounded-lg p-4 transition-colors">
               <Loading className="text-primary-600 mb-2 h-5 animate-spin" />
-              <span className="text-desktop-caption text-center">Loading</span>
+              <span className="text-desktop-caption text-center">
+                {t('iconShowcase.loadingLabel')}
+              </span>
             </div>
           </div>
         </section>
@@ -127,7 +137,7 @@ export default async function Home() {
         {/* Data */}
         <section className="border-surface mt-8 border-t pt-8">
           <h2 className="mb-4 text-xl font-semibold">
-            Server-Side Demo: Fetched Links ({links.length})
+            {t('serverDemoTitle', { count: links.length })}
           </h2>
 
           {links.length > 0 ? (
@@ -151,34 +161,34 @@ export default async function Home() {
                     </p>
                   )}
                   <p className="text-foreground/50 mt-2 text-xs">
-                    ID: {link.id} •{' '}
-                    {new Date(link.createdAt).toLocaleDateString()}
+                    {t('linkMeta', {
+                      id: link.id,
+                      date: new Date(link.createdAt).toLocaleDateString(locale),
+                    })}
                   </p>
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="text-foreground/70">
-              No links. Start the API on port 3001.
-            </p>
+            <p className="text-foreground/70">{t('noLinks')}</p>
           )}
 
           {links.length > 0 && (
             <p className="text-success-800/70 mt-4 text-sm">
-              ✓ Server-side fetch via serverFetch()
+              {t('serverFetchNote')}
             </p>
           )}
         </section>
 
         {/* Client-side fetch demo */}
         <section className="border-surface mt-8 border-t pt-8">
-          <h2 className="mb-4 text-xl font-semibold">Client-Side Demo</h2>
+          <h2 className="mb-4 text-xl font-semibold">{t('clientDemoTitle')}</h2>
           <LinksClient />
         </section>
       </main>
 
       <footer className="border-surface text-foreground/50 mt-16 w-full max-w-3xl border-t pt-8 text-center text-sm">
-        Web • Port 3000 • @repo/design-system
+        {t('footer')}
       </footer>
     </div>
   );

@@ -1,0 +1,27 @@
+{
+  "Root": {
+    "title": "HFM Web",
+    "description": "hfm-web monorepo — Next.js frontend"
+  },
+  "HomePage": {
+    "logoAlt": "Turborepo",
+    "title": "HFM web demo",
+    "intro": "Fetching data from PostgreSQL via the HFM API (NestJS) and Prisma ORM.",
+    "badges": {
+      "nextjs": "Next.js 16",
+      "prisma": "Prisma 7",
+      "localComponent": "Local Component"
+    },
+    "serverDemoTitle": "Server-Side Demo: Fetched Links ({count})",
+    "noLinks": "No links. Start the API on port 3001.",
+    "serverFetchNote": "✓ Server-side fetch via serverFetch()",
+    "clientDemoTitle": "Client-Side Demo",
+    "footer": "HFM Web • Port 3000 • @repo/design-system",
+    "iconShowcase": {
+      "title": "Icon Showcase",
+      "description": "All available icons from @repo/icons",
+      "loadingLabel": "Loading"
+    },
+    "linkMeta": "ID: {id} • {date}"
+  }
+}
