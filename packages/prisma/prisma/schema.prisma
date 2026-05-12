@@ -19,3 +19,79 @@ model Link {
 
   @@map("links")
 }
+
+model Fqa {
+  id Int    @id @default(autoincrement())
+  q  String
+  a  String
+
+  @@map("fqas")
+}
+
+model Ranking {
+  id    Int     @id @default(autoincrement())
+  sn    String
+  name  String
+  gain  Decimal @db.Decimal(14, 2)
+  bonus Decimal @db.Decimal(14, 2)
+  /// Leaderboard position (typically derived from ordering by `gain`)
+  rank  Int
+
+  @@index([gain(sort: Desc)])
+  @@map("rankings")
+}
+
+model Prize {
+  id          Int     @id @default(autoincrement())
+  amount      Decimal @db.Decimal(14, 2)
+  /// Manually assigned prize tier / placement
+  rank        Int
+  description String?
+
+  @@map("prizes")
+}
+
+model Country {
+  id           Int           @id @default(autoincrement())
+  name         String
+  codeLinks    CodeCountry[]
+  applications Application[]
+
+  @@map("countries")
+}
+
+model Code {
+  id           Int           @id @default(autoincrement())
+  code         String        @unique
+  countries    CodeCountry[]
+  applications Application[]
+
+  @@map("codes")
+}
+
+model CodeCountry {
+  codeId    Int
+  countryId Int
+  code      Code    @relation(fields: [codeId], references: [id], onDelete: Cascade)
+  country   Country @relation(fields: [countryId], references: [id], onDelete: Cascade)
+
+  @@id([codeId, countryId])
+  @@map("code_countries")
+}
+
+model Application {
+  id         Int      @id @default(autoincrement())
+  firstname  String
+  lastname   String
+  countryId  Int
+  codeId     Int
+  phone      String
+  email      String
+  experience String[]
+  consent    Boolean  @default(false)
+
+  country Country @relation(fields: [countryId], references: [id])
+  code    Code    @relation(fields: [codeId], references: [id])
+
+  @@map("applications")
+}
