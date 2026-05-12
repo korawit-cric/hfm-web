@@ -5,6 +5,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import type { ComponentType, SVGProps } from 'react';
 
 import { getLinks, LinksClient } from '../../../features/links';
+import { getRankings, RankingsClient } from '../../../features/rankings';
 import { FeatureBadge } from '../../../components/feature-badge';
 import { ButtonDemo } from '../../../components/button-demo';
 import { InputDemo } from '../../../components/input-demo';
@@ -48,7 +49,7 @@ export default async function Home({ params }: Props) {
   setRequestLocale(locale);
 
   const t = await getTranslations('HomePage');
-  const links = await getLinks();
+  const [links, rankings] = await Promise.all([getLinks(), getRankings()]);
 
   const icons: IconItem[] = [
     { name: 'AddFile', component: AddFile },
@@ -184,6 +185,39 @@ export default async function Home({ params }: Props) {
         <section className="border-surface mt-8 border-t pt-8">
           <h2 className="mb-4 text-xl font-semibold">{t('clientDemoTitle')}</h2>
           <LinksClient />
+        </section>
+
+        <section className="border-surface mt-8 border-t pt-8">
+          <h2 className="mb-4 text-xl font-semibold">
+            {t('rankingsServerTitle', { count: rankings.length })}
+          </h2>
+          {rankings.length > 0 ? (
+            <ul className="space-y-3">
+              {rankings.map((r) => (
+                <li
+                  key={r.id}
+                  className="border-surface hover:border-border rounded-xl border p-5 transition-colors"
+                >
+                  <p className="font-medium">
+                    #{r.rank} {r.name}
+                  </p>
+                  <p className="text-foreground/70 mt-1 text-sm">{r.sn}</p>
+                  <p className="text-foreground/50 mt-2 text-xs">
+                    {t('rankingMeta', { rank: r.rank, gain: r.gain })}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-foreground/70">{t('noRankings')}</p>
+          )}
+        </section>
+
+        <section className="border-surface mt-8 border-t pt-8">
+          <h2 className="mb-4 text-xl font-semibold">
+            {t('rankingsClientTitle')}
+          </h2>
+          <RankingsClient />
         </section>
       </main>
 

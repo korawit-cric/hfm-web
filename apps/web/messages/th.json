@@ -16,6 +16,10 @@
     "noLinks": "ยังไม่มีลิงก์ เริ่ม API ที่พอร์ต 3001",
     "serverFetchNote": "✓ ดึงฝั่งเซิร์ฟเวอร์ผ่าน serverFetch()",
     "clientDemoTitle": "ดีโมฝั่งไคลเอนต์",
+    "rankingsServerTitle": "ดีโมฝั่งเซิร์ฟเวอร์: อันดับ ({count})",
+    "noRankings": "ยังไม่มีข้อมูลอันดับ",
+    "rankingsClientTitle": "ดีโมฝั่งไคลเอนต์: อันดับ",
+    "rankingMeta": "อันดับ {rank} • gain {gain}",
     "footer": "HFM Web • พอร์ต 3000 • @repo/design-system",
     "iconShowcase": {
       "title": "แกลเลอรีไอคอน",

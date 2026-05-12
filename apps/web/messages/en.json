@@ -16,6 +16,10 @@
     "noLinks": "No links. Start the API on port 3001.",
     "serverFetchNote": "✓ Server-side fetch via serverFetch()",
     "clientDemoTitle": "Client-Side Demo",
+    "rankingsServerTitle": "Server-Side Demo: Rankings ({count})",
+    "noRankings": "No rankings data.",
+    "rankingsClientTitle": "Client-Side Demo: Rankings",
+    "rankingMeta": "#{rank} • gain {gain}",
     "footer": "HFM Web • Port 3000 • @repo/design-system",
     "iconShowcase": {
       "title": "Icon Showcase",
