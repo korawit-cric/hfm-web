@@ -6,6 +6,7 @@ import type { ComponentType, SVGProps } from 'react';
 
 import { FaqsClient, getFaqs } from '../../../features/faqs';
 import { getLinks, LinksClient } from '../../../features/links';
+import { getPrizes, PrizesClient } from '../../../features/prizes';
 import { getRankings, RankingsClient } from '../../../features/rankings';
 import { FeatureBadge } from '../../../components/feature-badge';
 import { ButtonDemo } from '../../../components/button-demo';
@@ -50,10 +51,11 @@ export default async function Home({ params }: Props) {
   setRequestLocale(locale);
 
   const t = await getTranslations('HomePage');
-  const [links, rankings, faqs] = await Promise.all([
+  const [links, rankings, faqs, prizes] = await Promise.all([
     getLinks(),
     getRankings(),
     getFaqs(),
+    getPrizes(),
   ]);
 
   const icons: IconItem[] = [
@@ -249,6 +251,40 @@ export default async function Home({ params }: Props) {
         <section className="border-surface mt-8 border-t pt-8">
           <h2 className="mb-4 text-xl font-semibold">{t('faqsClientTitle')}</h2>
           <FaqsClient />
+        </section>
+
+        <section className="border-surface mt-8 border-t pt-8">
+          <h2 className="mb-4 text-xl font-semibold">
+            {t('prizesServerTitle', { count: prizes.length })}
+          </h2>
+          {prizes.length > 0 ? (
+            <ul className="space-y-3">
+              {prizes.map((p) => (
+                <li
+                  key={p.id}
+                  className="border-surface rounded-xl border p-5 transition-colors"
+                >
+                  <p className="font-medium">
+                    {t('prizeLine', { rank: p.rank, amount: p.amount })}
+                  </p>
+                  {p.description && (
+                    <p className="text-foreground/70 mt-2 text-sm">
+                      {p.description}
+                    </p>
+                  )}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-foreground/70">{t('noPrizes')}</p>
+          )}
+        </section>
+
+        <section className="border-surface mt-8 border-t pt-8">
+          <h2 className="mb-4 text-xl font-semibold">
+            {t('prizesClientTitle')}
+          </h2>
+          <PrizesClient />
         </section>
       </main>
 

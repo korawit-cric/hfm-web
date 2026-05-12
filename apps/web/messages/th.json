@@ -23,6 +23,10 @@
     "faqsServerTitle": "ดีโมฝั่งเซิร์ฟเวอร์: FAQ ({count})",
     "noFaqs": "ยังไม่มี FAQ",
     "faqsClientTitle": "ดีโมฝั่งไคลเอนต์: FAQ",
+    "prizesServerTitle": "ดีโมฝั่งเซิร์ฟเวอร์: รางวัล ({count})",
+    "noPrizes": "ยังไม่มีรางวัล",
+    "prizesClientTitle": "ดีโมฝั่งไคลเอนต์: รางวัล",
+    "prizeLine": "ระดับ {rank} — {amount}",
     "footer": "HFM Web • พอร์ต 3000 • @repo/design-system",
     "iconShowcase": {
       "title": "แกลเลอรีไอคอน",
