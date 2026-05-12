@@ -1,12 +1,12 @@
 services:
   postgres:
     image: postgres:16-alpine
-    container_name: ${DB_CONTAINER_NAME:-nestjs-poc-db}
+    container_name: ${DB_CONTAINER_NAME:-hfm-web-db}
     restart: unless-stopped
     environment:
       POSTGRES_USER: ${DB_USER:-postgres}
       POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
-      POSTGRES_DB: ${DB_NAME:-nestjs_poc}
+      POSTGRES_DB: ${DB_NAME:-hfm-web-db}
     ports:
       - '${DB_PORT:-5433}:5432'
     volumes:

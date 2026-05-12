@@ -22,7 +22,7 @@ describe('AppController (e2e)', () => {
       .get('/')
       .expect(200)
       .expect((res) => {
-        expect(res.body).toHaveProperty('name', 'NestJS API');
+        expect(res.body).toHaveProperty('name', 'HFM API');
       });
   });
 });

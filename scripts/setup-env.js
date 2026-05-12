@@ -20,7 +20,7 @@ if (!fs.existsSync(envPath) && fs.existsSync(envExamplePath)) {
     DB_PASSWORD: 'postgres',
     DB_NAME: 'hfm-web-db',
     DB_PORT: '5433',
-    DB_CONTAINER_NAME: 'nestjs-poc-db',
+    DB_CONTAINER_NAME: 'hfm-web-db',
   };
 
   // Replace ${VAR} with default values

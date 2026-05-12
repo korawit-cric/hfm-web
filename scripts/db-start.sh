@@ -16,7 +16,7 @@ export DB_USER=${DB_USER:-postgres}
 export DB_PASSWORD=${DB_PASSWORD:-postgres}
 export DB_NAME=${DB_NAME:-hfm-web-db}
 export DB_PORT=${DB_PORT:-5433}
-export DB_CONTAINER_NAME=${DB_CONTAINER_NAME:-nestjs-poc-db}
+export DB_CONTAINER_NAME=${DB_CONTAINER_NAME:-hfm-web-db}
 
 echo "Starting PostgreSQL database..."
 cd "$DB_DIR" && docker-compose up -d postgres

@@ -11,9 +11,9 @@ This Turborepo includes the following packages & apps:
 ```shell
 .
 ├── apps
-│   ├── web                # Next.js 16 Frontend         → http://localhost:3000
-│   ├── api                # NestJS 11 API              → http://localhost:3001
-│   └── db                        # PostgreSQL 16 (Docker Compose)    → localhost:5433
+│   ├── web                # hfm-frontend (Next.js 16)   → http://localhost:3000
+│   ├── api                # hfm-api (NestJS 11)         → http://localhost:3001
+│   └── db                 # hfm-db (PostgreSQL 16, Docker)  → localhost:5433
 └── packages
     ├── @repo/api-client          # Frontend API definitions & types (no fetch)
     ├── @repo/design-system       # Tailwind 4 config, colors, global styles
@@ -31,13 +31,13 @@ Each package and application are written in [TypeScript](https://www.typescriptl
 
 **Runtime & Apps**
 
-| Component                                                 | Version         | Port       |
-| --------------------------------------------------------- | --------------- | ---------- |
-| **Node.js**                                               | >=22.12         | -          |
-| [**Next.js Web**](https://nextjs.org/) (`apps/web`)       | ^16.0.7         | 3000       |
-| [**NestJS API**](https://nestjs.com/) (`apps/api`)        | ^11.0.0         | 3001       |
-| [**PostgreSQL**](https://www.postgresql.org/) (`apps/db`) | 16-alpine       | 5433       |
-| **Swagger** (`/api`)                                      | @nestjs/swagger | 3001, 3003 |
+| Component                                                       | Version         | Port       |
+| --------------------------------------------------------------- | --------------- | ---------- |
+| **Node.js**                                                     | >=22.12         | -          |
+| [**Next.js**](https://nextjs.org/) (`hfm-frontend`, `apps/web`) | ^16.0.7         | 3000       |
+| [**NestJS API**](https://nestjs.com/) (`hfm-api`, `apps/api`)   | ^11.0.0         | 3001       |
+| [**PostgreSQL**](https://www.postgresql.org/) (`apps/db`)       | 16-alpine       | 5433       |
+| **Swagger** (`/api`)                                            | @nestjs/swagger | 3001, 3003 |
 
 **Core Libraries**
 
@@ -214,7 +214,7 @@ Uses [Conventional Commits](https://www.conventionalcommits.org/) format with re
 
 ```bash
 # Format: type(scope): message
-feat(web): add user authentication
+feat(hfm-frontend): add user authentication
 fix(api): resolve database connection issue
 docs(readme): update installation steps
 refactor(prisma): optimize query performance
@@ -357,11 +357,11 @@ The `@repo/icons` package uses [SVGR](https://react-svgr.com/) to automatically 
 This project separates **API definitions** from **fetch logic** for maximum flexibility:
 
 ```
-@repo/api-client (shared)    apps/*-web (per-app)
+@repo/api-client (shared)    apps/hfm-frontend (per-app, path `apps/web`)
 ┌─────────────────────┐      ┌─────────────────────────────────┐
 │ linksApi.list()     │      │ lib/fetch/server.ts (SSR)       │
 │ linksApi.detail(id) │ ──▶  │ lib/fetch/client.ts (CSR)       │
-│ linksApi.create()   │      │ queries/links.ts (TanStack)     │
+│ linksApi.create()   │      │ features/links/queries.ts       │
 └─────────────────────┘      └─────────────────────────────────┘
 ```
 
@@ -381,7 +381,7 @@ export const linksApi = {
 2. **Each app** has its own fetch utilities that consume these definitions:
 
 ```typescript
-// apps/registry-web/lib/fetch/server.ts - Server-side fetch
+// apps/web/lib/fetch/server.ts - Server-side fetch
 export async function serverFetch<T>(endpoint: ApiEndpoint<T>): Promise<T> {
   const response = await fetch(`${API_BASE_URL}${endpoint.url}`, {
     method: endpoint.method,
@@ -391,7 +391,7 @@ export async function serverFetch<T>(endpoint: ApiEndpoint<T>): Promise<T> {
   return response.json();
 }
 
-// apps/registry-web/lib/fetch/client.ts - Client-side fetch (for TanStack Query)
+// apps/web/lib/fetch/client.ts - Client-side fetch (for TanStack Query)
 export async function clientFetch<T>(endpoint: ApiEndpoint<T>): Promise<T> {
   // Same logic, but TanStack Query handles caching
 }
@@ -402,9 +402,9 @@ export async function clientFetch<T>(endpoint: ApiEndpoint<T>): Promise<T> {
 **Server Components** use `serverFetch()` directly:
 
 ```typescript
-// apps/registry-web/app/page.tsx (Server Component)
+// apps/web/app/(home)/page.tsx (Server Component)
 import { linksApi } from '@repo/api-client';
-import { serverFetch } from '@/lib/fetch/server';
+import { serverFetch } from '../../lib/fetch/server';
 
 export default async function Page() {
   const links = await serverFetch(linksApi.list());
@@ -415,9 +415,9 @@ export default async function Page() {
 **Client Components** use TanStack Query hooks:
 
 ```typescript
-// apps/registry-web/components/links-client.tsx
+// apps/web/features/links/links-client.tsx
 'use client';
-import { useLinksQuery } from '@/queries/links';
+import { useLinksQuery } from './queries';
 
 export function LinksClient() {
   const { data: links, isLoading } = useLinksQuery();
@@ -443,7 +443,7 @@ This monorepo is designed to make adding new apps straightforward:
 1. **Duplicate an existing app**:
 
    ```bash
-   cp -r apps/registry-web apps/my-new-app
+   cp -r apps/web apps/my-new-app
    ```
 
 2. **Update the app name** in the following files:
@@ -462,11 +462,11 @@ This monorepo is designed to make adding new apps straightforward:
 
 ```bash
 # 1. Duplicate an existing app
-cp -r apps/registry-web apps/admin
+cp -r apps/web apps/admin
 
 # 2. Update package.json
 cd apps/admin
-# Change "name": "registry-web" → "name": "admin"
+# Change "name": "hfm-frontend" → "name": "admin" (or your app workspace name)
 # Change port from 3001 → 3004
 
 # 3. Start developing!

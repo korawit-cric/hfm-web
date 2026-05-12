@@ -1,4 +1,4 @@
-# Database Service
+# Database (`hfm-db`)
 
 PostgreSQL database service running in Docker.
 
