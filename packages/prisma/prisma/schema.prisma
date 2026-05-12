@@ -9,55 +9,110 @@ datasource db {
   provider = "postgresql"
 }
 
+enum Locale {
+  en
+  th
+}
+
 model Link {
-  id          Int      @id @default(autoincrement())
-  url         String
-  title       String
-  description String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id           Int               @id @default(autoincrement())
+  url          String
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  translations LinkTranslation[]
 
   @@map("links")
 }
 
+model LinkTranslation {
+  linkId      Int
+  locale      Locale
+  title       String
+  description String?
+  link        Link   @relation(fields: [linkId], references: [id], onDelete: Cascade)
+
+  @@id([linkId, locale])
+  @@map("link_translations")
+}
+
 model Fqa {
-  id Int    @id @default(autoincrement())
-  q  String
-  a  String
+  id           Int              @id @default(autoincrement())
+  translations FqaTranslation[]
 
   @@map("fqas")
 }
 
+model FqaTranslation {
+  fqaId  Int
+  locale Locale
+  q      String
+  a      String
+  fqa    Fqa    @relation(fields: [fqaId], references: [id], onDelete: Cascade)
+
+  @@id([fqaId, locale])
+  @@map("fqa_translations")
+}
+
 model Ranking {
-  id    Int     @id @default(autoincrement())
-  sn    String
-  name  String
-  gain  Decimal @db.Decimal(14, 2)
-  bonus Decimal @db.Decimal(14, 2)
+  id           Int                  @id @default(autoincrement())
+  sn           String
+  gain         Decimal              @db.Decimal(14, 2)
+  bonus        Decimal              @db.Decimal(14, 2)
   /// Leaderboard position (typically derived from ordering by `gain`)
-  rank  Int
+  rank         Int
+  translations RankingTranslation[]
 
   @@index([gain(sort: Desc)])
   @@map("rankings")
 }
 
+model RankingTranslation {
+  rankingId Int
+  locale    Locale
+  name      String
+  ranking   Ranking @relation(fields: [rankingId], references: [id], onDelete: Cascade)
+
+  @@id([rankingId, locale])
+  @@map("ranking_translations")
+}
+
 model Prize {
-  id          Int     @id @default(autoincrement())
-  amount      Decimal @db.Decimal(14, 2)
+  id           Int                @id @default(autoincrement())
+  amount       Decimal            @db.Decimal(14, 2)
   /// Manually assigned prize tier / placement
-  rank        Int
-  description String?
+  rank         Int
+  translations PrizeTranslation[]
 
   @@map("prizes")
 }
 
+model PrizeTranslation {
+  prizeId     Int
+  locale      Locale
+  description String?
+  prize       Prize @relation(fields: [prizeId], references: [id], onDelete: Cascade)
+
+  @@id([prizeId, locale])
+  @@map("prize_translations")
+}
+
 model Country {
-  id           Int           @id @default(autoincrement())
-  name         String
+  id           Int                  @id @default(autoincrement())
   codeLinks    CodeCountry[]
   applications Application[]
+  translations CountryTranslation[]
 
   @@map("countries")
+}
+
+model CountryTranslation {
+  countryId Int
+  locale    Locale
+  name      String
+  country   Country @relation(fields: [countryId], references: [id], onDelete: Cascade)
+
+  @@id([countryId, locale])
+  @@map("country_translations")
 }
 
 model Code {
@@ -98,9 +153,19 @@ model Application {
 }
 
 model Experience {
-  id           Int           @id @default(autoincrement())
-  name         String
+  id           Int                     @id @default(autoincrement())
   applications Application[]
+  translations ExperienceTranslation[]
 
   @@map("experiences")
+}
+
+model ExperienceTranslation {
+  experienceId Int
+  locale       Locale
+  name         String
+  experience   Experience @relation(fields: [experienceId], references: [id], onDelete: Cascade)
+
+  @@id([experienceId, locale])
+  @@map("experience_translations")
 }

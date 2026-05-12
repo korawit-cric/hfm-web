@@ -1,5 +1,6 @@
-// Re-export Prisma types for convenience
-export type { Link } from '@repo/prisma';
+import type { Locale } from '@repo/prisma';
+
+export type { Locale };
 
 // API request/response types
 export interface ApiEndpoint<TResponse = unknown> {
@@ -15,15 +16,28 @@ export interface ApiEndpointWithBody<
   body?: TBody;
 }
 
-// Link DTOs
-export interface CreateLinkDto {
-  title: string;
+/** Resolved link for the requested locale (API flattens translations). */
+export interface Link {
+  id: number;
   url: string;
+  title: string;
+  description: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface LinkTranslationInput {
+  locale: Locale;
+  title: string;
   description?: string;
 }
 
+export interface CreateLinkDto {
+  url: string;
+  translations: LinkTranslationInput[];
+}
+
 export interface UpdateLinkDto {
-  title?: string;
   url?: string;
-  description?: string;
+  translations?: LinkTranslationInput[];
 }

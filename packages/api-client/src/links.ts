@@ -1,23 +1,31 @@
-import type { Link } from '@repo/prisma';
 import type {
   ApiEndpoint,
   ApiEndpointWithBody,
   CreateLinkDto,
+  Link,
   UpdateLinkDto,
 } from './types.js';
+
+function withLocaleQuery(path: string, locale?: string): string {
+  if (!locale) {
+    return path;
+  }
+  const q = new URLSearchParams({ locale }).toString();
+  return path.includes('?') ? `${path}&${q}` : `${path}?${q}`;
+}
 
 /**
  * Links API definitions
  * Pure data contracts - no fetch, no React, no Next.js
  */
 export const linksApi = {
-  list: (): ApiEndpoint<Link[]> => ({
-    url: '/links',
+  list: (locale?: string): ApiEndpoint<Link[]> => ({
+    url: withLocaleQuery('/links', locale),
     method: 'GET',
   }),
 
-  detail: (id: number): ApiEndpoint<Link> => ({
-    url: `/links/${id}`,
+  detail: (id: number, locale?: string): ApiEndpoint<Link> => ({
+    url: withLocaleQuery(`/links/${id}`, locale),
     method: 'GET',
   }),
 
@@ -30,8 +38,9 @@ export const linksApi = {
   update: (
     id: number,
     data: UpdateLinkDto,
+    locale?: string,
   ): ApiEndpointWithBody<UpdateLinkDto, Link> => ({
-    url: `/links/${id}`,
+    url: withLocaleQuery(`/links/${id}`, locale),
     method: 'PATCH',
     body: data,
   }),

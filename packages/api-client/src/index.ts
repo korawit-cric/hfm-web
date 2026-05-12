@@ -6,6 +6,8 @@ export type {
   ApiEndpoint,
   ApiEndpointWithBody,
   CreateLinkDto,
-  UpdateLinkDto,
+  LinkTranslationInput,
   Link,
+  Locale,
+  UpdateLinkDto,
 } from './types.js';
