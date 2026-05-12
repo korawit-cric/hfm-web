@@ -80,18 +80,27 @@ model CodeCountry {
 }
 
 model Application {
-  id         Int      @id @default(autoincrement())
-  firstname  String
-  lastname   String
-  countryId  Int
-  codeId     Int
-  phone      String
-  email      String
-  experience String[]
-  consent    Boolean  @default(false)
+  id           Int     @id @default(autoincrement())
+  firstname    String
+  lastname     String
+  countryId    Int
+  codeId       Int
+  experienceId Int
+  phone        String
+  email        String
+  consent      Boolean @default(false)
 
-  country Country @relation(fields: [countryId], references: [id])
-  code    Code    @relation(fields: [codeId], references: [id])
+  country    Country    @relation(fields: [countryId], references: [id])
+  code       Code       @relation(fields: [codeId], references: [id])
+  experience Experience @relation(fields: [experienceId], references: [id])
 
   @@map("applications")
+}
+
+model Experience {
+  id           Int           @id @default(autoincrement())
+  name         String
+  applications Application[]
+
+  @@map("experiences")
 }
