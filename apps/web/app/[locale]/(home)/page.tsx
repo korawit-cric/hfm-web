@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import type { ComponentType, SVGProps } from 'react';
 
+import { FaqsClient, getFaqs } from '../../../features/faqs';
 import { getLinks, LinksClient } from '../../../features/links';
 import { getRankings, RankingsClient } from '../../../features/rankings';
 import { FeatureBadge } from '../../../components/feature-badge';
@@ -49,7 +50,11 @@ export default async function Home({ params }: Props) {
   setRequestLocale(locale);
 
   const t = await getTranslations('HomePage');
-  const [links, rankings] = await Promise.all([getLinks(), getRankings()]);
+  const [links, rankings, faqs] = await Promise.all([
+    getLinks(),
+    getRankings(),
+    getFaqs(),
+  ]);
 
   const icons: IconItem[] = [
     { name: 'AddFile', component: AddFile },
@@ -218,6 +223,32 @@ export default async function Home({ params }: Props) {
             {t('rankingsClientTitle')}
           </h2>
           <RankingsClient />
+        </section>
+
+        <section className="border-surface mt-8 border-t pt-8">
+          <h2 className="mb-4 text-xl font-semibold">
+            {t('faqsServerTitle', { count: faqs.length })}
+          </h2>
+          {faqs.length > 0 ? (
+            <ul className="space-y-3">
+              {faqs.map((faq) => (
+                <li
+                  key={faq.id}
+                  className="border-surface rounded-xl border p-5 transition-colors"
+                >
+                  <p className="font-medium">{faq.q}</p>
+                  <p className="text-foreground/70 mt-2 text-sm">{faq.a}</p>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-foreground/70">{t('noFaqs')}</p>
+          )}
+        </section>
+
+        <section className="border-surface mt-8 border-t pt-8">
+          <h2 className="mb-4 text-xl font-semibold">{t('faqsClientTitle')}</h2>
+          <FaqsClient />
         </section>
       </main>
 

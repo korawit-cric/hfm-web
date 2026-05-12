@@ -20,6 +20,9 @@
     "noRankings": "No rankings data.",
     "rankingsClientTitle": "Client-Side Demo: Rankings",
     "rankingMeta": "#{rank} • gain {gain}",
+    "faqsServerTitle": "Server-Side Demo: FAQs ({count})",
+    "noFaqs": "No FAQs.",
+    "faqsClientTitle": "Client-Side Demo: FAQs",
     "footer": "HFM Web • Port 3000 • @repo/design-system",
     "iconShowcase": {
       "title": "Icon Showcase",

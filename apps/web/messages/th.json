@@ -20,6 +20,9 @@
     "noRankings": "ยังไม่มีข้อมูลอันดับ",
     "rankingsClientTitle": "ดีโมฝั่งไคลเอนต์: อันดับ",
     "rankingMeta": "อันดับ {rank} • gain {gain}",
+    "faqsServerTitle": "ดีโมฝั่งเซิร์ฟเวอร์: FAQ ({count})",
+    "noFaqs": "ยังไม่มี FAQ",
+    "faqsClientTitle": "ดีโมฝั่งไคลเอนต์: FAQ",
     "footer": "HFM Web • พอร์ต 3000 • @repo/design-system",
     "iconShowcase": {
       "title": "แกลเลอรีไอคอน",
