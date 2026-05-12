@@ -12,7 +12,7 @@ import {
 import { LinksService } from './links.service';
 import { CreateLinkDto } from './dto/create-link.dto';
 import { UpdateLinkDto } from './dto/update-link.dto';
-import { parseLocaleParam } from './locale';
+import { parseLocaleParam } from '../common/parse-locale-param';
 
 @Controller('links')
 export class LinksController {
