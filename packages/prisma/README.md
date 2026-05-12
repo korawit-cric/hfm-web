@@ -32,7 +32,7 @@ pnpm add @repo/prisma
    The `.env` file in the root directory should contain:
 
    ```env
-   DATABASE_URL="postgresql://postgres:postgres@localhost:5433/hfm-web-db?schema=public"
+   DATABASE_URL="postgresql://postgres:postgres@localhost:5433/hfm-db?schema=public"
    ```
 
    **How Prisma loads environment variables:**

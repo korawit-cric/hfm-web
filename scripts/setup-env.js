@@ -18,9 +18,9 @@ if (!fs.existsSync(envPath) && fs.existsSync(envExamplePath)) {
   const defaults = {
     DB_USER: 'postgres',
     DB_PASSWORD: 'postgres',
-    DB_NAME: 'hfm-web-db',
+    DB_NAME: 'hfm-db',
     DB_PORT: '5433',
-    DB_CONTAINER_NAME: 'hfm-web-db',
+    DB_CONTAINER_NAME: 'hfm-db',
   };
 
   // Replace ${VAR} with default values
