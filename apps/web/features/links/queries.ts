@@ -7,7 +7,7 @@ import {
   type UpdateLinkDto,
   type Link,
 } from '@repo/api-client';
-import { clientFetch } from '../lib/fetch/client';
+import { clientFetch } from '../../lib/fetch/client';
 
 export const linkKeys = {
   all: ['links'] as const,

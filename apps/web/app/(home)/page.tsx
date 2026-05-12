@@ -2,9 +2,8 @@ export const dynamic = 'force-dynamic';
 
 import Image from 'next/image';
 
-import { getLinks } from '../../services/links.service';
+import { getLinks, LinksClient } from '../../features/links';
 import { FeatureBadge } from '../../components/feature-badge';
-import { LinksClient } from '../../components/links-client';
 import { ButtonDemo } from '../../components/button-demo';
 import { InputDemo } from '../../components/input-demo';
 import { TextareaDemo } from '../../components/textarea-demo';

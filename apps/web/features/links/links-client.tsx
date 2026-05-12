@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@repo/ui/button';
-import { useLinksQuery } from '../queries/links';
+import { useLinksQuery } from './queries';
 
 /**
  * Client-side links component using TanStack Query
