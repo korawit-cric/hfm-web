@@ -3,6 +3,9 @@
     "title": "HFM Web",
     "description": "โมโนรีโป hfm-web — ส่วนหน้า Next.js"
   },
+  "NavigationBar": {
+    "logoAlt": "HF Markets"
+  },
   "HomePage": {
     "logoAlt": "Turborepo",
     "title": "ทดสอบ HFM web",

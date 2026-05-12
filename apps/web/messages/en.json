@@ -3,6 +3,9 @@
     "title": "HFM Web",
     "description": "hfm-web monorepo — Next.js frontend"
   },
+  "NavigationBar": {
+    "logoAlt": "HF Markets"
+  },
   "HomePage": {
     "logoAlt": "Turborepo",
     "title": "HFM web demo",
