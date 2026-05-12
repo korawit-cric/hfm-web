@@ -5,14 +5,7 @@ import type {
   Link,
   UpdateLinkDto,
 } from './types.js';
-
-function withLocaleQuery(path: string, locale?: string): string {
-  if (!locale) {
-    return path;
-  }
-  const q = new URLSearchParams({ locale }).toString();
-  return path.includes('?') ? `${path}&${q}` : `${path}?${q}`;
-}
+import { withLocaleQuery } from './query-utils.js';
 
 /**
  * Links API definitions
