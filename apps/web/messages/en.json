@@ -16,6 +16,12 @@
     "noLinks": "No links. Start the API on port 3001.",
     "serverFetchNote": "✓ Server-side fetch via serverFetch()",
     "clientDemoTitle": "Client-Side Demo",
-    "footer": "HFM Web • Port 3000 • @repo/design-system"
+    "footer": "HFM Web • Port 3000 • @repo/design-system",
+    "iconShowcase": {
+      "title": "Icon Showcase",
+      "description": "All available icons from @repo/icons",
+      "loadingLabel": "Loading"
+    },
+    "linkMeta": "ID: {id} • {date}"
   }
 }

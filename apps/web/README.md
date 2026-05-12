@@ -10,9 +10,11 @@ From the repo root:
 npm run dev --filter=hfm-frontend
 ```
 
-Open [http://localhost:3000](http://localhost:3000). Edit `app/` routes; the dev server hot-reloads.
+Open [http://localhost:3000](http://localhost:3000) (default locale `en`, no prefix). Thai: [http://localhost:3000/th](http://localhost:3000/th).
 
-This app loads **Prompt** from Google Fonts via [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts).
+Routing uses **next-intl** with `localePrefix: 'as-needed'` ([docs](https://next-intl.dev/docs/routing)). Use `Link` / `redirect` / `useRouter` from `lib/i18n/navigation` so locale is preserved.
+
+Messages live in `messages/{locale}.json` (`en`, `th`). The root layout loads **Prompt** from Google Fonts via [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts).
 
 ## Learn More
 

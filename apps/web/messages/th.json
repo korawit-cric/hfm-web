@@ -1,0 +1,27 @@
+{
+  "Root": {
+    "title": "HFM Web",
+    "description": "โมโนรีโป hfm-web — ส่วนหน้า Next.js"
+  },
+  "HomePage": {
+    "logoAlt": "Turborepo",
+    "title": "ทดสอบ HFM web",
+    "intro": "ดึงข้อมูลจาก PostgreSQL ผ่าน HFM API (NestJS) และ Prisma ORM",
+    "badges": {
+      "nextjs": "Next.js 16",
+      "prisma": "Prisma 7",
+      "localComponent": "คอมโพเนนต์ภายใน"
+    },
+    "serverDemoTitle": "ดีโมฝั่งเซิร์ฟเวอร์: ลิงก์ที่ดึงได้ ({count})",
+    "noLinks": "ยังไม่มีลิงก์ เริ่ม API ที่พอร์ต 3001",
+    "serverFetchNote": "✓ ดึงฝั่งเซิร์ฟเวอร์ผ่าน serverFetch()",
+    "clientDemoTitle": "ดีโมฝั่งไคลเอนต์",
+    "footer": "HFM Web • พอร์ต 3000 • @repo/design-system",
+    "iconShowcase": {
+      "title": "แกลเลอรีไอคอน",
+      "description": "ไอคอนทั้งหมดจาก @repo/icons",
+      "loadingLabel": "กำลังโหลด"
+    },
+    "linkMeta": "ID: {id} • {date}"
+  }
+}
