@@ -5,7 +5,7 @@ import pg from 'pg';
 const prismaClientSingleton = () => {
   const connectionString =
     process.env.DATABASE_URL ||
-    'postgresql://postgres:postgres@localhost:5433/monex-root-template-v2-db?schema=public';
+    'postgresql://postgres:postgres@localhost:5433/hfm-web-db?schema=public';
 
   const pool = new pg.Pool({ connectionString });
   const adapter = new PrismaPg(pool);

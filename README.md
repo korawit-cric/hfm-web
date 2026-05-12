@@ -1,4 +1,4 @@
-#     cric-monex-root-template-v2
+# hfm-web
 
 A full-stack monorepo featuring NestJS APIs, Next.js frontends, and Prisma ORM with PostgreSQL.
 
@@ -93,7 +93,7 @@ Each package and application are written in [TypeScript](https://www.typescriptl
    The `.env` file is automatically created from `.env.example` during `npm install`. If you need to update it, edit the root `.env` file:
 
    ```env
-   DATABASE_URL="postgresql://postgres:postgres@localhost:5433/monex-root-template-v2-db?schema=public"
+   DATABASE_URL="postgresql://postgres:postgres@localhost:5433/hfm-web-db?schema=public"
    ```
 
    **Note**: When you run `npm run dev`, the root `.env` file is automatically distributed to all apps and packages (except config packages) via symlinks. This ensures all parts of the monorepo use the same environment variables.
