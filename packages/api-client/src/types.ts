@@ -41,3 +41,26 @@ export interface UpdateLinkDto {
   url?: string;
   translations?: LinkTranslationInput[];
 }
+
+/** Leaderboard row for the requested locale (decimals as strings in JSON). */
+export interface Ranking {
+  id: number;
+  sn: string;
+  gain: string;
+  bonus: string;
+  rank: number;
+  name: string;
+}
+
+export interface Faq {
+  id: number;
+  q: string;
+  a: string;
+}
+
+export interface Prize {
+  id: number;
+  amount: string;
+  rank: number;
+  description: string | null;
+}
