@@ -8,10 +8,6 @@ type FormTextareaProps = Omit<TextareaProps, 'error'> & {
   error?: string;
 };
 
-/**
- * FormTextarea — Textarea integrated with React Hook Form.
- * Ref is a normal prop on {@link Textarea} (React 19).
- */
 export function FormTextarea({
   name,
   error: customError,
