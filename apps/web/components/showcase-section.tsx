@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 
+import { SectionHeader } from '@/components/section-header';
+
 const DEVICE_SRC = '/png/showcase-section-device.png';
 
 const SHOWCASE_ITEMS = [
@@ -39,12 +41,11 @@ export async function ShowcaseSection() {
       aria-labelledby="showcase-section-heading"
     >
       <div className="mx-auto max-w-6xl px-4 py-16 pb-0 sm:px-6 md:py-20 lg:px-8">
-        <h2
+        <SectionHeader
           id="showcase-section-heading"
-          className="font-sofia-sans-condensed mb-10 text-center text-3xl font-normal tracking-wide uppercase md:mb-20 md:text-5xl"
-        >
-          {t('title')}
-        </h2>
+          namespace="HomePage.showcase"
+          translationKey="title"
+        />
 
         <div className="showcase-orbit-grid">
           <div className="flex w-full min-w-0 justify-center justify-self-center [grid-area:device]">
@@ -73,13 +74,13 @@ export async function ShowcaseSection() {
                   : 'md:justify-self-start',
               ].join(' ')}
             >
-              <div className="relative h-16 w-16 shrink-0 overflow-hidden md:h-[100px] md:w-[100px]">
+              <div className="relative h-16 w-16 shrink-0 self-center md:h-[100px] md:w-[100px]">
                 <Image
                   src={item.icon}
                   alt=""
                   fill
                   className="object-contain"
-                  sizes="64px"
+                  sizes="(min-width: 768px) 100px, 64px"
                 />
               </div>
               <p className="text-darkest-gray max-w-md text-base leading-relaxed md:text-base">
