@@ -10,6 +10,8 @@ import { notFound } from 'next/navigation';
 import { Footer } from '@/components/layout/footer';
 import { NavigationBar } from '@/components/layout/navigation-bar';
 import { Providers } from '@/providers';
+import { DocumentLocaleSync } from '@/components/document-locale-sync';
+import { Locale } from '@/lib/i18n/navigation';
 import { routing } from '@/lib/i18n/routing';
 
 type Props = {
@@ -43,10 +45,14 @@ export default async function LocaleLayout({ children, params }: Props) {
   setRequestLocale(locale);
   const messages = await getMessages();
 
+  const localeFontClass =
+    locale === Locale.TH ? 'font-prompt' : 'font-open-sans';
+
   return (
     <NextIntlClientProvider messages={messages}>
+      <DocumentLocaleSync />
       <Providers>
-        <div className="flex min-h-screen flex-col">
+        <div className={`flex min-h-screen flex-col ${localeFontClass}`}>
           <NavigationBar />
           <main className="flex-1">{children}</main>
           <Footer />

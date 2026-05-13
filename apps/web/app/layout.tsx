@@ -1,9 +1,8 @@
-import { Open_Sans, Prompt } from 'next/font/google';
+import { Open_Sans, Prompt, Sofia_Sans_Condensed } from 'next/font/google';
 import { headers } from 'next/headers';
 
 import '@repo/ui/styles.css';
 import './globals.css';
-import { Locale } from '@/lib/i18n/navigation';
 
 const openSans = Open_Sans({
   variable: '--font-open-sans',
@@ -17,6 +16,12 @@ const prompt = Prompt({
   weight: ['300', '400', '500', '600', '700', '800'],
 });
 
+const sofiaSansCondensed = Sofia_Sans_Condensed({
+  variable: '--font-sofia-sans-condensed',
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800'],
+});
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -24,14 +29,12 @@ export default async function RootLayout({
 }>) {
   const locale = (await headers()).get('x-next-intl-locale') ?? 'en';
 
-  const fontClass =
-    locale === Locale.TH
-      ? `${prompt.variable} font-prompt`
-      : `${openSans.variable} font-open-sans`;
+  /* All next/font variable classes on body so every locale can use any utility. */
+  const fontVariables = `${openSans.variable} ${prompt.variable} ${sofiaSansCondensed.variable}`;
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={fontClass}>{children}</body>
+      <body className={fontVariables}>{children}</body>
     </html>
   );
 }

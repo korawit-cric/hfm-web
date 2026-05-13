@@ -73,7 +73,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
     // Default field size (design spec); override with controlClassName when needed.
     const baseInputStyles = cn(
-      'h-[42px] w-[317px] max-w-full rounded-lg bg-white px-4 text-darkest-gray placeholder:text-medium-gray transition-all duration-200 focus:outline-none text-mobile-body1 md:text-desktop-body1',
+      'h-[42px] w-full max-w-full rounded-lg bg-white px-4 text-darkest-gray placeholder:text-medium-gray transition-all duration-200 focus:outline-none text-mobile-body1 md:text-desktop-body1',
       icon && 'pr-10',
     );
 

@@ -67,6 +67,13 @@
   --text-xxs: 10px;
 }
 
+/* next/font `variable:` on body; `inline` maps utilities to those vars. */
+@theme inline {
+  --font-open-sans: var(--font-open-sans);
+  --font-prompt: var(--font-prompt);
+  --font-sofia-sans-condensed: var(--font-sofia-sans-condensed);
+}
+
 @utility text-gold-gradient {
   background-image: var(--background-image-gold-gradient);
   -webkit-background-clip: text;

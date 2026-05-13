@@ -103,10 +103,10 @@ export function ApplicationFormSection({ countries, experiences }: Props) {
           id="application-form-heading"
           className="mb-8 max-w-4xl px-2 text-center md:mb-10"
         >
-          <span className="text-gold-gradient block text-xl font-bold tracking-wide uppercase sm:text-2xl md:text-3xl lg:text-4xl">
+          <span className="text-gold-gradient font-sofia-sans-condensed block text-4xl font-bold tracking-wide uppercase md:text-7xl">
             {t('applicationForm.titleLine1')}
           </span>
-          <span className="mt-1 block text-xl font-bold tracking-wide text-white uppercase sm:text-2xl md:text-3xl lg:text-4xl">
+          <span className="font-sofia-sans-condensed mt-1 block text-4xl font-bold tracking-wide text-white uppercase md:text-7xl">
             {t('applicationForm.titleLine2')}
           </span>
         </h2>
