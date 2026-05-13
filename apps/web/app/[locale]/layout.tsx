@@ -46,7 +46,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages();
 
   const localeFontClass =
-    locale === Locale.TH ? 'font-prompt' : 'font-open-sans';
+    locale === Locale.TH ? 'font-ibm-plex-sans-thai' : 'font-open-sans';
 
   return (
     <NextIntlClientProvider messages={messages}>
