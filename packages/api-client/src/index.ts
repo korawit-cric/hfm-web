@@ -1,5 +1,7 @@
 // API definitions
 export { linksApi } from './links.js';
+export { countriesApi } from './countries.js';
+export { experiencesApi } from './experiences.js';
 export { faqsApi } from './faqs.js';
 export { rankingsApi } from './rankings.js';
 export { prizesApi } from './prizes.js';
@@ -12,6 +14,8 @@ export type {
   Faq,
   LinkTranslationInput,
   Link,
+  Country,
+  Experience,
   Locale,
   Prize,
   Ranking,

@@ -2,8 +2,10 @@
 'use client';
 
 import { forwardRef, ReactNode } from 'react';
-import { cn } from './utils';
 import { Error } from '@repo/icons';
+
+import { FieldHelperText } from './field-helper-text';
+import { cn } from './utils';
 
 /**
  * Input Component - Pure presentational component
@@ -41,6 +43,10 @@ export interface InputProps extends Omit<
    * Helper text displayed below the input
    */
   helperText?: string;
+  /**
+   * Classes merged onto the native &lt;input&gt; (overrides default 317×42).
+   */
+  controlClassName?: string;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -53,6 +59,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       helperText,
       disabled = false,
       className,
+      controlClassName,
       ...inputProps
     },
     ref,
@@ -64,9 +71,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       (inputProps.value !== undefined && inputProps.value !== '') ||
       (inputProps.defaultValue !== undefined && inputProps.defaultValue !== '');
 
-    // Base input styles
+    // Default field size (design spec); override with controlClassName when needed.
     const baseInputStyles = cn(
-      'h-14 w-full rounded-lg bg-white px-4 placeholder:text-medium-gray transition-all duration-200 focus:outline-none text-mobile-body1 md:text-desktop-body1',
+      'h-[42px] w-full max-w-full rounded-sm bg-white px-4 text-darkest-gray placeholder:text-medium-gray transition-all duration-200 focus:outline-none text-mobile-body1 md:text-desktop-body1',
       icon && 'pr-10',
     );
 
@@ -91,12 +98,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const labelStyles =
       'mb-2 block font-bold text-bold-gray text-mobile-caption md:text-desktop-caption';
 
-    // Helper text / Error message styles
-    const helperStyles = cn(
-      'mt-2 text-mobile-caption md:text-desktop-caption',
-      error ? 'text-error-500' : 'text-darkest-gray',
-    );
-
     return (
       <div className={cn('w-full', className)}>
         {label && (
@@ -118,7 +119,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             aria-describedby={
               error || helperText ? `${inputProps.id}-helper` : undefined
             }
-            className={cn(baseInputStyles, stateStyles)}
+            className={cn(baseInputStyles, stateStyles, controlClassName)}
             {...inputProps}
           />
 
@@ -136,20 +137,16 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
                       : 'text-medium-gray',
               )}
             >
-              {error ? <Error className="text-error-500 h-6" /> : icon}
+              {error ? <Error className="text-error-500 h-4" /> : icon}
             </div>
           )}
         </div>
 
-        {(error || helperText) && (
-          <p
-            id={`${inputProps.id}-helper`}
-            className={helperStyles}
-            role={error ? 'alert' : undefined}
-          >
-            {error || helperText}
-          </p>
-        )}
+        <FieldHelperText
+          id={`${inputProps.id}-helper`}
+          error={error}
+          helperText={helperText}
+        />
       </div>
     );
   },

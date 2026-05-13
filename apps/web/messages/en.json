@@ -61,6 +61,31 @@
     "noPrizes": "No prizes.",
     "prizesClientTitle": "Client-Side Demo: Prizes",
     "prizeLine": "Rank tier {rank} — {amount}",
+    "applicationForm": {
+      "titleLine1": "LOREM IPSUM DOLOR",
+      "titleLine2": "SIT AMET TOSIK",
+      "formTitle": "Lorem ipsum dolor sit amet",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "countryLabel": "Country",
+      "countryPlaceholder": "Select country",
+      "code": "Code",
+      "phone": "Phone",
+      "email": "Email",
+      "experienceLabel": "Experience",
+      "experiencePlaceholder": "Select experience",
+      "acceptTermsLabel": "I have read and accepted the ",
+      "privacyPolicy": "Privacy Policy",
+      "and": " and ",
+      "termsAndConditions": "Terms and Conditions",
+      "submit": "JOIN NOW",
+      "submitSuccess": "Application submitted successfully!",
+      "errors": {
+        "required": "This field is required",
+        "email": "Enter a valid email",
+        "acceptTerms": "You must accept the terms to continue"
+      }
+    },
     "footer": "HFM Web • Port 3000 • @repo/design-system",
     "iconShowcase": {
       "title": "Icon Showcase",

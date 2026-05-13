@@ -2,6 +2,7 @@
 'use client';
 
 import { forwardRef } from 'react';
+import { FieldHelperText } from './field-helper-text';
 import { cn } from './utils';
 
 /**
@@ -65,7 +66,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
 
     // Base textarea styles
     const baseTextareaStyles = cn(
-      'min-h-20 w-full resize-y rounded-lg bg-white px-4 py-3 placeholder:text-medium-gray transition-all duration-200 focus:outline-none text-mobile-body1 md:text-desktop-body1',
+      'min-h-20 w-full resize-y rounded-lg bg-white px-4 py-3 text-darkest-gray placeholder:text-medium-gray transition-all duration-200 focus:outline-none text-mobile-body1 md:text-desktop-body1',
     );
 
     // State-based border and text colors
@@ -88,12 +89,6 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     // Label styles
     const labelStyles =
       'mb-2 block font-bold text-bold-gray text-mobile-caption md:text-desktop-caption';
-
-    // Helper text / Error message styles
-    const helperStyles = cn(
-      'mt-2 text-mobile-caption md:text-desktop-caption',
-      error ? 'text-error-500' : 'text-darkest-gray',
-    );
 
     return (
       <div className={cn('w-full', className)}>
@@ -122,15 +117,11 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           />
         </div>
 
-        {(error || helperText) && (
-          <p
-            id={`${textareaProps.id}-helper`}
-            className={helperStyles}
-            role={error ? 'alert' : undefined}
-          >
-            {error || helperText}
-          </p>
-        )}
+        <FieldHelperText
+          id={`${textareaProps.id}-helper`}
+          error={error}
+          helperText={helperText}
+        />
       </div>
     );
   },
