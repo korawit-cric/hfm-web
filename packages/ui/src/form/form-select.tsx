@@ -11,10 +11,6 @@ type FormSelectProps = Omit<SelectProps, 'error'> & {
   onSelectChange?: (event: ChangeEvent<HTMLSelectElement>) => void;
 };
 
-/**
- * FormSelect — Select integrated with React Hook Form.
- * Ref is a normal prop on {@link Select} (React 19).
- */
 export function FormSelect({
   name,
   error: customError,
