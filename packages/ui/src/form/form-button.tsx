@@ -6,14 +6,9 @@ import type { ButtonProps } from '../button';
 
 type FormButtonProps = Omit<ButtonProps, 'type'> & {
   type?: 'button' | 'submit' | 'reset';
-  /** @default true */
   autoDisable?: boolean;
 };
 
-/**
- * FormButton — Button integrated with React Hook Form.
- * Ref is a normal prop on {@link Button} (React 19).
- */
 export function FormButton({
   ref,
   type = 'submit',
