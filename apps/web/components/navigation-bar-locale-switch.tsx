@@ -4,7 +4,7 @@ import { useLocale } from 'next-intl';
 
 import { LocaleSwitcherEn, LocaleSwitcherTh } from '@repo/icons';
 
-import { Link, usePathname } from '@/lib/i18n/navigation';
+import { Link, Locale, usePathname } from '@/lib/i18n/navigation';
 
 type Props = {
   labelSwitchToEnglish: string;
@@ -17,9 +17,9 @@ export function NavigationBarLocaleSwitch({
 }: Props) {
   const pathname = usePathname();
   const locale = useLocale();
-  const targetLocale = locale === 'en' ? 'th' : 'en';
+  const targetLocale = locale === Locale.EN ? Locale.TH : Locale.EN;
   const ariaLabel =
-    targetLocale === 'th' ? labelSwitchToThai : labelSwitchToEnglish;
+    targetLocale === Locale.TH ? labelSwitchToThai : labelSwitchToEnglish;
 
   return (
     <Link

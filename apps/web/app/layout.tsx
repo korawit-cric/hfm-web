@@ -3,6 +3,7 @@ import { headers } from 'next/headers';
 
 import '@repo/ui/styles.css';
 import './globals.css';
+import { Locale } from '@/lib/i18n/navigation';
 
 const openSans = Open_Sans({
   variable: '--font-open-sans',
@@ -24,7 +25,7 @@ export default async function RootLayout({
   const locale = (await headers()).get('x-next-intl-locale') ?? 'en';
 
   const fontClass =
-    locale === 'th'
+    locale === Locale.TH
       ? `${prompt.variable} font-prompt`
       : `${openSans.variable} font-open-sans`;
 
