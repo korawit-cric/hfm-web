@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import type { Ranking } from '@repo/api-client';
+import { RankingTopThreeBadge } from '@repo/icons';
 import { getTranslations } from 'next-intl/server';
 
 import { JoinNowCtaLink } from '@/components/join-now-cta-link';
@@ -53,8 +54,14 @@ export async function RankingSection({ rankings }: Props) {
                 {topThree.map((r, i) => (
                   <article
                     key={r.id}
-                    className="flex gap-4 rounded-xl bg-white p-5 text-black md:gap-8 md:p-[30px]"
+                    className="relative flex gap-4 overflow-hidden rounded-xl bg-white p-5 text-black md:gap-8 md:p-[30px]"
                   >
+                    <div
+                      className="pointer-events-none absolute top-0 right-0 z-10 h-[88px] w-[90px] md:h-[117px] md:w-[119px]"
+                      aria-hidden
+                    >
+                      <RankingTopThreeBadge className="h-full w-full" />
+                    </div>
                     <div className="relative h-16 w-16 shrink-0 self-center md:h-[100px] md:w-[100px]">
                       <Image
                         src={trophyForPlace(i)}

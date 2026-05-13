@@ -11,6 +11,7 @@ export { default as HfmMarketsLogo } from '../dist/HfmMarketsLogo';
 export { default as LocaleSwitcherEn } from '../dist/LocaleSwitcherEn';
 export { default as LocaleSwitcherTh } from '../dist/LocaleSwitcherTh';
 export { default as MobileDevice } from '../dist/MobileDevice';
+export { default as RankingTopThreeBadge } from '../dist/RankingTopThreeBadge';
 export { default as SocialFacebook } from '../dist/SocialFacebook';
 export { default as SocialInstagram } from '../dist/SocialInstagram';
 export { default as SocialLinkedin } from '../dist/SocialLinkedin';
