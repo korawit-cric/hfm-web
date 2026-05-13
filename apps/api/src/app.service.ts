@@ -10,7 +10,6 @@ export class AppService {
       docs: '/api',
       endpoints: {
         swagger: 'GET /api',
-        links: 'GET /links',
       },
     };
   }
