@@ -7,16 +7,9 @@
   --color-*: initial; /* Removes all default colors */
 
   /* Primary Colors - Urban Sage (grassy green) */
-  /* --color-primary-50: #f0fdf7; */
-  /* --color-primary-100: #dbf7eb; */
-  /* --color-primary-200: #a8ead0; */
   --color-primary-300: #93d9b8;
-  /* --color-primary-400: #45b58c; */
   --color-primary-500: #179149;
-  /* --color-primary-600: #30906a; */
   --color-primary-700: #176c38;
-  /* --color-primary-800: #2e603c; */
-  /* --color-primary-900: #1a3b24; */
 
   --color-secondary-300: #f9e3e4;
   --color-secondary-500: #cd0511;
@@ -45,13 +38,13 @@
   --color-warning-800: #d9a506;
 
   --color-white: #ffffff;
-  --color-lightest-gray: #eeeeee; /*used*/
+  --color-lightest-gray: #eeeeee;
   --color-light-gray: #e9e9e9;
-  --color-medium-gray: #a8a8a8; /*used*/
+  --color-medium-gray: #a8a8a8;
   --color-gray: #999999;
-  --color-dark-gray: #5a5a5a; /*used*/
-  --color-bold-gray: #404040; /* used */
-  --color-darkest-gray: #161616; /*used*/
+  --color-dark-gray: #5a5a5a;
+  --color-bold-gray: #404040;
+  --color-darkest-gray: #161616;
   --color-black: #000000;
 
   /* Default essential colors */
