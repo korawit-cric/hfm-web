@@ -14,6 +14,9 @@ import type { Country, Experience } from '@repo/api-client';
 
 import { Link } from '@/lib/i18n/navigation';
 
+/** Phone row: full width of each column, same height as default fields. */
+const PHONE_FIELD_CONTROL = 'h-[42px] w-full min-w-0';
+
 function buildSchema(t: (key: string) => string) {
   const req = () => t('applicationForm.errors.required');
   const emailInvalid = () => t('applicationForm.errors.email');
@@ -108,7 +111,7 @@ export function ApplicationFormSection({ countries, experiences }: Props) {
           </span>
         </h2>
 
-        <div className="w-full max-w-[640px] rounded-2xl bg-white px-5 py-6 shadow-2xl sm:px-8 sm:py-8 md:max-w-[720px]">
+        <div className="w-full max-w-[730px] overflow-y-auto rounded-2xl bg-white px-5 py-6 shadow-2xl sm:px-8 sm:py-8">
           <h3 className="text-darkest-gray mb-6 text-center text-lg font-bold md:text-xl">
             {t('applicationForm.formTitle')}
           </h3>
@@ -123,25 +126,19 @@ export function ApplicationFormSection({ countries, experiences }: Props) {
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5">
                   <FormInput
                     name="firstName"
-                    label={t('applicationForm.firstName')}
-                    required
                     placeholder={t('applicationForm.firstName')}
                   />
                   <FormInput
                     name="lastName"
-                    label={t('applicationForm.lastName')}
-                    required
                     placeholder={t('applicationForm.lastName')}
                   />
                 </div>
 
-                <div className="flex flex-col gap-4 md:flex-row md:items-end md:gap-5">
-                  <div className="w-full min-w-0 flex-1 md:flex-[1.2]">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:items-end md:gap-5">
+                  <div className="min-w-0">
                     <FormSelect
                       name="countryId"
                       id="application-country-id"
-                      label={t('applicationForm.countryLabel')}
-                      required
                       icon={selectChevron}
                       onSelectChange={(e) => {
                         const id = e.target.value;
@@ -165,22 +162,20 @@ export function ApplicationFormSection({ countries, experiences }: Props) {
                       ))}
                     </FormSelect>
                   </div>
-                  <div className="flex w-full gap-4 md:w-auto md:flex-1">
+                  <div className="flex min-w-0 gap-4">
                     <div className="w-24 shrink-0 md:w-28">
                       <FormInput
                         name="phoneCode"
-                        label={t('applicationForm.code')}
-                        required
                         placeholder="+66"
+                        controlClassName={PHONE_FIELD_CONTROL}
                       />
                     </div>
                     <div className="min-w-0 flex-1">
                       <FormInput
                         name="phone"
-                        label={t('applicationForm.phone')}
-                        required
                         type="tel"
                         placeholder={t('applicationForm.phone')}
+                        controlClassName={PHONE_FIELD_CONTROL}
                       />
                     </div>
                   </div>
@@ -189,8 +184,6 @@ export function ApplicationFormSection({ countries, experiences }: Props) {
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5">
                   <FormInput
                     name="email"
-                    label={t('applicationForm.email')}
-                    required
                     type="email"
                     placeholder={t('applicationForm.email')}
                   />
@@ -198,8 +191,6 @@ export function ApplicationFormSection({ countries, experiences }: Props) {
                     <FormSelect
                       name="experienceId"
                       id="application-experience"
-                      label={t('applicationForm.experienceLabel')}
-                      required
                       icon={selectChevron}
                     >
                       <option value="" disabled>
@@ -214,30 +205,28 @@ export function ApplicationFormSection({ countries, experiences }: Props) {
                   </div>
                 </div>
 
-                <div>
-                  <FormCheckbox
-                    name="acceptTerms"
-                    id="application-accept-terms"
-                    label={
-                      <>
-                        {t('applicationForm.acceptTermsLabel')}
-                        <Link
-                          href="/privacy"
-                          className="text-secondary-500 hover:text-secondary-700 font-medium underline"
-                        >
-                          {t('applicationForm.privacyPolicy')}
-                        </Link>
-                        {t('applicationForm.and')}
-                        <Link
-                          href="/terms"
-                          className="text-secondary-500 hover:text-secondary-700 font-medium underline"
-                        >
-                          {t('applicationForm.termsAndConditions')}
-                        </Link>
-                      </>
-                    }
-                  />
-                </div>
+                <FormCheckbox
+                  name="acceptTerms"
+                  id="application-accept-terms"
+                  label={
+                    <>
+                      {t('applicationForm.acceptTermsLabel')}
+                      <Link
+                        href="/privacy"
+                        className="text-secondary-500 hover:text-secondary-700 font-medium underline"
+                      >
+                        {t('applicationForm.privacyPolicy')}
+                      </Link>
+                      {t('applicationForm.and')}
+                      <Link
+                        href="/terms"
+                        className="text-secondary-500 hover:text-secondary-700 font-medium underline"
+                      >
+                        {t('applicationForm.termsAndConditions')}
+                      </Link>
+                    </>
+                  }
+                />
 
                 <div className="flex justify-center pt-2">
                   <FormButton
