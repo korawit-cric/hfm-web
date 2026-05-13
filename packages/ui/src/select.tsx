@@ -48,7 +48,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         String(selectProps.defaultValue) !== '');
 
     const baseSelectStyles = cn(
-      'h-[42px] w-full max-w-full cursor-pointer rounded-lg bg-white px-4 transition-all duration-200 text-mobile-body1 md:text-desktop-body1',
+      'h-[42px] w-full max-w-full cursor-pointer rounded-sm bg-white px-4 transition-all duration-200 text-mobile-body1 md:text-desktop-body1',
       'appearance-none',
       icon && 'pr-10',
     );
