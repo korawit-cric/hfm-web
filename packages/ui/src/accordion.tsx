@@ -1,14 +1,5 @@
 'use client';
 
-/**
- * Generic Radix Accordion primitives (no domain-specific styling).
- * Compose with `className` at the call site—for example FAQ lists or settings panels.
- *
- * Refs flow through props (React 19); no `forwardRef` wrapper required.
- *
- * @see https://www.radix-ui.com/primitives/docs/components/accordion
- */
-
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
 import type { ComponentProps } from 'react';
 
@@ -58,7 +49,6 @@ function AccordionContent({
       )}
       {...props}
     >
-      {/* Wrapper for height animation; spacing is left to children / caller `className`. */}
       <div className="pt-0">{children}</div>
     </AccordionPrimitive.Content>
   );
