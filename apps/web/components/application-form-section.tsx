@@ -6,7 +6,7 @@ import { z } from 'zod';
 import { ArrowRight } from '@repo/icons';
 import { useCustomForm, FormWrapper } from '@repo/ui/form/form-wrapper';
 import { FormInput } from '@repo/ui/form/form-input';
-import { FormSelect } from '@repo/ui/form/form-select';
+import { FormDropdownSelect } from '@repo/ui/form/form-dropdown-select';
 import { FormCheckbox } from '@repo/ui/form/form-checkbox';
 import { FormButton } from '@repo/ui/form/form-button';
 
@@ -131,7 +131,7 @@ export function ApplicationFormSection({ countries, experiences }: Props) {
 
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:items-end">
                   <div className="min-w-0">
-                    <FormSelect
+                    <FormDropdownSelect
                       name="countryId"
                       id="application-country-id"
                       icon={selectChevron}
@@ -155,7 +155,7 @@ export function ApplicationFormSection({ countries, experiences }: Props) {
                           {c.name}
                         </option>
                       ))}
-                    </FormSelect>
+                    </FormDropdownSelect>
                   </div>
                   <div className="flex min-w-0 gap-4">
                     <div className="w-18">
@@ -183,7 +183,7 @@ export function ApplicationFormSection({ countries, experiences }: Props) {
                     placeholder={t('applicationForm.email')}
                   />
                   <div>
-                    <FormSelect
+                    <FormDropdownSelect
                       name="experienceId"
                       id="application-experience"
                       icon={selectChevron}
@@ -196,7 +196,7 @@ export function ApplicationFormSection({ countries, experiences }: Props) {
                           {exp.name}
                         </option>
                       ))}
-                    </FormSelect>
+                    </FormDropdownSelect>
                   </div>
                 </div>
 

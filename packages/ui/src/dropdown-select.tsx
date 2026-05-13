@@ -12,20 +12,20 @@ import {
   type ChangeEvent,
   type ReactNode,
 } from 'react';
-import * as SelectPrimitive from '@radix-ui/react-select';
+import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { Error } from '@repo/icons';
 
 import { FieldHelperText } from './field-helper-text';
 import { cn } from './utils';
 
-export type SelectOptionItem = {
+export type DropdownSelectOptionItem = {
   value: string;
   label: ReactNode;
   disabled: boolean;
 };
 
-function collectOptions(children: ReactNode): SelectOptionItem[] {
-  const out: SelectOptionItem[] = [];
+function collectOptions(children: ReactNode): DropdownSelectOptionItem[] {
+  const out: DropdownSelectOptionItem[] = [];
   Children.forEach(children, (child) => {
     if (!isValidElement(child) || child.type !== 'option') {
       return;
@@ -40,23 +40,7 @@ function collectOptions(children: ReactNode): SelectOptionItem[] {
   return out;
 }
 
-function buildEmptySentinels(allValues: Iterable<string>): {
-  empty: string;
-  placeholder: string;
-} {
-  const vals = new Set(allValues);
-  let empty = '\u2060\u200b';
-  let placeholder = '\u2060\u200c';
-  while (vals.has(empty)) {
-    empty += '\u200b';
-  }
-  while (vals.has(placeholder) || placeholder === empty) {
-    placeholder += '\u200c';
-  }
-  return { empty, placeholder };
-}
-
-export interface SelectProps extends Omit<
+export interface DropdownSelectProps extends Omit<
   React.ComponentProps<'select'>,
   'size'
 > {
@@ -68,7 +52,7 @@ export interface SelectProps extends Omit<
   controlClassName?: string;
 }
 
-export function Select({
+export function DropdownSelect({
   label,
   required = false,
   icon,
@@ -84,9 +68,10 @@ export function Select({
   id: idProp,
   ref,
   ...selectRest
-}: SelectProps) {
+}: DropdownSelectProps) {
   const autoId = useId();
   const fieldId = idProp ?? autoId;
+  const labelId = `${fieldId}-label`;
   const helperId = `${fieldId}-helper`;
 
   const innerSelectRef = useRef<HTMLSelectElement>(null);
@@ -118,45 +103,11 @@ export function Select({
 
   const hasValue = committedValue !== '' && String(committedValue) !== '';
 
-  const { empty: emptySentinel, placeholder: placeholderSentinel } = useMemo(
-    () => buildEmptySentinels(options.map((o) => o.value)),
-    [options],
-  );
-
-  const firstEmptyOption = useMemo(
-    () => options.find((o) => o.value === ''),
-    [options],
-  );
-
-  const toRadixValue = useCallback(
-    (committed: string): string | undefined => {
-      if (committed !== '') {
-        return committed;
-      }
-      if (firstEmptyOption && !firstEmptyOption.disabled) {
-        return emptySentinel;
-      }
-      return undefined;
-    },
-    [firstEmptyOption, emptySentinel],
-  );
-
-  const fromRadixValue = useCallback(
-    (radix: string) => (radix === emptySentinel ? '' : radix),
-    [emptySentinel],
-  );
-
-  const radixItemValue = useCallback(
-    (opt: SelectOptionItem) => {
-      if (opt.value !== '') {
-        return opt.value;
-      }
-      return opt.disabled ? placeholderSentinel : emptySentinel;
-    },
-    [emptySentinel, placeholderSentinel],
-  );
-
+  const selectedOption = options.find((o) => o.value === committedValue);
   const placeholderOption = options.find((o) => o.value === '');
+  const triggerLabel = selectedOption
+    ? selectedOption.label
+    : (placeholderOption?.label ?? '\u00a0');
 
   const emitChange = (nextValue: string) => {
     if (!isControlled) {
@@ -168,10 +119,6 @@ export function Select({
         name: String(selectRest.name ?? ''),
       },
     } as unknown as ChangeEvent<HTMLSelectElement>);
-  };
-
-  const handleRadixValueChange = (radix: string) => {
-    emitChange(fromRadixValue(radix));
   };
 
   const baseSelectStyles = cn(
@@ -203,24 +150,17 @@ export function Select({
   const labelStyles =
     'mb-2 block font-bold text-bold-gray text-mobile-caption md:text-desktop-caption';
 
-  const committedRadixValue = toRadixValue(committedValue);
-  const defaultRadixValue = toRadixValue(
-    defaultValueProp !== undefined && defaultValueProp !== null
-      ? String(defaultValueProp)
-      : '',
-  );
-
   return (
     <div className={cn('w-full', className)}>
       {label ? (
-        <label htmlFor={fieldId} className={labelStyles}>
+        <div id={labelId} className={labelStyles}>
           {label}
           {required ? (
             <span className="text-error-500 ml-1" aria-label="required">
               *
             </span>
           ) : null}
-        </label>
+        </div>
       ) : null}
 
       <div className="relative">
@@ -242,69 +182,55 @@ export function Select({
           {children}
         </select>
 
-        <SelectPrimitive.Root
-          disabled={disabled}
-          required={required}
-          {...(isControlled
-            ? {
-                value: committedRadixValue,
-                onValueChange: handleRadixValueChange,
-              }
-            : {
-                defaultValue: defaultRadixValue,
-                onValueChange: handleRadixValueChange,
-              })}
-        >
-          <SelectPrimitive.Trigger
-            id={fieldId}
+        <DropdownMenuPrimitive.Root modal={false}>
+          <DropdownMenuPrimitive.Trigger
+            disabled={disabled}
             aria-invalid={error ? 'true' : 'false'}
             aria-describedby={error || helperText ? helperId : undefined}
+            aria-labelledby={label ? labelId : undefined}
             className={cn(baseSelectStyles, stateStyles, controlClassName)}
           >
-            <SelectPrimitive.Value
-              placeholder={placeholderOption?.label ?? '\u00a0'}
-            />
-          </SelectPrimitive.Trigger>
+            <span className="min-w-0 flex-1 truncate">{triggerLabel}</span>
+          </DropdownMenuPrimitive.Trigger>
 
-          <SelectPrimitive.Portal>
-            <SelectPrimitive.Content
-              position="popper"
+          <DropdownMenuPrimitive.Portal>
+            <DropdownMenuPrimitive.Content
               sideOffset={4}
+              align="start"
               collisionPadding={8}
               className={cn(
-                'border-medium-gray z-[200] max-h-[240px] overflow-hidden rounded-sm border bg-white py-1 shadow-lg',
-                'w-[var(--radix-select-trigger-width)] min-w-[var(--radix-select-trigger-width)]',
+                'border-medium-gray z-[200] max-h-[240px] overflow-y-auto rounded-sm border bg-white py-1 shadow-lg',
+                'w-[var(--radix-dropdown-menu-trigger-width)] min-w-[var(--radix-dropdown-menu-trigger-width)]',
               )}
             >
-              <SelectPrimitive.Viewport className="max-h-[240px] overflow-y-auto p-0">
-                {options.map((opt, index) => (
-                  <SelectPrimitive.Item
-                    key={`${radixItemValue(opt)}-${index}`}
-                    value={radixItemValue(opt)}
-                    disabled={opt.disabled}
-                    textValue={
-                      typeof opt.label === 'string' ? opt.label : undefined
+              {options.map((opt, index) => (
+                <DropdownMenuPrimitive.Item
+                  key={`${opt.value}-${index}`}
+                  disabled={opt.disabled}
+                  onSelect={() => {
+                    if (!opt.disabled) {
+                      emitChange(opt.value);
                     }
-                    className={cn(
-                      'text-mobile-body1 md:text-desktop-body1 px-4 py-2',
-                      'cursor-pointer outline-none select-none',
-                      'data-[disabled]:text-medium-gray data-[disabled]:cursor-not-allowed data-[disabled]:opacity-60',
-                      'data-[highlighted]:bg-lightest-gray data-[highlighted]:text-darkest-gray',
-                      'data-[state=checked]:text-darkest-gray data-[state=checked]:font-medium',
+                  }}
+                  className={cn(
+                    'text-mobile-body1 md:text-desktop-body1 px-4 py-2',
+                    'cursor-pointer outline-none select-none',
+                    'data-[disabled]:text-medium-gray data-[disabled]:cursor-not-allowed data-[disabled]:opacity-60',
+                    'data-[highlighted]:bg-lightest-gray data-[highlighted]:text-darkest-gray',
+                    opt.value === committedValue &&
                       !opt.disabled &&
-                        opt.value !== committedValue &&
-                        'text-darkest-gray',
-                    )}
-                  >
-                    <SelectPrimitive.ItemText>
-                      {opt.label}
-                    </SelectPrimitive.ItemText>
-                  </SelectPrimitive.Item>
-                ))}
-              </SelectPrimitive.Viewport>
-            </SelectPrimitive.Content>
-          </SelectPrimitive.Portal>
-        </SelectPrimitive.Root>
+                      'text-darkest-gray font-medium',
+                    !opt.disabled &&
+                      opt.value !== committedValue &&
+                      'text-darkest-gray',
+                  )}
+                >
+                  {opt.label}
+                </DropdownMenuPrimitive.Item>
+              ))}
+            </DropdownMenuPrimitive.Content>
+          </DropdownMenuPrimitive.Portal>
+        </DropdownMenuPrimitive.Root>
 
         {(icon || error) && (
           <div

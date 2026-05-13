@@ -3,21 +3,21 @@
 import type { ChangeEvent } from 'react';
 import { useFormContext, Controller } from 'react-hook-form';
 
-import { Select, type SelectProps } from '../select';
+import { DropdownSelect, type DropdownSelectProps } from '../dropdown-select';
 
-type FormSelectProps = Omit<SelectProps, 'error'> & {
+type FormDropdownSelectProps = Omit<DropdownSelectProps, 'error'> & {
   name: string;
   error?: string;
   onSelectChange?: (event: ChangeEvent<HTMLSelectElement>) => void;
 };
 
-export function FormSelect({
+export function FormDropdownSelect({
   name,
   error: customError,
   onSelectChange,
   ref,
-  ...selectProps
-}: FormSelectProps) {
+  ...dropdownSelectProps
+}: FormDropdownSelectProps) {
   const formContext = useFormContext();
   const {
     control,
@@ -29,7 +29,9 @@ export function FormSelect({
     customError || (fieldError?.message as string) || undefined;
 
   if (!formContext) {
-    return <Select ref={ref} error={errorMessage} {...selectProps} />;
+    return (
+      <DropdownSelect ref={ref} error={errorMessage} {...dropdownSelectProps} />
+    );
   }
 
   return (
@@ -37,8 +39,8 @@ export function FormSelect({
       name={name}
       control={control}
       render={({ field }) => (
-        <Select
-          {...selectProps}
+        <DropdownSelect
+          {...dropdownSelectProps}
           {...field}
           onChange={(e) => {
             field.onChange(e);
