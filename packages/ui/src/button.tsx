@@ -85,15 +85,15 @@ export const Button = forwardRef<
     const colorStyles = {
       primary: {
         bg: 'bg-primary-500',
-        bgHover: 'hover:bg-primary-300',
+        bgHover: 'hover:bg-primary-700',
         border: 'border-none',
         borderHover: 'hover:border-none',
       },
       secondary: {
         bg: 'bg-transparent',
-        bgHover: 'hover:bg-secondary-300',
+        bgHover: 'hover:bg-secondary-700',
         border: 'border-secondary-500',
-        borderHover: 'hover:border-secondary-300',
+        borderHover: 'hover:border-secondary-700',
       },
     };
 
