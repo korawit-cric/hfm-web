@@ -48,7 +48,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         String(selectProps.defaultValue) !== '');
 
     const baseSelectStyles = cn(
-      'h-[42px] w-full max-w-full cursor-pointer rounded-lg bg-white px-4 transition-all duration-200 focus:outline-none text-mobile-body1 md:text-desktop-body1',
+      'h-[42px] w-full max-w-full cursor-pointer rounded-lg bg-white px-4 transition-all duration-200 text-mobile-body1 md:text-desktop-body1',
       'appearance-none',
       icon && 'pr-10',
     );
@@ -60,16 +60,16 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         )
       : error
         ? cn(
-            'border border-error-300 focus:border-2',
+            'border border-error-300',
             hasValue ? 'text-darkest-gray' : 'text-medium-gray',
           )
         : hasValue
           ? cn(
-              'border-2 border-medium-gray hover:border-2 hover:border-primary-300 focus:border-2 focus:border-primary-400',
+              'border-2 border-medium-gray hover:border-2 hover:border-primary-300',
               'text-darkest-gray',
             )
           : cn(
-              'border border-medium-gray hover:border-primary-300 focus:border-2 focus:border-primary-400 focus:ring-primary-400/20',
+              'border border-medium-gray hover:border-primary-300',
               'text-medium-gray',
             );
 
