@@ -68,11 +68,11 @@
       "empty": "ยังไม่มี FAQ"
     },
     "showcase": {
-      "title": "Quisque rutrum",
+      "title": "ไฮไลท์ที่คุณไม่ควรพลาด",
       "deviceAlt": "แอปมือถือ HFM บนสมาร์ทโฟนสองเครื่อง",
-      "showcase1": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
-      "showcase2": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
-      "showcase3": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit."
+      "showcase1": "เทรดได้ทุกที่ทุกเวลาผ่านแอปที่ออกแบบมาให้ใช้งานง่ายและรวดเร็ว เหมาะกับทั้งมือใหม่และเทรดเดอร์มือโปร",
+      "showcase2": "เข้าถึงตลาดโลก สเปรดแคบ และเครื่องมือวิเคราะห์ครบชุดเพื่อช่วยให้คุณตัดสินใจได้มั่นใจยิ่งขึ้น",
+      "showcase3": "ฝากถอนสะดวก รองรับหลายช่องทาง พร้อมทีมซัพพอร์ตภาษาไทยเพื่อช่วยเหลือคุณตลอดเส้นทางการลงทุน"
     },
     "prizes": {
       "title": "รางวัล",
@@ -86,9 +86,9 @@
     "prizesClientTitle": "ดีโมฝั่งไคลเอนต์: รางวัล",
     "prizeLine": "ระดับ {rank} — {amount}",
     "applicationForm": {
-      "titleLine1": "LOREM IPSUM DOLOR",
-      "titleLine2": "SIT AMET TOSIK",
-      "formTitle": "Lorem ipsum dolor sit amet",
+      "titleLine1": "พร้อมแล้วหรือยัง",
+      "titleLine2": "สมัครเทรดกับ HFM",
+      "formTitle": "กรอกข้อมูลด้านล่างเพื่อเริ่มต้น",
       "firstName": "ชื่อจริง",
       "lastName": "นามสกุล",
       "countryLabel": "ประเทศ",
