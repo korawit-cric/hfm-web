@@ -86,6 +86,46 @@ body {
   background: var(--background);
 }
 
+/* Form controls must not inherit body --foreground (light); use text token instead. */
+@layer base {
+  input:not([type='checkbox']):not([type='radio']):not([type='range']):not(
+      [type='file']
+    ):not([type='hidden']):not([type='button']):not([type='submit']):not(
+      [type='reset']
+    ),
+  textarea {
+    color: var(--color-darkest-gray);
+  }
+
+  /* Empty select shows placeholder-style label; selected value uses component utility. */
+  select {
+    color: var(--color-medium-gray);
+  }
+
+  input:disabled,
+  textarea:disabled,
+  select:disabled {
+    color: var(--color-medium-gray);
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-medium-gray);
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--color-darkest-gray);
+  }
+}
+
 *,
 *::before,
 *::after {
