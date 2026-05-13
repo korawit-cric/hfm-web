@@ -30,7 +30,7 @@ export async function PrizesSection({ prizes }: Props) {
 
   return (
     <section className="bg-white" aria-labelledby="prizes-section-heading">
-      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">
+      <div className="mx-auto max-w-6xl px-4 py-16 pt-32 sm:px-6 md:py-20 md:pt-40 lg:px-8">
         <h2
           id="prizes-section-heading"
           className="font-sofia-sans-condensed mb-12 text-center text-3xl font-normal tracking-wide uppercase md:mb-16 md:text-5xl"
