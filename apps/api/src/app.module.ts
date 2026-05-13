@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 
+import { CountriesModule } from './countries/countries.module';
 import { FaqsModule } from './faqs/faqs.module';
 import { LinksModule } from './links/links.module';
 import { PrizesModule } from './prizes/prizes.module';
@@ -13,6 +14,7 @@ import { AppController } from './app.controller';
   imports: [
     PrismaModule,
     LinksModule,
+    CountriesModule,
     RankingsModule,
     FaqsModule,
     PrizesModule,
