@@ -57,10 +57,15 @@ export async function NavigationBar() {
         </div>
         <div className="flex items-center justify-between">
           <div className="flex gap-[100px]">
-            <HfmMarketsLogo
-              className="h-[58px] w-auto"
+            <Link
+              href="/"
               aria-label={t('logoAlt')}
-            />
+            >
+              <HfmMarketsLogo
+                className="block h-[58px]! w-auto max-w-none shrink-0"
+                aria-hidden
+              />
+            </Link>
             <nav
               aria-label={t('mainNavLabel')}
               className="text-lightest-gray flex items-center gap-9 text-base font-normal"
