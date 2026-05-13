@@ -2,6 +2,8 @@
 
 A full-stack monorepo featuring NestJS APIs, Next.js frontends, and Prisma ORM with PostgreSQL.
 
+**Turborepo** keeps the API, web app, Prisma layer, and shared packages in one workspace with unified tooling and incremental builds. Real slices of the stack (DTOs, services, controllers on the server; feature modules plus typed fetch helpers on the web) double as a template for new features. **Prisma**, **Swagger**, and repo-wide **lint / typecheck / tests** keep models, HTTP contracts, and quality checks consistent.
+
 ## What's inside?
 
 This Turborepo includes the following packages & apps:
@@ -25,42 +27,30 @@ This Turborepo includes the following packages & apps:
     └── @repo/ui                  # React 19 component library with Tailwind
 ```
 
-Each package and application are written in [TypeScript](https://www.typescriptlang.org/).
+Everything below is **TypeScript** unless noted.
 
-### Tech Stack & Versions
+**Apps**
 
-**Runtime & Apps**
+| Path       | Role            | Main versions                                                      | URL / port                  |
+| ---------- | --------------- | ------------------------------------------------------------------ | --------------------------- |
+| `apps/web` | Next.js UI      | Next ^16.0.7, React ^19.1.0, next-intl ^4.11, TanStack Query ^5.80 | <http://localhost:3000>     |
+| `apps/api` | NestJS REST API | Nest ^11, Swagger @nestjs/swagger ^11                              | <http://localhost:3001/api> |
+| `apps/db`  | PostgreSQL      | 16-alpine (Docker)                                                 | localhost:5433              |
 
-| Component                                                       | Version         | Port       |
-| --------------------------------------------------------------- | --------------- | ---------- |
-| **Node.js**                                                     | >=22.12         | -          |
-| [**Next.js**](https://nextjs.org/) (`hfm-frontend`, `apps/web`) | ^16.0.7         | 3000       |
-| [**NestJS API**](https://nestjs.com/) (`hfm-api`, `apps/api`)   | ^11.0.0         | 3001       |
-| [**PostgreSQL**](https://www.postgresql.org/) (`apps/db`)       | 16-alpine       | 5433       |
-| **Swagger** (`/api`)                                            | @nestjs/swagger | 3001, 3003 |
+**Packages**
 
-**Core Libraries**
+| Package                   | Role                             | Notable versions   |
+| ------------------------- | -------------------------------- | ------------------ |
+| `@repo/prisma`            | ORM, schema, shared DB types     | Prisma ^7.1.0      |
+| `@repo/api-client`        | Typed paths/methods (no fetch)   | —                  |
+| `@repo/design-system`     | Tailwind 4 tokens, global styles | Tailwind ^4.1.x    |
+| `@repo/ui`                | Shared React components          | React 19, Tailwind |
+| `@repo/icons`             | SVGR → React icons               | SVGR ^8.1.0        |
+| `@repo/eslint-config`     | Lint (+ Prettier integration)    | ESLint 9           |
+| `@repo/typescript-config` | Shared TS configs                | TS ~5.8            |
+| `@repo/jest-config`       | Shared Jest setup                | Jest 30            |
 
-| Library                                           | Version |
-| ------------------------------------------------- | ------- |
-| [**React**](https://react.dev/)                   | ^19.1.0 |
-| [**Prisma ORM**](https://www.prisma.io/)          | ^7.1.0  |
-| [**Tailwind CSS**](https://tailwindcss.com/)      | ^4.1.11 |
-| [**TanStack Query**](https://tanstack.com/query)  | ^5.80.7 |
-| [**TypeScript**](https://www.typescriptlang.org/) | 5.5.4+  |
-| [**SVGR**](https://react-svgr.com/)               | ^8.1.0  |
-
-**Tooling**
-
-| Tool                                                   | Purpose            |
-| ------------------------------------------------------ | ------------------ |
-| [**Turborepo**](https://turbo.build/repo)              | Monorepo build     |
-| [**ESLint**](https://eslint.org/)                      | Code linting       |
-| [**Prettier**](https://prettier.io)                    | Code formatting    |
-| [**Jest**](https://jestjs.io/)                         | Testing            |
-| [**Docker Compose**](https://docs.docker.com/compose/) | Database container |
-| [**Husky**](https://typicode.github.io/husky/)         | Git hooks          |
-| [**Commitlint**](https://commitlint.js.org/)           | Commit messages    |
+**Runtime & repo tooling:** Node.js **≥22.12** · **Turborepo** · **Docker Compose** (DB) · **Husky** · **Commitlint** (conventional commits)
 
 ## Getting Started
 
@@ -151,34 +141,16 @@ npm run db:seed
 npm run db:studio
 ```
 
-#### Build
-
-```bash
-# Will build all the app & packages with the supported `build` script.
-npm run build
-
-# ℹ️ If you plan to only build apps individually,
-# Please make sure you've built the packages first.
-```
-
-#### Develop
-
-```bash
-# Will run the development server for all the app & packages with the supported `dev` script.
-# This automatically distributes the root .env file to all apps and packages before starting.
-npm run dev
-```
-
 **Note**: The `predev` script automatically creates symlinks from the root `.env` to each app and package (excluding config packages like `eslint-config`, `jest-config`, `typescript-config`).
 
 #### test
 
 ```bash
 # Will launch a test suites for all the app & packages with the supported `test` script.
-pnpm run test
+npm run test
 
 # You can launch e2e testes with `test:e2e`
-pnpm run test:e2e
+npm run test:e2e
 
 # See `@repo/jest-config` to customize the behavior.
 ```
@@ -188,7 +160,7 @@ pnpm run test:e2e
 ```bash
 # Will lint all the app & packages with the supported `lint` script.
 # See `@repo/eslint-config` to customize the behavior.
-pnpm run lint
+npm run lint
 ```
 
 #### Format
@@ -232,125 +204,229 @@ Runs on all pushes and pull requests:
 
 ## Project Structure
 
-### API Endpoints
+### API (`apps/api`)
 
-The NestJS APIs provide the following endpoints with **Swagger documentation**:
+- **Swagger**: `http://localhost:3001/api` (and `3003` when that instance is used)
+- **DTOs** use `@nestjs/swagger` and align with **Prisma** so request/response shapes track the schema
 
-- API: `http://localhost:3001/api`
-- API: `http://localhost:3003/api`
+### Web (`apps/web`)
 
-- `GET /links` - Get all links
-- `GET /links/:id` - Get a specific link
-- `POST /links` - Create a new link
-- `PATCH /links/:id` - Update a link
-- `DELETE /links/:id` - Delete a link
+**`serverFetch`** in Server Components, **`clientFetch`** + TanStack Query in client features; types flow from **`@repo/api-client`**.
 
-#### DTOs & Swagger
+### Forms
 
-DTOs implement Prisma types to ensure type alignment:
+- Shared primitives live in **`@repo/ui`**: `useCustomForm` wraps **react-hook-form** with **Zod** via `zodResolver`; `FormWrapper` provides `FormProvider` and submits with `handleSubmit`.
+- **Localize validation messages** by building the Zod schema with a function that takes `t` from `useTranslations` (same idea as `apps/web/components/application-form-section.tsx`).
+- Wire fields with `FormInput`, `FormDropdownSelect`, `FormCheckbox`, etc., from `@repo/ui/form/*`. Labels and placeholders use the same message namespace as validation strings.
 
-```typescript
-// apps/registry-api/src/links/dto/create-link.dto.ts
-import { ApiProperty } from '@nestjs/swagger';
-import type { Prisma } from '@repo/prisma';
+```tsx
+'use client';
 
-export class CreateLinkDto implements Prisma.LinkCreateInput {
-  @ApiProperty({ example: 'https://google.com' })
-  url: string;
+import { useMemo } from 'react';
+import { useTranslations } from 'next-intl';
+import { z } from 'zod';
+import { useCustomForm, FormWrapper } from '@repo/ui/form/form-wrapper';
+import { FormInput } from '@repo/ui/form/form-input';
 
-  @ApiProperty({ example: 'Google' })
-  title: string;
+function buildSchema(t: (key: string) => string) {
+  const req = () => t('applicationForm.errors.required');
+  return z.object({
+    firstName: z.string().min(1, req()),
+    email: z
+      .string()
+      .min(1, req())
+      .email(() => t('applicationForm.errors.email')),
+  });
+}
 
-  @ApiProperty({ example: 'Search engine', required: false })
-  description?: string;
+export function ExampleForm() {
+  const t = useTranslations('HomePage');
+  const schema = useMemo(() => buildSchema(t), [t]);
+  const form = useCustomForm({
+    defaultValues: { firstName: '', email: '' },
+    schema,
+    mode: 'onSubmit',
+  });
+
+  return (
+    <FormWrapper formInstance={form} onSubmit={(data) => console.log(data)}>
+      <FormInput
+        name="firstName"
+        placeholder={t('applicationForm.firstName')}
+      />
+      <FormInput
+        name="email"
+        type="email"
+        placeholder={t('applicationForm.email')}
+      />
+    </FormWrapper>
+  );
 }
 ```
 
-**Why this pattern?**
+### Localization (next-intl)
 
-- ✅ `implements Prisma.LinkCreateInput` - TypeScript enforces DTO ↔ Prisma alignment
-- ✅ `@ApiProperty()` - Swagger gets proper documentation with examples
-- ✅ Single source of truth - Prisma schema defines the data model
-- ✅ Compile-time errors if DTO drifts from schema
+- Routing and locales: `apps/web/lib/i18n/routing.ts` (e.g. `en`, `th`; default `en`).
+- Request config and message loading: `apps/web/lib/i18n/request.ts` pulls `messages/{locale}.json`.
+- **Always** use `Link`, `redirect`, `useRouter`, and path helpers from `apps/web/lib/i18n/navigation.ts` so the active locale is preserved (not raw `next/link` for in-app routes).
+- In Client Components, use `useTranslations('Namespace')` (and `useLocale()` when passing locale to the API). Server Components / layouts can use `getTranslations` from `next-intl/server` (see `lib/metadata/create-metadata.ts`).
 
-### Frontend
+Locale-aware navigation and copy:
 
-The Next.js apps display database results fetched from their respective NestJS APIs. The frontends:
+```tsx
+// apps/web — use this module for in-app links / redirects (locale-preserving)
+import { Link, useRouter } from '@/lib/i18n/navigation';
+import { useLocale, useTranslations } from 'next-intl';
 
-- Fetches links from the API on server-side
-- Displays them in a styled card layout
-- Shows link metadata (ID, URL, creation date)
-- Uses Prisma-generated TypeScript types for type safety
+export function Example() {
+  const t = useTranslations('HomePage');
+  const locale = useLocale();
+  return <Link href="/privacy">{t('applicationForm.privacyPolicy')}</Link>;
+}
+```
+
+```tsx
+// apps/web — pass API locale from the client (pattern used with countries, FAQs, etc.)
+import { useLocale } from 'next-intl';
+
+const locale = useLocale();
+// queryFn: () => clientFetch(countriesApi.list(locale))
+```
+
+### Translation model on the backend
+
+- Prisma defines a shared **`Locale`** enum and per-entity **`*Translation`** tables with `@@id([parentId, locale])` (`packages/prisma/prisma/schema.prisma`).
+- Controllers accept **`?locale=`**; **`apps/api/src/common/parse-locale-param.ts`** normalizes to `Locale` (defaults to `en`).
+- Services **`include: { translations: true }`**, resolve the best translation row, and **`BadRequestException`** if none exist when localized output is required.
+
+```prisma
+// packages/prisma/prisma/schema.prisma (shape used across FQA, Country, Experience, …)
+enum Locale {
+  en
+  th
+}
+
+model Country {
+  id           Int                  @id @default(autoincrement())
+  translations CountryTranslation[]
+  // …
+}
+
+model CountryTranslation {
+  countryId Int
+  locale    Locale
+  name      String
+  country   Country @relation(fields: [countryId], references: [id], onDelete: Cascade)
+
+  @@id([countryId, locale])
+}
+```
+
+```typescript
+// apps/api — query param
+@Get()
+findAll(@Query('locale') locale?: string) {
+  return this.countriesService.findAll(parseLocaleParam(locale));
+}
+```
+
+```typescript
+// apps/api — pick requested locale, then en, then any row
+import { BadRequestException } from '@nestjs/common';
+import { Locale } from '@repo/prisma';
+
+private pickTranslation(entity: { id: number; translations: { locale: Locale; name: string }[] }, locale: Locale) {
+  const row =
+    entity.translations.find((tr) => tr.locale === locale) ??
+    entity.translations.find((tr) => tr.locale === Locale.en) ??
+    entity.translations[0];
+  if (!row) {
+    throw new BadRequestException(`Entity ${entity.id} has no translations`);
+  }
+  return { id: entity.id, name: row.name };
+}
+```
 
 ### Shared Packages
 
 - **@repo/api-client**: Frontend API definitions (no fetch, no React, no Next.js)
   - Endpoint definitions with typed request/response
-  - Shared DTOs (`CreateLinkDto`, `UpdateLinkDto`)
-  - Runtime-agnostic - works on server and client components
-  - **Shared across all frontend apps only**
+  - Runtime-agnostic — server and client
 
 - **@repo/prisma**: Shared Prisma client and schema
   - Exports singleton Prisma client instance
-  - Exports all Prisma types (`Prisma`, `Link`, etc.)
-  - **Ready to publish as an npm package** (see [Architecture Philosophy](#architecture-philosophy))
+  - Exports Prisma types for API and web
+  - **Ready to publish as an npm package** (see [packages/prisma README](./packages/prisma/README.md))
 
-- **@repo/design-system**: Shared styling foundation
-  - Tailwind CSS configuration and color palette
-  - Global CSS variables and styles
-  - Used by all frontend apps
+- **@repo/design-system**: Shared Tailwind 4 foundation (tokens, globals, PostCSS preset) — see [Design system structure](#design-system-structure)
 
-- **@repo/icons**: SVG icon components library
-  - SVG files converted to React components using SVGR
-  - TypeScript support with full type safety
-  - Optimized SVGs with `currentColor` for styling flexibility
-  - See [@repo/icons README](./packages/icons/README.md) for usage
+- **@repo/icons**: SVG → React via SVGR — see [packages/icons README](./packages/icons/README.md)
 
 - **@repo/ui**: Shared React component library
   - Reusable components (Button, Card, etc.)
   - Built with Tailwind CSS from `@repo/design-system`
 
-### Icon System with SVGR
+### Design system structure
 
-The `@repo/icons` package uses [SVGR](https://react-svgr.com/) to automatically convert SVG files into React components. This provides a type-safe, tree-shakeable icon system.
+The design system is split so **tokens and global rules** stay in one package, **React primitives** consume them, and the **app** adds only layout or page-specific CSS.
 
-**How it works:**
+**`packages/design-system`** (`@repo/design-system`)
 
-1. **SVG Source Files**: Place SVG files in `packages/icons/src/icons/` (e.g., `arrow-right.svg`)
+| Path / export                            | Role                                                                                                                                                    |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `shared-styles.css` (export `.`)         | Tailwind 4 foundation: `@theme` tokens, `@theme inline` + **Next.js font** variables, custom `@utility`, `@layer base` for form controls, global resets |
+| `postcss.config.js` (export `./postcss`) | Shared **`postcssConfig`** (`@tailwindcss/postcss`) for apps                                                                                            |
 
-2. **Build Process**: SVGR transforms SVGs into React components:
+Details in **`shared-styles.css`**: primary / secondary / status palettes, neutrals, `background` and `foreground`, typography scale (e.g. `--text-xxs`), gold-gradient image + `text-gold-gradient` utility, and base styles for inputs, textareas, selects, placeholders, and autofill.
 
-   ```bash
-   npm run build:icons  # Converts SVG → React components in dist/
-   ```
+Excerpt from [`packages/design-system/shared-styles.css`](./packages/design-system/shared-styles.css):
 
-3. **Auto-Generated Index**: The build process creates TypeScript exports:
+```css
+@import 'tailwindcss';
 
-   ```typescript
-   // packages/icons/src/index.ts (auto-generated)
-   export { default as ArrowRight } from '../dist/ArrowRight';
-   ```
+@theme {
+  --color-*: initial; /* drop Tailwind default palette; tokens below drive utilities */
 
-4. **Usage in Apps**: Import icons as React components:
+  --color-primary-300: #93d9b8;
+  --color-primary-500: #179149;
+  --color-primary-700: #176c38;
 
-   ```tsx
-   import { ArrowRight, AddUser } from '@repo/icons';
+  --background-image-gold-gradient: linear-gradient(
+    90deg,
+    #fcd678 0%,
+    #fcd678 0.01%,
+    #bc8c2f 100%
+  );
 
-   <ArrowRight className="text-primary-600 h-5 w-5" />;
-   ```
+  --background: #f4f4f4;
+  --foreground: #161616;
+  --text-xxs: 10px;
+  /* …secondary, status, neutrals, borders, and more in the repo… */
+}
 
-**SVGR Configuration** (`.svgrrc.js`):
+/* Bridges next/font CSS variables to Tailwind font utilities */
+@theme inline {
+  --font-open-sans: var(--font-open-sans);
+  --font-ibm-plex-sans-thai: var(--font-ibm-plex-sans-thai);
+  --font-sofia-sans-condensed:
+    var(--font-sofia-sans-condensed), var(--font-ibm-plex-sans-thai);
+}
 
-- **TypeScript**: Generates `.tsx` files with full type safety
-- **SVGO Optimization**: Automatically optimizes SVG files
-- **Color Replacement**: `#000` and `#000000` → `currentColor` for styling flexibility
-- **Icon Mode**: Optimized for icon usage (removes dimensions, preserves viewBox)
+@utility text-gold-gradient {
+  background-image: var(--background-image-gold-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+```
 
-**Development Workflow**:
+**How apps and UI consume it**
 
-- `npm run build` - Build all icons and regenerate index
-- `npm run dev` - Watch mode (auto-rebuilds on SVG changes)
-- Icons are automatically converted from kebab-case filenames to PascalCase component names
+1. **`apps/web`** — `app/globals.css` imports `@tailwindcss` then `@repo/design-system`; add app-only rules (e.g. layout grids) beside those imports. `postcss.config.mjs` re-exports `postcssConfig` from `@repo/design-system/postcss`.
+2. **`@repo/ui`** — `src/styles.css` imports `@repo/design-system`, then defines **component-local** `@utility` / keyframes (e.g. accordion animations). The package **`build:styles`** emits `dist/index.css`; consumers use `@repo/ui/styles.css` alongside JS exports from `@repo/ui/*`.
+
+**Mental model:** `@repo/design-system` = single source of truth for **theme + globals**; `@repo/ui` = **layered styles + components** on top; `apps/web` = **product-specific** CSS only where needed.
 
 ### Data Fetching Architecture
 
@@ -381,19 +457,21 @@ export const linksApi = {
 2. **Each app** has its own fetch utilities that consume these definitions:
 
 ```typescript
-// apps/web/lib/fetch/server.ts - Server-side fetch
+// apps/web/lib/fetch/server.ts — Server Components / route handlers
+// next.revalidate: shared TTL (e.g. 30 minutes) for GET-style reads
 export async function serverFetch<T>(endpoint: ApiEndpoint<T>): Promise<T> {
   const response = await fetch(`${API_BASE_URL}${endpoint.url}`, {
     method: endpoint.method,
     body: endpoint.body ? JSON.stringify(endpoint.body) : undefined,
-    cache: 'no-store', // Server controls caching
+    next: { revalidate: 1800 },
   });
-  return response.json();
+  // …parse JSON, throw on error
 }
 
-// apps/web/lib/fetch/client.ts - Client-side fetch (for TanStack Query)
+// apps/web/lib/fetch/client.ts — browser / TanStack Query
+// Optional parseResponse() for custom status handling (e.g. form POST → discriminated result)
 export async function clientFetch<T>(endpoint: ApiEndpoint<T>): Promise<T> {
-  // Same logic, but TanStack Query handles caching
+  // …default: throw if !ok, else JSON parse; TanStack Query owns client caching
 }
 ```
 
@@ -434,47 +512,18 @@ export function LinksClient() {
 - ✅ **Type safety** - Full TypeScript inference from endpoint to response
 - ✅ **Easy to test** - Mock endpoints without mocking fetch
 
-### Extending Apps
+### SEO & indexing (`apps/web`)
 
-> **💡 Simple Extension Pattern**: To add a new Next.js app, simply duplicate an existing app directory and change its name!
+Brief stack for crawlers and previews:
 
-This monorepo is designed to make adding new apps straightforward:
+| Piece                                                     | Role                                                                                    |
+| --------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `lib/metadata/create-metadata.ts`                         | Locale-aware `generateMetadata` (canonical, `hreflang`, Open Graph, Twitter)            |
+| `lib/sitemap/registry.ts` + `app/sitemap.ts`              | Route registry; `/sitemap.xml` per locale (`NEXT_PUBLIC_BASE_URL`)                      |
+| `scripts/generate-robots.js` (`postbuild` on the web app) | Writes `public/robots.txt` (full allow + sitemap in production; disallow all otherwise) |
+| `lib/metadata/create-organization-schema.ts`              | JSON-LD `Organization` in the locale layout                                             |
 
-1. **Duplicate an existing app**:
-
-   ```bash
-   cp -r apps/web apps/my-new-app
-   ```
-
-2. **Update the app name** in the following files:
-   - `apps/my-new-app/package.json` - Change the name to `"my-new-app"`
-   - `apps/my-new-app/package.json` - Update the `"dev"` script port (e.g., `--port 3004`)
-   - `apps/my-new-app/next.config.js` (if it exists) - Update any app-specific configurations
-
-3. **That's it!** The new app will:
-   - ✅ Automatically use shared packages (`@repo/design-system`, `@repo/ui`, `@repo/api-client`)
-   - ✅ Inherit all Tailwind configurations from the design system
-   - ✅ Use the same environment variables (via symlink distribution)
-   - ✅ Work with Turborepo's build and dev commands
-   - ✅ Share TypeScript, ESLint, and Prettier configurations
-
-**Example: Creating an admin dashboard**
-
-```bash
-# 1. Duplicate an existing app
-cp -r apps/web apps/admin
-
-# 2. Update package.json
-cd apps/admin
-# Change "name": "hfm-frontend" → "name": "admin" (or your app workspace name)
-# Change port from 3001 → 3004
-
-# 3. Start developing!
-npm run dev
-# Your new admin app will be available at http://localhost:3004
-```
-
-All shared packages, configurations, and utilities are automatically available to your new app. This makes it incredibly easy to spin up additional frontend applications while maintaining consistency across your monorepo.
+See root **`.env.example`** for `NEXT_PUBLIC_BASE_URL`, `NEXT_PUBLIC_SITE_NAME`, optional logo/social overrides, and `APP_ENV` (robots behavior).
 
 ### Environment Variables
 
@@ -485,23 +534,4 @@ The project uses a centralized `.env` file in the root directory:
 - **Excluded Packages**: Config packages (`eslint-config`, `jest-config`, `typescript-config`) don't receive `.env` files
 - **Single Source of Truth**: All environment variables are managed in the root `.env` file
 
-### Remote Caching
-
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-```bash
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```bash
-npx turbo link
-```
+**Web (see `.env.example`)**: `NEXT_PUBLIC_API_URL`, `NEXT_PUBLIC_BASE_URL` (canonical / sitemap), `NEXT_PUBLIC_SITE_NAME` / optional logo & social URLs for metadata + JSON-LD, `APP_ENV` for production-style `robots.txt` after build.
