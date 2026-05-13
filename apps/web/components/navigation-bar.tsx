@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import { HfmMarketsLogo, MobileDevice, LocaleSwitcherEn } from '@repo/icons';
+import { Button } from '@repo/ui/button';
 
 export async function NavigationBar() {
   const t = await getTranslations('NavigationBar');
@@ -27,11 +28,21 @@ export async function NavigationBar() {
             <LocaleSwitcherEn className="h-[17px] w-auto" aria-hidden />
           </div>
         </div>
-        <div>
-          <HfmMarketsLogo
-            className="h-[58px] w-auto"
-            aria-label={t('logoAlt')}
-          />
+        <div className="flex items-center justify-between">
+          <div>
+            <HfmMarketsLogo
+              className="h-[58px] w-auto"
+              aria-label={t('logoAlt')}
+            />
+          </div>
+          <div className="flex gap-[17px]">
+            <Button variant="secondary" size="small">
+              Login
+            </Button>
+            <Button variant="primary" size="small">
+              Register
+            </Button>
+          </div>
         </div>
       </div>
     </header>
