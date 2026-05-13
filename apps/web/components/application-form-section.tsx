@@ -62,6 +62,7 @@ export function ApplicationFormSection({ countries, experiences }: Props) {
       acceptTerms: false,
     },
     schema,
+    mode: 'onSubmit',
   });
 
   const countriesById = useMemo(
@@ -85,19 +86,13 @@ export function ApplicationFormSection({ countries, experiences }: Props) {
 
   return (
     <section
-      className="relative isolate flex min-h-[max(774px,100svh)] w-full flex-col items-center justify-center px-4 py-10 sm:px-6 md:py-14 lg:py-16"
+      className="relative isolate flex min-h-[max(774px,100svh)] w-full flex-col items-center justify-center px-4 py-10 md:py-12"
       aria-labelledby="application-form-heading"
     >
       <div
-        className="absolute inset-0 -z-20 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage:
-            "url('/png/application-form-section-background.png')",
-        }}
+        className="absolute inset-0 -z-20 bg-[url('/png/application-form-section-background.png')] bg-cover bg-center bg-no-repeat"
         aria-hidden
       />
-      <div className="bg-darkest-gray/65 absolute inset-0 -z-10" aria-hidden />
-
       <div className="relative z-0 mx-auto flex w-full max-w-6xl flex-col items-center">
         <h2
           id="application-form-heading"
@@ -111,18 +106,18 @@ export function ApplicationFormSection({ countries, experiences }: Props) {
           </span>
         </h2>
 
-        <div className="w-full max-w-[730px] overflow-y-auto rounded-2xl bg-white px-5 py-6 shadow-2xl sm:px-8 sm:py-8">
-          <h3 className="text-darkest-gray mb-6 text-center text-lg font-bold md:text-xl">
+        <div className="flex min-h-[437px] w-full max-w-[730px] flex-col items-center justify-center overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl md:p-10">
+          <h3 className="text-darkest-gray mb-8 text-center text-lg font-bold md:text-xl">
             {t('applicationForm.formTitle')}
           </h3>
 
-          <div className="w-full space-y-4">
+          <div className="w-full">
             <FormWrapper
               formInstance={form}
               onSubmit={handleSubmit}
               className="w-full"
             >
-              <div className="space-y-4 md:space-y-5">
+              <div className="flex flex-col [&>*:not(:last-child):not(:nth-last-child(2))]:mb-4 [&>*:nth-last-child(2)]:mb-10">
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5">
                   <FormInput
                     name="firstName"
@@ -134,7 +129,7 @@ export function ApplicationFormSection({ countries, experiences }: Props) {
                   />
                 </div>
 
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:items-end md:gap-5">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:items-end">
                   <div className="min-w-0">
                     <FormSelect
                       name="countryId"
@@ -209,31 +204,32 @@ export function ApplicationFormSection({ countries, experiences }: Props) {
                   name="acceptTerms"
                   id="application-accept-terms"
                   label={
-                    <>
+                    <div className="text-gray flex items-center gap-1 text-xs">
                       {t('applicationForm.acceptTermsLabel')}
                       <Link
                         href="/privacy"
-                        className="text-secondary-500 hover:text-secondary-700 font-medium underline"
+                        className="text-secondary-500! hover:text-secondary-700 font-normal hover:underline!"
                       >
                         {t('applicationForm.privacyPolicy')}
                       </Link>
                       {t('applicationForm.and')}
                       <Link
                         href="/terms"
-                        className="text-secondary-500 hover:text-secondary-700 font-medium underline"
+                        className="text-secondary-500! hover:text-secondary-700 font-normal hover:underline!"
                       >
                         {t('applicationForm.termsAndConditions')}
                       </Link>
-                    </>
+                    </div>
                   }
                 />
 
-                <div className="flex justify-center pt-2">
+                <div className="flex justify-center">
                   <FormButton
                     type="submit"
                     variant="primary"
                     size="large"
-                    className="w-full min-w-[200px] uppercase sm:w-auto"
+                    className="w-full min-w-[307px] uppercase md:w-auto"
+                    autoDisable={false}
                   >
                     {t('applicationForm.submit')}
                   </FormButton>
