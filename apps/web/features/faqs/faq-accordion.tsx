@@ -9,13 +9,9 @@ import {
 
 type Props = {
   faqs: Faq[];
-  /** Initially open item (`String(faq.id)`). */
   defaultValue?: string;
 };
 
-/**
- * Opinionated FAQ layout (dark band, dividers, copy) built from `@repo/ui/accordion`.
- */
 export function FaqAccordion({ faqs, defaultValue }: Props) {
   return (
     <Accordion
