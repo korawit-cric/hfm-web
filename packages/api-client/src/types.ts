@@ -64,3 +64,10 @@ export interface Prize {
   rank: number;
   description: string | null;
 }
+
+/** Country row localized for the requested locale; includes primary dialing prefix when linked in DB. */
+export interface Country {
+  id: number;
+  name: string;
+  phoneCode: string;
+}
