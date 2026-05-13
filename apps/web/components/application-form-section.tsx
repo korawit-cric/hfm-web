@@ -10,6 +10,8 @@ import { FormInput } from '@repo/ui/form/form-input';
 import { FormButton } from '@repo/ui/form/form-button';
 import { cn } from '@repo/ui/utils';
 
+import type { Country } from '@repo/api-client';
+
 import { Link } from '@/lib/i18n/navigation';
 
 const labelClassName = 'mb-2 block text-xs font-bold text-bold-gray md:text-sm';
@@ -28,7 +30,7 @@ function buildSchema(t: (key: string) => string) {
   return z.object({
     firstName: z.string().min(1, req()),
     lastName: z.string().min(1, req()),
-    country: z.string().min(1, req()),
+    countryId: z.string().min(1, req()),
     phoneCode: z.string().min(1, req()),
     phone: z.string().min(1, req()),
     email: z.string().min(1, req()).email(emailInvalid()),
@@ -41,7 +43,11 @@ function buildSchema(t: (key: string) => string) {
 
 export type ApplicationFormValues = z.infer<ReturnType<typeof buildSchema>>;
 
-export function ApplicationFormSection() {
+type Props = {
+  countries: Country[];
+};
+
+export function ApplicationFormSection({ countries }: Props) {
   const t = useTranslations('HomePage');
   const [submittedData, setSubmittedData] =
     useState<ApplicationFormValues | null>(null);
@@ -52,7 +58,7 @@ export function ApplicationFormSection() {
     defaultValues: {
       firstName: '',
       lastName: '',
-      country: '',
+      countryId: '',
       phoneCode: '',
       phone: '',
       email: '',
@@ -62,8 +68,14 @@ export function ApplicationFormSection() {
     schema,
   });
 
+  const countriesById = useMemo(
+    () => new Map(countries.map((c) => [String(c.id), c])),
+    [countries],
+  );
+
   const {
     control,
+    setValue,
     formState: { errors },
   } = form;
 
@@ -136,7 +148,7 @@ export function ApplicationFormSection() {
                 <div className="flex flex-col gap-4 md:flex-row md:items-end md:gap-5">
                   <div className="w-full min-w-0 flex-1 md:flex-[1.2]">
                     <label
-                      htmlFor="application-country"
+                      htmlFor="application-country-id"
                       className={labelClassName}
                     >
                       {t('applicationForm.countryLabel')}
@@ -149,30 +161,38 @@ export function ApplicationFormSection() {
                     </label>
                     <div className="relative">
                       <Controller
-                        name="country"
+                        name="countryId"
                         control={control}
                         render={({ field }) => (
                           <select
                             {...field}
-                            id="application-country"
-                            aria-invalid={errors.country ? 'true' : 'false'}
+                            id="application-country-id"
+                            aria-invalid={errors.countryId ? 'true' : 'false'}
+                            onChange={(e) => {
+                              field.onChange(e);
+                              const id = e.target.value;
+                              if (!id) {
+                                setValue('phoneCode', '');
+                                return;
+                              }
+                              const country = countriesById.get(id);
+                              if (country?.phoneCode) {
+                                setValue('phoneCode', country.phoneCode);
+                              }
+                            }}
                             className={cn(
                               selectBaseClassName,
-                              selectErrorClass('country'),
+                              selectErrorClass('countryId'),
                             )}
                           >
                             <option value="" disabled>
                               {t('applicationForm.countryPlaceholder')}
                             </option>
-                            <option value="TH">
-                              {t('applicationForm.countryTH')}
-                            </option>
-                            <option value="US">
-                              {t('applicationForm.countryUS')}
-                            </option>
-                            <option value="GB">
-                              {t('applicationForm.countryGB')}
-                            </option>
+                            {countries.map((c) => (
+                              <option key={c.id} value={String(c.id)}>
+                                {c.name}
+                              </option>
+                            ))}
                           </select>
                         )}
                       />
@@ -181,9 +201,9 @@ export function ApplicationFormSection() {
                         aria-hidden
                       />
                     </div>
-                    {errors.country?.message ? (
+                    {errors.countryId?.message ? (
                       <p className="text-error-500 mt-2 text-xs md:text-sm">
-                        {String(errors.country.message)}
+                        {String(errors.countryId.message)}
                       </p>
                     ) : null}
                   </div>

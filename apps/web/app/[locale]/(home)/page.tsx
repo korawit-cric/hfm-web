@@ -3,6 +3,7 @@ export const dynamic = 'force-dynamic';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import type { ComponentType, SVGProps } from 'react';
 
+import { getCountries } from '@/features/countries';
 import { FaqsClient, getFaqs } from '@/features/faqs';
 import { getLinks, LinksClient } from '@/features/links';
 import { getPrizes, PrizesClient } from '@/features/prizes';
@@ -51,11 +52,12 @@ export default async function Home({ params }: Props) {
   setRequestLocale(locale);
 
   const t = await getTranslations('HomePage');
-  const [links, rankings, faqs, prizes] = await Promise.all([
+  const [links, rankings, faqs, prizes, countries] = await Promise.all([
     getLinks(),
     getRankings(),
     getFaqs(),
     getPrizes(),
+    getCountries(),
   ]);
 
   const icons: IconItem[] = [
@@ -81,7 +83,7 @@ export default async function Home({ params }: Props) {
 
   return (
     <>
-      <ApplicationFormSection />
+      <ApplicationFormSection countries={countries} />
       <div className="flex min-h-screen flex-col items-center justify-center p-8">
         <main className="w-full max-w-3xl">
           {/* Intro */}
