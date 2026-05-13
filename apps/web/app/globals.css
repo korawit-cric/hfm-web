@@ -1,6 +1,12 @@
 @import 'tailwindcss';
 @import '@repo/design-system';
 
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 .showcase-orbit-grid {
   display: grid;
   gap: 2.5rem;

@@ -60,6 +60,13 @@
       "showcase2": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
       "showcase3": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit."
     },
+    "prizes": {
+      "title": "Prizes",
+      "empty": "No prizes available.",
+      "termsDisclaimer": "Terms and Conditions apply",
+      "medalAriaLabel": "Prize tier {rank}",
+      "descriptionFallback": "Cras dapibus"
+    },
     "prizesServerTitle": "Server-Side Demo: Prizes ({count})",
     "noPrizes": "No prizes.",
     "prizesClientTitle": "Client-Side Demo: Prizes",

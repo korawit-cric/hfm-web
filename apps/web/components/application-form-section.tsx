@@ -12,6 +12,7 @@ import { FormButton } from '@repo/ui/form/form-button';
 
 import type { Country, Experience } from '@repo/api-client';
 
+import { JOIN_NOW_PRIMARY_BUTTON_CLASSNAME } from '@/components/shared-classes/join-now-button-classes';
 import { Link } from '@/lib/i18n/navigation';
 
 /** Phone row: full width of each column, same height as default fields. */
@@ -86,6 +87,7 @@ export function ApplicationFormSection({ countries, experiences }: Props) {
 
   return (
     <section
+      id="application-form"
       className="relative isolate flex min-h-[max(774px,100svh)] w-full flex-col items-center justify-center px-4 py-10 md:py-12"
       aria-labelledby="application-form-heading"
     >
@@ -228,7 +230,7 @@ export function ApplicationFormSection({ countries, experiences }: Props) {
                     type="submit"
                     variant="primary"
                     size="large"
-                    className="w-full min-w-[307px] uppercase md:w-auto"
+                    className={JOIN_NOW_PRIMARY_BUTTON_CLASSNAME}
                     autoDisable={false}
                   >
                     {t('applicationForm.submit')}
