@@ -36,7 +36,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     const inputId = id ?? generatedId;
 
     const labelRowStyles = cn(
-      'flex cursor-pointer items-center gap-3 text-mobile-body1 md:text-desktop-body1 text-darkest-gray',
+      'flex cursor-pointer items-center gap-2 text-mobile-body1 md:text-desktop-body1 text-darkest-gray',
       disabled && 'cursor-not-allowed opacity-60',
     );
 
