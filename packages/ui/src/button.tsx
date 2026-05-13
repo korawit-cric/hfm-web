@@ -12,13 +12,8 @@ type ButtonVariant = 'primary' | 'secondary';
  *
  * @example
  * <Button variant="primary">Click me</Button>
- * <Button variant="primary-icon" icon={<Icon />}>Text</Button>
- * <Button variant="secondary" color="primary">Text</Button>
- * <Button variant="primary" color="yellow" size="small">Text</Button>
- * <Button variant="linked" href="/page">Text</Button>
- * <Button variant="textlink" href="/page">Text</Button>
- * <Button variant="primary" disabled>Text</Button>
- *
+ * <Button variant="secondary" size="small">Text</Button>
+
  * @example With Next.js Link
  * ```tsx
  * import Link from 'next/link';
