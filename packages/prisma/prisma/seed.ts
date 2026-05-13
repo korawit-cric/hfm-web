@@ -77,7 +77,7 @@ async function main() {
     await prisma.codeCountry.create({
       data: {
         codeId: codeRow.id,
-        countryId: countryIdByKey[row.countryKey],
+        countryId: countryIdByKey[row.countryKey]!,
       },
     });
   }
@@ -325,9 +325,9 @@ async function main() {
       {
         firstname: 'Somchai',
         lastname: 'Dev',
-        countryId: countryIdByKey.TH,
-        codeId: codeIdByDial['+66'],
-        experienceId: experienceIds[5]!,
+        countryId: countryIdByKey.TH!,
+        codeId: codeIdByDial['+66']!,
+        experienceId: experienceIds[4]!,
         phone: '812345678',
         email: 'somchai.dev@example.com',
         consent: true,
@@ -335,8 +335,8 @@ async function main() {
       {
         firstname: 'Jane',
         lastname: 'Smith',
-        countryId: countryIdByKey.US,
-        codeId: codeIdByDial['+1'],
+        countryId: countryIdByKey.US!,
+        codeId: codeIdByDial['+1']!,
         experienceId: experienceIds[3]!,
         phone: '2025550143',
         email: 'jane.smith@example.com',
