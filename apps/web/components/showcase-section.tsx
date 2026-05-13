@@ -40,7 +40,7 @@ export async function ShowcaseSection() {
       className="bg-light-gray text-black"
       aria-labelledby="showcase-section-heading"
     >
-      <div className="mx-auto max-w-6xl px-4 py-16 pb-0 sm:px-6 md:py-20 lg:px-8">
+      <div className="mx-auto max-w-6xl px-4 py-16 !pb-0 sm:px-6 md:py-20 lg:px-8">
         <SectionHeader
           id="showcase-section-heading"
           namespace="HomePage.showcase"
