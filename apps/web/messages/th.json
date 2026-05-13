@@ -6,6 +6,8 @@
   "NavigationBar": {
     "logoAlt": "HF Markets",
     "mainNavLabel": "เมนูหลัก",
+    "mainNavOpenMenu": "เปิดเมนูหลัก",
+    "mainNavCloseMenu": "ปิดเมนูหลัก",
     "navProducts": "ผลิตภัณฑ์",
     "navAbout": "เกี่ยวกับเรา",
     "navResources": "แหล่งข้อมูล",
@@ -15,7 +17,9 @@
     "utilityPartnerWithUs": "ร่วมเป็นพาร์ทเนอร์",
     "downloadApp": "ดาวน์โหลดแอป",
     "localeSwitchToEnglish": "เปลี่ยนเป็นภาษาอังกฤษ",
-    "localeSwitchToThai": "เปลี่ยนเป็นภาษาไทย"
+    "localeSwitchToThai": "เปลี่ยนเป็นภาษาไทย",
+    "login": "เข้าสู่ระบบ",
+    "register": "สมัครสมาชิก"
   },
   "HomePage": {
     "logoAlt": "Turborepo",

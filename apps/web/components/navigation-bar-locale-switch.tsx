@@ -9,11 +9,13 @@ import { Link, Locale, usePathname } from '@/lib/i18n/navigation';
 type Props = {
   labelSwitchToEnglish: string;
   labelSwitchToThai: string;
+  onClick?: () => void;
 };
 
 export function NavigationBarLocaleSwitch({
   labelSwitchToEnglish,
   labelSwitchToThai,
+  onClick,
 }: Props) {
   const pathname = usePathname();
   const locale = useLocale();
@@ -28,6 +30,7 @@ export function NavigationBarLocaleSwitch({
       prefetch={false}
       aria-label={ariaLabel}
       className="text-lightest-gray rounded-sm transition-opacity hover:opacity-80"
+      onClick={onClick}
     >
       {locale === 'en' ? (
         <LocaleSwitcherEn className="h-4 w-auto" aria-hidden />
