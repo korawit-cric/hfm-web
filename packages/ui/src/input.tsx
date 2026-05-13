@@ -73,7 +73,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
     // Default field size (design spec); override with controlClassName when needed.
     const baseInputStyles = cn(
-      'h-[42px] w-full max-w-full rounded-sm bg-white px-4 text-darkest-gray placeholder:text-medium-gray transition-all duration-200 text-mobile-body1 md:text-desktop-body1',
+      'h-[42px] w-full max-w-full rounded-sm bg-white px-4 text-darkest-gray placeholder:text-medium-gray transition-all duration-200 focus:outline-none text-mobile-body1 md:text-desktop-body1',
       icon && 'pr-10',
     );
 
@@ -84,13 +84,15 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           hasValue ? 'text-darkest-gray' : 'text-medium-gray ',
         )
       : error
-        ? cn('border border-error-300')
+        ? cn('border border-error-300 focus:border-2')
         : // Normal states (rest, hover, active, filled)
           hasValue
           ? cn(
-              'border-2 border-medium-gray hover:border-2 hover:border-primary-300',
+              'border-2 border-medium-gray hover:border-2 hover:border-primary-300 focus:border-2 focus:border-primary-400',
             )
-          : cn('border border-medium-gray hover:border-primary-300');
+          : cn(
+              'border border-medium-gray hover:border-primary-300 focus:border-2 focus:border-primary-400 focus:ring-primary-400/20',
+            );
 
     // Label styles
     const labelStyles =
