@@ -1,4 +1,5 @@
 // API definitions
+export { applicationsApi } from './applications.js';
 export { countriesApi } from './countries.js';
 export { experiencesApi } from './experiences.js';
 export { faqsApi } from './faqs.js';
@@ -16,3 +17,7 @@ export type {
   Prize,
   Ranking,
 } from './types.js';
+export type {
+  CreateApplicationBody,
+  SavedApplication,
+} from './applications.js';
