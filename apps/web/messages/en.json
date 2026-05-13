@@ -53,6 +53,7 @@
       "title": "Rankings",
       "empty": "No rankings yet.",
       "moreRanksTitle": "More ranks",
+      "moreRanksFootnote": "Figures are indicative and updated periodically according to official rules.",
       "emptyTable": "No additional ranks.",
       "winner1": "This month's 1st winner",
       "winner2": "This month's 2nd winner",
@@ -61,7 +62,8 @@
       "colRank": "Rank",
       "colName": "Name",
       "colSn": "SN",
-      "colGain": "Gain"
+      "colGain": "Gain",
+      "tableRemark": "Terms and Conditions apply"
     },
     "faq": {
       "sectionTitle": "FAQs",
