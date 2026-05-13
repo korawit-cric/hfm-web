@@ -4,6 +4,8 @@ import { HfmMarketsLogo, MobileDevice } from '@repo/icons';
 import { Button } from '@repo/ui/button';
 
 import { NavigationBarLocaleSwitch } from './navigation-bar-locale-switch';
+import { NavigationBarMainNav } from './navigation-bar-main-nav';
+import { NavigationBarMobileDrawer } from './navigation-bar-mobile-drawer';
 import { Link } from '@/lib/i18n/navigation';
 
 const MAIN_NAV_ITEMS = [
@@ -22,14 +24,26 @@ const TOP_UTILITY_LINKS = [
 export async function NavigationBar() {
   const t = await getTranslations('NavigationBar');
 
+  const mainNavItems = MAIN_NAV_ITEMS.map(({ href, translationKey }) => ({
+    href,
+    label: t(translationKey),
+  }));
+
+  const drawerUtilityLinks = TOP_UTILITY_LINKS.map(
+    ({ href, translationKey }) => ({
+      href,
+      label: t(translationKey),
+    }),
+  );
+
   return (
-    <header className="bg-darkest-gray">
-      <div className="mx-auto flex h-[132px] max-w-6xl flex-col justify-center gap-4">
-        <div className="flex items-end justify-between gap-4">
+    <header className="bg-darkest-gray relative z-50">
+      <div className="mx-auto flex max-w-6xl flex-col justify-center gap-4 px-4 py-4 sm:px-6 lg:h-[132px] lg:py-0">
+        <div className="hidden flex-wrap items-end justify-between gap-x-4 gap-y-2 sm:flex">
           <span className="text-medium-gray text-xxs leading-2.5 font-normal">
             Member of HF Markets Group
           </span>
-          <div className="text-lightest-gray flex items-center gap-4 text-sm">
+          <div className="text-lightest-gray flex min-w-0 flex-1 flex-wrap items-center justify-end gap-x-3 gap-y-2 text-sm sm:flex-initial sm:gap-4">
             <Link
               href="/download"
               className="border-dark-gray text-lightest-gray hover:border-lightest-gray/40 inline-flex items-center gap-2 rounded-md border-[0.5px] px-2 py-1 transition-colors hover:text-white"
@@ -59,36 +73,36 @@ export async function NavigationBar() {
             />
           </div>
         </div>
-        <div className="flex items-center justify-between">
-          <div className="flex gap-[100px]">
-            <Link href="/" aria-label={t('logoAlt')}>
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex min-w-0 flex-1 items-center gap-4 lg:gap-[100px]">
+            <Link href="/" aria-label={t('logoAlt')} className="shrink-0">
               <HfmMarketsLogo
-                className="block h-[58px]! w-auto max-w-none shrink-0"
+                className="block h-10! w-auto max-w-none shrink-0 sm:h-12! lg:h-[58px]!"
                 aria-hidden
               />
             </Link>
-            <nav
-              aria-label={t('mainNavLabel')}
-              className="text-lightest-gray flex items-center gap-9 text-base font-normal"
-            >
-              {MAIN_NAV_ITEMS.map(({ href, translationKey }) => (
-                <Link
-                  key={href}
-                  href={href}
-                  className="transition-colors hover:text-white! hover:underline!"
-                >
-                  {t(translationKey)}
-                </Link>
-              ))}
-            </nav>
+            <NavigationBarMainNav
+              items={mainNavItems}
+              navAriaLabel={t('mainNavLabel')}
+            />
           </div>
-          <div className="flex gap-[17px]">
+          <div className="flex shrink-0 items-center gap-2 sm:gap-[17px]">
             <Button variant="secondary" size="small">
               {t('login')}
             </Button>
             <Button variant="primary" size="small">
               {t('register')}
             </Button>
+            <NavigationBarMobileDrawer
+              items={mainNavItems}
+              navAriaLabel={t('mainNavLabel')}
+              openMenuLabel={t('mainNavOpenMenu')}
+              closeMenuLabel={t('mainNavCloseMenu')}
+              downloadLabel={t('downloadApp')}
+              utilityLinks={drawerUtilityLinks}
+              labelSwitchToEnglish={t('localeSwitchToEnglish')}
+              labelSwitchToThai={t('localeSwitchToThai')}
+            />
           </div>
         </div>
       </div>

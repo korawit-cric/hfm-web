@@ -6,6 +6,8 @@
   "NavigationBar": {
     "logoAlt": "HF Markets",
     "mainNavLabel": "Main navigation",
+    "mainNavOpenMenu": "Open main menu",
+    "mainNavCloseMenu": "Close main menu",
     "navProducts": "Products",
     "navAbout": "About",
     "navResources": "Resources",
