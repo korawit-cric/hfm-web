@@ -1,26 +1,18 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { Controller } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 import { z } from 'zod';
-import { ArrowRight, Error as ErrorIcon } from '@repo/icons';
+import { ArrowRight } from '@repo/icons';
 import { useCustomForm, FormWrapper } from '@repo/ui/form/form-wrapper';
 import { FormInput } from '@repo/ui/form/form-input';
+import { FormSelect } from '@repo/ui/form/form-select';
+import { FormCheckbox } from '@repo/ui/form/form-checkbox';
 import { FormButton } from '@repo/ui/form/form-button';
-import { cn } from '@repo/ui/utils';
 
 import type { Country, Experience } from '@repo/api-client';
 
 import { Link } from '@/lib/i18n/navigation';
-
-const labelClassName = 'mb-2 block text-xs font-bold text-bold-gray md:text-sm';
-
-const selectBaseClassName = cn(
-  'h-14 w-full cursor-pointer rounded-lg border bg-white px-4 pr-10 text-base text-darkest-gray transition-all duration-200',
-  'border border-medium-gray hover:border-primary-300 focus:border-2 focus:border-primary-400 focus:outline-none',
-  'appearance-none',
-);
 
 function buildSchema(t: (key: string) => string) {
   const req = () => t('applicationForm.errors.required');
@@ -74,14 +66,11 @@ export function ApplicationFormSection({ countries, experiences }: Props) {
     [countries],
   );
 
-  const {
-    control,
-    setValue,
-    formState: { errors },
-  } = form;
+  const { setValue } = form;
 
-  const selectErrorClass = (name: keyof ApplicationFormValues) =>
-    errors[name] ? 'border-2 border-error-300' : '';
+  const selectChevron = (
+    <ArrowRight className="text-medium-gray h-4 w-4 rotate-90" aria-hidden />
+  );
 
   const handleSubmit = (data: ApplicationFormValues) => {
     setSubmittedData(data);
@@ -148,65 +137,33 @@ export function ApplicationFormSection({ countries, experiences }: Props) {
 
                 <div className="flex flex-col gap-4 md:flex-row md:items-end md:gap-5">
                   <div className="w-full min-w-0 flex-1 md:flex-[1.2]">
-                    <label
-                      htmlFor="application-country-id"
-                      className={labelClassName}
+                    <FormSelect
+                      name="countryId"
+                      id="application-country-id"
+                      label={t('applicationForm.countryLabel')}
+                      required
+                      icon={selectChevron}
+                      onSelectChange={(e) => {
+                        const id = e.target.value;
+                        if (!id) {
+                          setValue('phoneCode', '');
+                          return;
+                        }
+                        const country = countriesById.get(id);
+                        if (country?.phoneCode) {
+                          setValue('phoneCode', country.phoneCode);
+                        }
+                      }}
                     >
-                      {t('applicationForm.countryLabel')}
-                      <span
-                        className="text-error-500 ml-1"
-                        aria-label="required"
-                      >
-                        *
-                      </span>
-                    </label>
-                    <div className="relative">
-                      <Controller
-                        name="countryId"
-                        control={control}
-                        render={({ field }) => (
-                          <select
-                            {...field}
-                            id="application-country-id"
-                            aria-invalid={errors.countryId ? 'true' : 'false'}
-                            onChange={(e) => {
-                              field.onChange(e);
-                              const id = e.target.value;
-                              if (!id) {
-                                setValue('phoneCode', '');
-                                return;
-                              }
-                              const country = countriesById.get(id);
-                              if (country?.phoneCode) {
-                                setValue('phoneCode', country.phoneCode);
-                              }
-                            }}
-                            className={cn(
-                              selectBaseClassName,
-                              selectErrorClass('countryId'),
-                            )}
-                          >
-                            <option value="" disabled>
-                              {t('applicationForm.countryPlaceholder')}
-                            </option>
-                            {countries.map((c) => (
-                              <option key={c.id} value={String(c.id)}>
-                                {c.name}
-                              </option>
-                            ))}
-                          </select>
-                        )}
-                      />
-                      <ArrowRight
-                        className="text-medium-gray pointer-events-none absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 rotate-90"
-                        aria-hidden
-                      />
-                    </div>
-                    {errors.countryId?.message ? (
-                      <p className="text-error-500 mt-2 text-xs md:text-sm">
-                        {String(errors.countryId.message)}
-                      </p>
-                    ) : null}
+                      <option value="" disabled>
+                        {t('applicationForm.countryPlaceholder')}
+                      </option>
+                      {countries.map((c) => (
+                        <option key={c.id} value={String(c.id)}>
+                          {c.name}
+                        </option>
+                      ))}
+                    </FormSelect>
                   </div>
                   <div className="flex w-full gap-4 md:w-auto md:flex-1">
                     <div className="w-24 shrink-0 md:w-28">
@@ -238,101 +195,48 @@ export function ApplicationFormSection({ countries, experiences }: Props) {
                     placeholder={t('applicationForm.email')}
                   />
                   <div>
-                    <label
-                      htmlFor="application-experience"
-                      className={labelClassName}
+                    <FormSelect
+                      name="experienceId"
+                      id="application-experience"
+                      label={t('applicationForm.experienceLabel')}
+                      required
+                      icon={selectChevron}
                     >
-                      {t('applicationForm.experienceLabel')}
-                      <span
-                        className="text-error-500 ml-1"
-                        aria-label="required"
-                      >
-                        *
-                      </span>
-                    </label>
-                    <div className="relative">
-                      <Controller
-                        name="experienceId"
-                        control={control}
-                        render={({ field }) => (
-                          <select
-                            {...field}
-                            id="application-experience"
-                            aria-invalid={
-                              errors.experienceId ? 'true' : 'false'
-                            }
-                            className={cn(
-                              selectBaseClassName,
-                              selectErrorClass('experienceId'),
-                            )}
-                          >
-                            <option value="" disabled>
-                              {t('applicationForm.experiencePlaceholder')}
-                            </option>
-                            {experiences.map((exp) => (
-                              <option key={exp.id} value={String(exp.id)}>
-                                {exp.name}
-                              </option>
-                            ))}
-                          </select>
-                        )}
-                      />
-                      <ArrowRight
-                        className="text-medium-gray pointer-events-none absolute top-1/2 right-3 h-4 w-4 -translate-y-1/2 rotate-90"
-                        aria-hidden
-                      />
-                    </div>
-                    {errors.experienceId?.message ? (
-                      <p className="text-error-500 mt-2 text-xs md:text-sm">
-                        {String(errors.experienceId.message)}
-                      </p>
-                    ) : null}
+                      <option value="" disabled>
+                        {t('applicationForm.experiencePlaceholder')}
+                      </option>
+                      {experiences.map((exp) => (
+                        <option key={exp.id} value={String(exp.id)}>
+                          {exp.name}
+                        </option>
+                      ))}
+                    </FormSelect>
                   </div>
                 </div>
 
                 <div>
-                  <Controller
+                  <FormCheckbox
                     name="acceptTerms"
-                    control={control}
-                    render={({ field }) => (
-                      <label className="text-darkest-gray flex cursor-pointer items-start gap-3 text-sm md:text-base">
-                        <input
-                          type="checkbox"
-                          checked={field.value}
-                          onChange={(e) => field.onChange(e.target.checked)}
-                          onBlur={field.onBlur}
-                          ref={field.ref}
-                          className="text-primary-500 focus:ring-primary-400 border-medium-gray mt-0.5 h-5 w-5 shrink-0 rounded border"
-                          aria-invalid={errors.acceptTerms ? 'true' : 'false'}
-                        />
-                        <span>
-                          {t('applicationForm.acceptTermsLabel')}
-                          <Link
-                            href="/privacy"
-                            className="text-secondary-500 hover:text-secondary-700 font-medium underline"
-                          >
-                            {t('applicationForm.privacyPolicy')}
-                          </Link>
-                          {t('applicationForm.and')}
-                          <Link
-                            href="/terms"
-                            className="text-secondary-500 hover:text-secondary-700 font-medium underline"
-                          >
-                            {t('applicationForm.termsAndConditions')}
-                          </Link>
-                        </span>
-                      </label>
-                    )}
+                    id="application-accept-terms"
+                    label={
+                      <>
+                        {t('applicationForm.acceptTermsLabel')}
+                        <Link
+                          href="/privacy"
+                          className="text-secondary-500 hover:text-secondary-700 font-medium underline"
+                        >
+                          {t('applicationForm.privacyPolicy')}
+                        </Link>
+                        {t('applicationForm.and')}
+                        <Link
+                          href="/terms"
+                          className="text-secondary-500 hover:text-secondary-700 font-medium underline"
+                        >
+                          {t('applicationForm.termsAndConditions')}
+                        </Link>
+                      </>
+                    }
                   />
-                  {errors.acceptTerms?.message ? (
-                    <p
-                      className="text-error-500 mt-2 flex items-center gap-1 text-xs md:text-sm"
-                      role="alert"
-                    >
-                      <ErrorIcon className="h-4 w-4 shrink-0" aria-hidden />
-                      {String(errors.acceptTerms.message)}
-                    </p>
-                  ) : null}
                 </div>
 
                 <div className="flex justify-center pt-2">
