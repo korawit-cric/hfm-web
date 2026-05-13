@@ -49,6 +49,20 @@
     "noRankings": "No rankings data.",
     "rankingsClientTitle": "Client-Side Demo: Rankings",
     "rankingMeta": "#{rank} • gain {gain}",
+    "rankingSection": {
+      "title": "Rankings",
+      "empty": "No rankings yet.",
+      "moreRanksTitle": "More ranks",
+      "emptyTable": "No additional ranks.",
+      "winner1": "This month's 1st winner",
+      "winner2": "This month's 2nd winner",
+      "winner3": "This month's 3rd winner",
+      "totalGainPrefix": "Total gain of",
+      "colRank": "Rank",
+      "colName": "Name",
+      "colSn": "SN",
+      "colGain": "Gain"
+    },
     "faq": {
       "sectionTitle": "FAQs",
       "empty": "No FAQs."

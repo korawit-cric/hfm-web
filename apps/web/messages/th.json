@@ -49,6 +49,20 @@
     "noRankings": "ยังไม่มีข้อมูลอันดับ",
     "rankingsClientTitle": "ดีโมฝั่งไคลเอนต์: อันดับ",
     "rankingMeta": "อันดับ {rank} • gain {gain}",
+    "rankingSection": {
+      "title": "อันดับ",
+      "empty": "ยังไม่มีข้อมูลอันดับ",
+      "moreRanksTitle": "อันดับถัดไป",
+      "emptyTable": "ไม่มีอันดับเพิ่มเติม",
+      "winner1": "ผู้ชนะอันดับ 1 ประจำเดือนนี้",
+      "winner2": "ผู้ชนะอันดับ 2 ประจำเดือนนี้",
+      "winner3": "ผู้ชนะอันดับ 3 ประจำเดือนนี้",
+      "totalGainPrefix": "กำไรรวม",
+      "colRank": "อันดับ",
+      "colName": "ชื่อ",
+      "colSn": "SN",
+      "colGain": "กำไร"
+    },
     "faq": {
       "sectionTitle": "คำถามที่พบบ่อย",
       "empty": "ยังไม่มี FAQ"
