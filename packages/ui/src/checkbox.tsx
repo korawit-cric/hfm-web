@@ -36,12 +36,12 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     const inputId = id ?? generatedId;
 
     const labelRowStyles = cn(
-      'flex cursor-pointer items-start gap-3 text-mobile-body1 md:text-desktop-body1 text-darkest-gray',
+      'flex cursor-pointer items-center gap-3 text-mobile-body1 md:text-desktop-body1 text-darkest-gray',
       disabled && 'cursor-not-allowed opacity-60',
     );
 
     const boxStyles = cn(
-      'mt-0.5 h-5 w-5 shrink-0 rounded border transition-colors focus:outline-none focus:ring-2 focus:ring-primary-400/40 focus:ring-offset-0',
+      'h-[15px] w-[15px] shrink-0 rounded border transition-colors',
       'border-medium-gray text-primary-500 accent-primary-500',
       error && 'border-error-300',
       disabled && 'cursor-not-allowed',
