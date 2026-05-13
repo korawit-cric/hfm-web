@@ -15,7 +15,9 @@
     "utilityPartnerWithUs": "Partner with us",
     "downloadApp": "Download App",
     "localeSwitchToEnglish": "Switch to English",
-    "localeSwitchToThai": "Switch to Thai"
+    "localeSwitchToThai": "Switch to Thai",
+    "login": "Login",
+    "register": "Register"
   },
   "HomePage": {
     "logoAlt": "Turborepo",

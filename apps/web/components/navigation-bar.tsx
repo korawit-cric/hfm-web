@@ -84,10 +84,10 @@ export async function NavigationBar() {
           </div>
           <div className="flex gap-[17px]">
             <Button variant="secondary" size="small">
-              Login
+              {t('login')}
             </Button>
             <Button variant="primary" size="small">
-              Register
+              {t('register')}
             </Button>
           </div>
         </div>
