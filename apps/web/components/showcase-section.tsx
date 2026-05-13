@@ -38,7 +38,7 @@ export async function ShowcaseSection() {
       className="bg-light-gray text-black"
       aria-labelledby="showcase-section-heading"
     >
-      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">
+      <div className="mx-auto max-w-6xl px-4 py-16 pb-0 sm:px-6 md:py-20 lg:px-8">
         <h2
           id="showcase-section-heading"
           className="font-sofia-sans-condensed mb-10 text-center text-3xl font-normal tracking-wide uppercase md:mb-20 md:text-5xl"

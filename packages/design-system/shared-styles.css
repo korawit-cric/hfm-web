@@ -67,7 +67,8 @@
 @theme inline {
   --font-open-sans: var(--font-open-sans);
   --font-prompt: var(--font-prompt);
-  --font-sofia-sans-condensed: var(--font-sofia-sans-condensed);
+  --font-sofia-sans-condensed:
+    var(--font-sofia-sans-condensed), var(--font-prompt);
 }
 
 @utility text-gold-gradient {
