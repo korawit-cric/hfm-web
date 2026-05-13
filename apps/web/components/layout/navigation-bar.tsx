@@ -40,7 +40,7 @@ export async function NavigationBar() {
     <header className="bg-darkest-gray relative z-50">
       <div className="mx-auto flex max-w-6xl flex-col justify-center gap-4 px-4 py-4 sm:px-6 lg:h-[132px] lg:py-0">
         <div className="hidden flex-wrap items-end justify-between gap-x-4 gap-y-2 sm:flex">
-          <span className="text-medium-gray text-xxs leading-2.5 font-normal">
+          <span className="text-medium-gray text-xxs font-open-sans leading-2.5 font-normal">
             Member of HF Markets Group
           </span>
           <div className="text-lightest-gray flex min-w-0 flex-1 flex-wrap items-center justify-end gap-x-3 gap-y-2 text-sm sm:flex-initial sm:gap-4">
