@@ -7,9 +7,9 @@ import {
 } from 'next-intl/server';
 import { hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
-import { NavigationBar } from '../../components/navigation-bar';
-import { Providers } from '../../providers';
-import { routing } from '../../lib/i18n/routing';
+import { NavigationBar } from '@/components/navigation-bar';
+import { Providers } from '@/providers';
+import { routing } from '@/lib/i18n/routing';
 
 type Props = {
   children: React.ReactNode;

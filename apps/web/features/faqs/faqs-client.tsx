@@ -5,7 +5,7 @@ import { useLocale } from 'next-intl';
 import { faqsApi, type Faq } from '@repo/api-client';
 import { Button } from '@repo/ui/button';
 
-import { clientFetch } from '../../lib/fetch/client';
+import { clientFetch } from '@/lib/fetch/client';
 
 export const faqKeys = {
   all: ['faqs'] as const,

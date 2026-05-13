@@ -2,7 +2,7 @@ import { prizesApi } from '@repo/api-client';
 import type { Prize } from '@repo/api-client';
 import { getLocale } from 'next-intl/server';
 
-import { serverFetch } from '../../lib/fetch/server';
+import { serverFetch } from '@/lib/fetch/server';
 
 export async function getPrizes(): Promise<Prize[]> {
   try {

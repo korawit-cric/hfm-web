@@ -4,7 +4,7 @@ import { HfmMarketsLogo, MobileDevice } from '@repo/icons';
 import { Button } from '@repo/ui/button';
 
 import { NavigationBarLocaleSwitch } from './navigation-bar-locale-switch';
-import { Link } from '../lib/i18n/navigation';
+import { Link } from '@/lib/i18n/navigation';
 
 const MAIN_NAV_ITEMS = [
   { href: '/products', translationKey: 'navProducts' },
@@ -61,10 +61,7 @@ export async function NavigationBar() {
         </div>
         <div className="flex items-center justify-between">
           <div className="flex gap-[100px]">
-            <Link
-              href="/"
-              aria-label={t('logoAlt')}
-            >
+            <Link href="/" aria-label={t('logoAlt')}>
               <HfmMarketsLogo
                 className="block h-[58px]! w-auto max-w-none shrink-0"
                 aria-hidden

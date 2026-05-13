@@ -4,7 +4,7 @@ import { useLocale } from 'next-intl';
 
 import { LocaleSwitcherEn, LocaleSwitcherTh } from '@repo/icons';
 
-import { Link, usePathname } from '../lib/i18n/navigation';
+import { Link, usePathname } from '@/lib/i18n/navigation';
 
 type Props = {
   labelSwitchToEnglish: string;

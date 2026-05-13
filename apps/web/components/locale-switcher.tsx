@@ -2,8 +2,8 @@
 
 import { useLocale } from 'next-intl';
 
-import { Link, usePathname } from '../lib/i18n/navigation';
-import { routing } from '../lib/i18n/routing';
+import { Link, usePathname } from '@/lib/i18n/navigation';
+import { routing } from '@/lib/i18n/routing';
 
 type Props = {
   labels: Record<string, string>;
