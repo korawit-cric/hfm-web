@@ -1,5 +1,7 @@
 import { linksApi } from '@repo/api-client';
-import type { Link } from '@repo/prisma';
+import type { Link } from '@repo/api-client';
+import { getLocale } from 'next-intl/server';
+
 import { serverFetch } from '../../lib/fetch/server';
 
 /**
@@ -8,7 +10,8 @@ import { serverFetch } from '../../lib/fetch/server';
  */
 export async function getLinks(): Promise<Link[]> {
   try {
-    return await serverFetch(linksApi.list());
+    const locale = await getLocale();
+    return await serverFetch(linksApi.list(locale));
   } catch (error) {
     console.error('Error fetching links:', error);
     return [];
@@ -17,7 +20,8 @@ export async function getLinks(): Promise<Link[]> {
 
 export async function getLink(id: number): Promise<Link | null> {
   try {
-    return await serverFetch(linksApi.detail(id));
+    const locale = await getLocale();
+    return await serverFetch(linksApi.detail(id, locale));
   } catch (error) {
     console.error(`Error fetching link ${id}:`, error);
     return null;
