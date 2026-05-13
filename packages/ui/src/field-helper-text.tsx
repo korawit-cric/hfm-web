@@ -9,14 +9,10 @@ export interface FieldHelperTextProps {
   id: string;
   error?: string;
   helperText?: string;
-  /** Prefix error line with icon (e.g. checkbox helpers). */
   showErrorIcon?: boolean;
   className?: string;
 }
 
-/**
- * Shared caption under {@link Input}, {@link Select}, {@link Textarea}, {@link Checkbox}.
- */
 export function FieldHelperText({
   id,
   error,
