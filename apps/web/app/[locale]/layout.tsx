@@ -7,8 +7,8 @@ import {
 } from 'next-intl/server';
 import { hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
-import { Footer } from '@/components/footer';
-import { NavigationBar } from '@/components/navigation-bar';
+import { Footer } from '@/components/layout/footer';
+import { NavigationBar } from '@/components/layout/navigation-bar';
 import { Providers } from '@/providers';
 import { routing } from '@/lib/i18n/routing';
 
