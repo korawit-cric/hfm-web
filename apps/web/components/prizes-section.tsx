@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 
 import { JoinNowCtaLink } from '@/components/join-now-cta-link';
+import { SectionEmptyMessage } from '@/components/section-empty-message';
 
 const PRIZE_MEDAL_IMAGES = [
   '/png/prizes-section-medal-01.png',
@@ -79,7 +80,7 @@ export async function PrizesSection({ prizes }: Props) {
             </div>
           </>
         ) : (
-          <p className="text-dark-gray text-center text-sm">{t('empty')}</p>
+          <SectionEmptyMessage tone="dark">{t('empty')}</SectionEmptyMessage>
         )}
       </div>
     </section>
