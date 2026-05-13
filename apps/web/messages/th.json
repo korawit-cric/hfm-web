@@ -21,6 +21,16 @@
     "login": "เข้าสู่ระบบ",
     "register": "สมัครสมาชิก"
   },
+  "Footer": {
+    "findUsOn": "ติดตามเราได้ที่",
+    "socialPlaceholder": "ช่องทางโซเชียล — ไอคอนจะเพิ่มเร็วๆ นี้",
+    "socialListLabel": "ลิงก์โซเชียลมีเดีย",
+    "downloadHfmApp": "ดาวน์โหลดแอป HFM",
+    "appStoreBadgeAlt": "ดาวน์โหลดบน App Store",
+    "googlePlayBadgeAlt": "รับได้ที่ Google Play",
+    "riskWarning": "คำเตือนความเสี่ยง",
+    "riskWarningBody": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. การซื้อขายผลิตภัณฑ์ที่มีเลเวอเรจมีความเสี่ยงสูง และอาจไม่เหมาะกับนักลงทุนทุกท่าน ผลการดำเนินงานในอดีตไม่ได้บ่งชี้ถึงผลในอนาคต"
+  },
   "HomePage": {
     "logoAlt": "Turborepo",
     "title": "ทดสอบ HFM web",
