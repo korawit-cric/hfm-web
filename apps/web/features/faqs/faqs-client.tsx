@@ -1,11 +1,12 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { faqsApi, type Faq } from '@repo/api-client';
-import { Button } from '@repo/ui/button';
 
 import { clientFetch } from '@/lib/fetch/client';
+
+import { FaqAccordion } from './faq-accordion';
 
 export const faqKeys = {
   all: ['faqs'] as const,
@@ -26,51 +27,32 @@ export function useFaqsQuery() {
 }
 
 export function FaqsClient() {
-  const { data, isLoading, isFetching, error, refetch } = useFaqsQuery();
+  const t = useTranslations('HomePage');
+  const { data, isLoading, error } = useFaqsQuery();
 
   if (isLoading) {
     return (
-      <div className="border-surface rounded-xl border p-5">
-        <div className="flex items-center gap-3">
-          <div className="border-primary-500 h-5 w-5 animate-spin rounded-full border-2 border-t-transparent" />
-          <p className="text-foreground/70 text-sm">Loading FAQs…</p>
-        </div>
+      <div className="flex items-center gap-3 py-6">
+        <div
+          className="h-5 w-5 animate-spin rounded-full border-2 border-white/25 border-t-white"
+          aria-hidden
+        />
+        <p className="text-medium-gray text-sm">{t('faqAccordionLoading')}</p>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="border-error-400/50 rounded-xl border p-5">
-        <p className="text-error-400 text-sm">Error loading FAQs</p>
-      </div>
+      <p className="text-error-400 text-sm" role="alert">
+        {t('faqAccordionError')}
+      </p>
     );
   }
 
-  return (
-    <div className="space-y-3">
-      <div className="flex items-center justify-between">
-        <span className="text-sm font-medium">TanStack Query</span>
-        <Button
-          onClick={() => void refetch()}
-          disabled={isFetching}
-          size="small"
-        >
-          {isFetching ? 'Refetching…' : 'Refetch'}
-        </Button>
-      </div>
-      {data && data.length > 0 ? (
-        <ul className="space-y-3 text-sm">
-          {data.map((faq) => (
-            <li key={faq.id} className="border-surface rounded-lg border p-3">
-              <p className="font-medium">{faq.q}</p>
-              <p className="text-foreground/70 mt-1">{faq.a}</p>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p className="text-foreground/70 text-sm">No FAQs</p>
-      )}
-    </div>
-  );
+  if (data && data.length > 0) {
+    return <FaqAccordion faqs={data} />;
+  }
+
+  return <p className="text-medium-gray text-sm">{t('noFaqs')}</p>;
 }
