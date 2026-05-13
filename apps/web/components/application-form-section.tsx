@@ -10,7 +10,7 @@ import { FormInput } from '@repo/ui/form/form-input';
 import { FormButton } from '@repo/ui/form/form-button';
 import { cn } from '@repo/ui/utils';
 
-import type { Country } from '@repo/api-client';
+import type { Country, Experience } from '@repo/api-client';
 
 import { Link } from '@/lib/i18n/navigation';
 
@@ -34,7 +34,7 @@ function buildSchema(t: (key: string) => string) {
     phoneCode: z.string().min(1, req()),
     phone: z.string().min(1, req()),
     email: z.string().min(1, req()).email(emailInvalid()),
-    experience: z.string().min(1, req()),
+    experienceId: z.string().min(1, req()),
     acceptTerms: z.boolean().refine((val) => val === true, {
       message: accept(),
     }),
@@ -45,9 +45,10 @@ export type ApplicationFormValues = z.infer<ReturnType<typeof buildSchema>>;
 
 type Props = {
   countries: Country[];
+  experiences: Experience[];
 };
 
-export function ApplicationFormSection({ countries }: Props) {
+export function ApplicationFormSection({ countries, experiences }: Props) {
   const t = useTranslations('HomePage');
   const [submittedData, setSubmittedData] =
     useState<ApplicationFormValues | null>(null);
@@ -62,7 +63,7 @@ export function ApplicationFormSection({ countries }: Props) {
       phoneCode: '',
       phone: '',
       email: '',
-      experience: '',
+      experienceId: '',
       acceptTerms: false,
     },
     schema,
@@ -251,30 +252,28 @@ export function ApplicationFormSection({ countries }: Props) {
                     </label>
                     <div className="relative">
                       <Controller
-                        name="experience"
+                        name="experienceId"
                         control={control}
                         render={({ field }) => (
                           <select
                             {...field}
                             id="application-experience"
-                            aria-invalid={errors.experience ? 'true' : 'false'}
+                            aria-invalid={
+                              errors.experienceId ? 'true' : 'false'
+                            }
                             className={cn(
                               selectBaseClassName,
-                              selectErrorClass('experience'),
+                              selectErrorClass('experienceId'),
                             )}
                           >
                             <option value="" disabled>
                               {t('applicationForm.experiencePlaceholder')}
                             </option>
-                            <option value="beginner">
-                              {t('applicationForm.expBeginner')}
-                            </option>
-                            <option value="intermediate">
-                              {t('applicationForm.expIntermediate')}
-                            </option>
-                            <option value="advanced">
-                              {t('applicationForm.expAdvanced')}
-                            </option>
+                            {experiences.map((exp) => (
+                              <option key={exp.id} value={String(exp.id)}>
+                                {exp.name}
+                              </option>
+                            ))}
                           </select>
                         )}
                       />
@@ -283,9 +282,9 @@ export function ApplicationFormSection({ countries }: Props) {
                         aria-hidden
                       />
                     </div>
-                    {errors.experience?.message ? (
+                    {errors.experienceId?.message ? (
                       <p className="text-error-500 mt-2 text-xs md:text-sm">
-                        {String(errors.experience.message)}
+                        {String(errors.experienceId.message)}
                       </p>
                     ) : null}
                   </div>

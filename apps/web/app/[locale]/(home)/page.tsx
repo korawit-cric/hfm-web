@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import type { ComponentType, SVGProps } from 'react';
 
 import { getCountries } from '@/features/countries';
+import { getExperiences } from '@/features/experiences';
 import { FaqsClient, getFaqs } from '@/features/faqs';
 import { getLinks, LinksClient } from '@/features/links';
 import { getPrizes, PrizesClient } from '@/features/prizes';
@@ -52,13 +53,15 @@ export default async function Home({ params }: Props) {
   setRequestLocale(locale);
 
   const t = await getTranslations('HomePage');
-  const [links, rankings, faqs, prizes, countries] = await Promise.all([
-    getLinks(),
-    getRankings(),
-    getFaqs(),
-    getPrizes(),
-    getCountries(),
-  ]);
+  const [links, rankings, faqs, prizes, countries, experiences] =
+    await Promise.all([
+      getLinks(),
+      getRankings(),
+      getFaqs(),
+      getPrizes(),
+      getCountries(),
+      getExperiences(),
+    ]);
 
   const icons: IconItem[] = [
     { name: 'AddFile', component: AddFile },
@@ -83,7 +86,7 @@ export default async function Home({ params }: Props) {
 
   return (
     <>
-      <ApplicationFormSection countries={countries} />
+      <ApplicationFormSection countries={countries} experiences={experiences} />
       <div className="flex min-h-screen flex-col items-center justify-center p-8">
         <main className="w-full max-w-3xl">
           {/* Intro */}
