@@ -158,10 +158,10 @@ export function ApplicationFormSection({ countries, experiences }: Props) {
                     </FormSelect>
                   </div>
                   <div className="flex min-w-0 gap-4">
-                    <div className="w-24 shrink-0 md:w-28">
+                    <div className="w-18">
                       <FormInput
                         name="phoneCode"
-                        placeholder="+66"
+                        placeholder={t('applicationForm.code')}
                         controlClassName={PHONE_FIELD_CONTROL}
                       />
                     </div>
