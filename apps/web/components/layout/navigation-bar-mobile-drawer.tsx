@@ -6,6 +6,7 @@ import { HamburgerMenu, MobileDevice } from '@repo/icons';
 import { Link, usePathname } from '@/lib/i18n/navigation';
 
 import type { NavigationBarMainNavItem } from './navigation-bar-main-nav';
+import type { NavigationBarLocaleLabels } from './navigation-bar-locale-switch';
 import { NavigationBarLocaleSwitch } from './navigation-bar-locale-switch';
 
 type UtilityLink = {
@@ -13,26 +14,24 @@ type UtilityLink = {
   label: string;
 };
 
+export type NavigationBarDrawerLabels = {
+  navAriaLabel: string;
+  openMenu: string;
+  closeMenu: string;
+  download: string;
+  locale: NavigationBarLocaleLabels;
+};
+
 type Props = {
   items: NavigationBarMainNavItem[];
-  navAriaLabel: string;
-  openMenuLabel: string;
-  closeMenuLabel: string;
-  downloadLabel: string;
   utilityLinks: UtilityLink[];
-  labelSwitchToEnglish: string;
-  labelSwitchToThai: string;
+  labels: NavigationBarDrawerLabels;
 };
 
 export function NavigationBarMobileDrawer({
   items,
-  navAriaLabel,
-  openMenuLabel,
-  closeMenuLabel,
-  downloadLabel,
   utilityLinks,
-  labelSwitchToEnglish,
-  labelSwitchToThai,
+  labels,
 }: Props) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
@@ -67,7 +66,7 @@ export function NavigationBarMobileDrawer({
         className="text-lightest-gray cursor-pointer rounded-md p-1 transition-colors hover:text-white lg:hidden"
         aria-expanded={open}
         aria-controls={drawerId}
-        aria-label={open ? closeMenuLabel : openMenuLabel}
+        aria-label={open ? labels.closeMenu : labels.openMenu}
         onClick={() => setOpen((prev) => !prev)}
       >
         <HamburgerMenu className="h-6 w-6 shrink-0" aria-hidden />
@@ -95,12 +94,12 @@ export function NavigationBarMobileDrawer({
       >
         <div className="border-bold-gray/40 flex shrink-0 items-center justify-between gap-4 border-b px-4 py-3">
           <h2 id={titleId} className="text-base font-bold text-white">
-            {navAriaLabel}
+            {labels.navAriaLabel}
           </h2>
           <button
             type="button"
             className="text-lightest-gray -mr-2 cursor-pointer rounded-md p-2 transition-colors hover:text-white"
-            aria-label={closeMenuLabel}
+            aria-label={labels.closeMenu}
             onClick={() => setOpen(false)}
           >
             <span className="text-2xl leading-none" aria-hidden>
@@ -131,7 +130,7 @@ export function NavigationBarMobileDrawer({
               onClick={() => setOpen(false)}
             >
               <MobileDevice className="h-4 w-auto shrink-0" aria-hidden />
-              {downloadLabel}
+              {labels.download}
             </Link>
             <ul className="flex flex-col gap-0.5">
               {utilityLinks.map(({ href, label }) => (
@@ -148,8 +147,7 @@ export function NavigationBarMobileDrawer({
             </ul>
             <div className="flex px-3 py-3">
               <NavigationBarLocaleSwitch
-                labelSwitchToEnglish={labelSwitchToEnglish}
-                labelSwitchToThai={labelSwitchToThai}
+                labels={labels.locale}
                 onClick={() => setOpen(false)}
               />
             </div>

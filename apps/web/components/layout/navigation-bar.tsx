@@ -36,6 +36,19 @@ export async function NavigationBar() {
     }),
   );
 
+  const localeLabels = {
+    switchToEnglish: t('localeSwitchToEnglish'),
+    switchToThai: t('localeSwitchToThai'),
+  };
+
+  const drawerLabels = {
+    navAriaLabel: t('mainNavLabel'),
+    openMenu: t('mainNavOpenMenu'),
+    closeMenu: t('mainNavCloseMenu'),
+    download: t('downloadApp'),
+    locale: localeLabels,
+  };
+
   return (
     <header className="bg-darkest-gray relative z-50">
       <div className="mx-auto flex max-w-6xl flex-col justify-center gap-4 px-4 py-4 sm:px-6 lg:h-[132px] lg:py-0">
@@ -67,10 +80,7 @@ export async function NavigationBar() {
             <div className="text-bold-gray" aria-hidden>
               |
             </div>
-            <NavigationBarLocaleSwitch
-              labelSwitchToEnglish={t('localeSwitchToEnglish')}
-              labelSwitchToThai={t('localeSwitchToThai')}
-            />
+            <NavigationBarLocaleSwitch labels={localeLabels} />
           </div>
         </div>
         <div className="flex items-center justify-between gap-3">
@@ -95,13 +105,8 @@ export async function NavigationBar() {
             </Button>
             <NavigationBarMobileDrawer
               items={mainNavItems}
-              navAriaLabel={t('mainNavLabel')}
-              openMenuLabel={t('mainNavOpenMenu')}
-              closeMenuLabel={t('mainNavCloseMenu')}
-              downloadLabel={t('downloadApp')}
               utilityLinks={drawerUtilityLinks}
-              labelSwitchToEnglish={t('localeSwitchToEnglish')}
-              labelSwitchToThai={t('localeSwitchToThai')}
+              labels={drawerLabels}
             />
           </div>
         </div>
