@@ -16,7 +16,7 @@
   "license": "MIT",
   "scripts": {
     "build": "npm run build:icons && npm run build:index",
-    "build:icons": "svgr --out-dir dist --typescript --config-file .svgrrc.js src/icons",
+    "build:icons": "rm -rf dist && svgr --out-dir dist --typescript --config-file .svgrrc.js src/icons",
     "build:index": "node scripts/generate-index.mjs",
     "dev": "chokidar \"src/icons/**/*.svg\" --initial --debounce 300 -c \"npm run build\" --verbose",
     "check-types": "npm run build && tsc --noEmit",
