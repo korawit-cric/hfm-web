@@ -67,6 +67,7 @@ export async function ShowcaseSection() {
                 'flex gap-4',
                 'items-center justify-center',
                 'text-center md:w-fit md:max-w-[180px] md:flex-col md:items-start md:gap-3 md:text-left',
+                'md:-translate-y-20',
                 item.align === 'left'
                   ? 'md:justify-self-end'
                   : 'md:justify-self-start',
