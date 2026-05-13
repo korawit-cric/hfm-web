@@ -35,13 +35,11 @@ const EXPERIENCES: { en: string; th: string }[] = [
 async function clearAll() {
   await prisma.application.deleteMany();
   await prisma.codeCountry.deleteMany();
-  await prisma.linkTranslation.deleteMany();
   await prisma.fqaTranslation.deleteMany();
   await prisma.rankingTranslation.deleteMany();
   await prisma.prizeTranslation.deleteMany();
   await prisma.countryTranslation.deleteMany();
   await prisma.experienceTranslation.deleteMany();
-  await prisma.link.deleteMany();
   await prisma.fqa.deleteMany();
   await prisma.ranking.deleteMany();
   await prisma.prize.deleteMany();
@@ -254,66 +252,6 @@ async function main() {
           create: [
             { locale: L.en, description: p.en },
             { locale: L.th, description: p.th },
-          ],
-        },
-      },
-    });
-  }
-
-  const linkSeeds = [
-    {
-      url: 'https://turborepo.com/docs/getting-started/installation',
-      en: {
-        title: 'Installation',
-        description: 'Get started with Turborepo in a few moments',
-      },
-      th: {
-        title: 'การติดตั้ง',
-        description: 'เริ่มใช้ Turborepo ได้ในไม่กี่ขั้นตอน',
-      },
-    },
-    {
-      url: 'https://turborepo.com/docs/crafting-your-repository',
-      en: {
-        title: 'Crafting',
-        description: 'Architecting a monorepo is a careful process.',
-      },
-      th: {
-        title: 'การออกแบบ',
-        description: 'การสร้าง monorepo ต้องใช้ความรอบคอบ',
-      },
-    },
-    {
-      url: 'https://turborepo.com/docs/getting-started/add-to-existing-repository',
-      en: {
-        title: 'Add Repositories',
-        description:
-          'Turborepo can be incrementally adopted in any repository, single or multi-package, to speed up the developer and CI workflows of the repository.',
-      },
-      th: {
-        title: 'เพิ่มที่เก็บ',
-        description:
-          'ใช้ Turborepo แบบค่อยเป็นค่อยไปกับที่เก็บเดียวหรือหลายแพ็กเกจ เพื่อเร่งงานพัฒนาและ CI',
-      },
-    },
-  ];
-
-  for (const item of linkSeeds) {
-    await prisma.link.create({
-      data: {
-        url: item.url,
-        translations: {
-          create: [
-            {
-              locale: L.en,
-              title: item.en.title,
-              description: item.en.description,
-            },
-            {
-              locale: L.th,
-              title: item.th.title,
-              description: item.th.description,
-            },
           ],
         },
       },

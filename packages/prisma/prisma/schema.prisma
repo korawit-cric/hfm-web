@@ -14,27 +14,6 @@ enum Locale {
   th
 }
 
-model Link {
-  id           Int               @id @default(autoincrement())
-  url          String
-  createdAt    DateTime          @default(now())
-  updatedAt    DateTime          @updatedAt
-  translations LinkTranslation[]
-
-  @@map("links")
-}
-
-model LinkTranslation {
-  linkId      Int
-  locale      Locale
-  title       String
-  description String?
-  link        Link   @relation(fields: [linkId], references: [id], onDelete: Cascade)
-
-  @@id([linkId, locale])
-  @@map("link_translations")
-}
-
 model Fqa {
   id           Int              @id @default(autoincrement())
   translations FqaTranslation[]
