@@ -8,9 +8,6 @@ type Props = {
   emptyLabel: string;
 };
 
-/**
- * Full-width FAQ block (black band, thin dividers) intended to sit above the site footer.
- */
 export function FaqSection({ faqs, title, emptyLabel }: Props) {
   return (
     <section
