@@ -106,7 +106,7 @@ export function ApplicationFormSection({ countries, experiences }: Props) {
           </span>
         </h2>
 
-        <div className="flex min-h-[437px] w-full max-w-[730px] flex-col items-center justify-center overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl md:p-10">
+        <div className="flex min-h-[437px] w-full max-w-[730px] flex-col items-center justify-center overflow-y-auto rounded-[10px] bg-white p-6 shadow-2xl md:p-10">
           <h3 className="text-darkest-gray mb-8 text-center text-lg font-bold md:text-xl">
             {t('applicationForm.formTitle')}
           </h3>
@@ -117,7 +117,7 @@ export function ApplicationFormSection({ countries, experiences }: Props) {
               onSubmit={handleSubmit}
               className="w-full"
             >
-              <div className="flex flex-col [&>*:not(:last-child):not(:nth-last-child(2))]:mb-4 [&>*:nth-last-child(2)]:mb-10">
+              <div className="flex flex-col [&>*:not(:last-child):not(:nth-last-child(3)):not(:nth-last-child(2))]:mb-4 [&>*:nth-last-child(2)]:mb-10 [&>*:nth-last-child(3)]:mb-6">
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5">
                   <FormInput
                     name="firstName"
