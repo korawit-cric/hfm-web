@@ -13,7 +13,9 @@
     "navContact": "ติดต่อ",
     "utilityContactUs": "ติดต่อเรา",
     "utilityPartnerWithUs": "ร่วมเป็นพาร์ทเนอร์",
-    "downloadApp": "ดาวน์โหลดแอป"
+    "downloadApp": "ดาวน์โหลดแอป",
+    "localeSwitchToEnglish": "เปลี่ยนเป็นภาษาอังกฤษ",
+    "localeSwitchToThai": "เปลี่ยนเป็นภาษาไทย"
   },
   "HomePage": {
     "logoAlt": "Turborepo",

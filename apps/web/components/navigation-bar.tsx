@@ -1,8 +1,9 @@
 import { Fragment } from 'react';
 import { getTranslations } from 'next-intl/server';
-import { HfmMarketsLogo, MobileDevice, LocaleSwitcherEn } from '@repo/icons';
+import { HfmMarketsLogo, MobileDevice } from '@repo/icons';
 import { Button } from '@repo/ui/button';
 
+import { NavigationBarLocaleSwitch } from './navigation-bar-locale-switch';
 import { Link } from '../lib/i18n/navigation';
 
 const MAIN_NAV_ITEMS = [
@@ -52,7 +53,10 @@ export async function NavigationBar() {
             <div className="text-bold-gray" aria-hidden>
               |
             </div>
-            <LocaleSwitcherEn className="h-4 w-auto" aria-hidden />
+            <NavigationBarLocaleSwitch
+              labelSwitchToEnglish={t('localeSwitchToEnglish')}
+              labelSwitchToThai={t('localeSwitchToThai')}
+            />
           </div>
         </div>
         <div className="flex items-center justify-between">

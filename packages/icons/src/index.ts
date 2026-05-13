@@ -21,6 +21,7 @@ export { default as HamburgerMenu } from '../dist/HamburgerMenu';
 export { default as HfmMarketsLogo } from '../dist/HfmMarketsLogo';
 export { default as Loading } from '../dist/Loading';
 export { default as LocaleSwitcherEn } from '../dist/LocaleSwitcherEn';
+export { default as LocaleSwitcherTh } from '../dist/LocaleSwitcherTh';
 export { default as MapPin } from '../dist/MapPin';
 export { default as MobileDevice } from '../dist/MobileDevice';
 export { default as PhoneCall } from '../dist/PhoneCall';
