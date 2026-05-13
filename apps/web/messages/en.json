@@ -4,7 +4,16 @@
     "description": "hfm-web monorepo — Next.js frontend"
   },
   "NavigationBar": {
-    "logoAlt": "HF Markets"
+    "logoAlt": "HF Markets",
+    "mainNavLabel": "Main navigation",
+    "navProducts": "Products",
+    "navAbout": "About",
+    "navResources": "Resources",
+    "navSupport": "Support",
+    "navContact": "Contact",
+    "utilityContactUs": "Contact us",
+    "utilityPartnerWithUs": "Partner with us",
+    "downloadApp": "Download App"
   },
   "HomePage": {
     "logoAlt": "Turborepo",
