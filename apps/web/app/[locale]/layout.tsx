@@ -7,6 +7,10 @@ import { NavigationBar } from '@/components/layout/navigation-bar';
 import { Providers } from '@/providers';
 import { DocumentLocaleSync } from '@/components/document-locale-sync';
 import { createMetadata } from '@/lib/metadata/create-metadata';
+import {
+  createOrganizationSchema,
+  organizationSchemaToJsonLd,
+} from '@/lib/metadata/create-organization-schema';
 import { routing } from '@/lib/i18n/routing';
 
 type Props = {
@@ -36,8 +40,16 @@ export default async function LocaleLayout({ children, params }: Props) {
   const localeFontClass =
     locale === 'th' ? 'font-ibm-plex-sans-thai' : 'font-open-sans';
 
+  const organizationJsonLd = organizationSchemaToJsonLd(
+    createOrganizationSchema(locale),
+  );
+
   return (
     <NextIntlClientProvider messages={messages}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: organizationJsonLd }}
+      />
       <DocumentLocaleSync />
       <Providers>
         <div className={`flex min-h-screen flex-col ${localeFontClass}`}>
