@@ -1,17 +1,11 @@
 'use client';
 
 import { forwardRef, ReactNode } from 'react';
-import { ArrowRight } from '@repo/icons';
+
 import { cn } from './utils';
 
 type ButtonSize = 'large' | 'small';
-type ButtonVariant =
-  | 'primary'
-  | 'primary-icon'
-  | 'secondary'
-  | 'linked'
-  | 'textlink';
-type ButtonColor = 'primary' | 'yellow' | 'red';
+type ButtonVariant = 'primary' | 'secondary';
 
 /**
  * Button Component
@@ -40,7 +34,6 @@ export interface ButtonProps {
   className?: string;
   variant?: ButtonVariant;
   size?: ButtonSize;
-  color?: ButtonColor;
   icon?: ReactNode;
   onClick?: () => void;
   disabled?: boolean;
@@ -68,8 +61,7 @@ export const Button = forwardRef<
       className = '',
       variant = 'primary',
       size = 'large',
-      color = 'primary',
-      icon,
+      icon: _icon,
       onClick,
       disabled = false,
       href,
@@ -78,55 +70,34 @@ export const Button = forwardRef<
     },
     ref,
   ) => {
-    // Size styles
-    // NOTE: Custom text utilities (text-desktop-body1, text-desktop-body2) are preserved
-    // by tailwind-merge because they're registered in utils.ts configuration
     const sizeStyles = {
-      large: 'h-14 md:h-12 text-mobile-body1 md:text-desktop-body1',
-      small: 'h-10 md:h-10 text-mobile-body2 md:text-desktop-body2',
+      large: 'h-[54px] text-lg font-normal',
+      small: 'h-[35px] text-base font-normal',
     };
 
     // Base styles
     const baseStyles = cn(
-      'inline-flex items-center justify-center gap-2 px-4 py-[9px] rounded-lg font-medium transition-all duration-200 cursor-pointer',
+      'inline-flex items-center justify-center gap-2 px-4 py-[9px] rounded-sm font-medium transition-all duration-200 cursor-pointer text-white',
       sizeStyles[size],
     );
 
     // Color mappings
     const colorStyles = {
       primary: {
-        bg: 'bg-primary-600',
-        border: 'border-primary-700',
+        bg: 'bg-primary-500',
         bgHover: 'hover:bg-primary-700',
-        borderHover: 'hover:border-primary-800',
-        borderWidth: 'border',
-        text: 'text-white',
-        textLink: 'text-primary-600',
-        textLinkHover: 'hover:text-primary-700',
+        border: 'border-none',
+        borderHover: 'hover:border-none',
       },
-      yellow: {
-        bg: 'bg-warning-300',
-        border: 'border-warning-800',
-        bgHover: 'hover:bg-warning-500',
-        borderHover: 'hover:border-warning-800',
-        borderWidth: 'border-2',
-        text: 'text-darkest-gray',
-        textLink: 'text-warning-500',
-        textLinkHover: 'hover:text-warning-800',
-      },
-      red: {
-        bg: 'bg-error-300',
-        border: 'border-error-500',
-        bgHover: 'hover:bg-error-500',
-        borderHover: 'hover:border-error-800',
-        borderWidth: 'border-2',
-        text: 'text-white',
-        textLink: 'text-error-300',
-        textLinkHover: 'hover:text-error-500',
+      secondary: {
+        bg: 'bg-transparent',
+        bgHover: 'hover:bg-secondary-700',
+        border: 'border-secondary-500',
+        borderHover: 'hover:border-secondary-700',
       },
     };
 
-    const colors = colorStyles[color];
+    const colors = colorStyles[variant];
 
     // Disabled styles override
     const disabledColorStyles = disabled
@@ -137,65 +108,24 @@ export const Button = forwardRef<
     const variantStyles: Record<ButtonVariant, string> = {
       primary: disabled
         ? disabledColorStyles
-        : cn(
-            colors.bg,
-            colors.bgHover,
-            colors.text,
-            colors.border,
-            colors.borderHover,
-            colors.borderWidth,
-          ),
-      'primary-icon': disabled
-        ? disabledColorStyles
-        : cn(
-            colors.bg,
-            colors.bgHover,
-            colors.text,
-            colors.border,
-            colors.borderHover,
-            colors.borderWidth,
-          ),
+        : cn(colors.bg, colors.bgHover, colors.border, colors.borderHover),
       secondary: disabled
         ? cn(
             disabledColorStyles,
             'bg-transparent hover:bg-transparent border-none ',
           )
         : cn(
-            'bg-transparent border-none',
+            'bg-transparent border',
+            colors.bg,
+            colors.bgHover,
             colors.border,
             colors.borderHover,
-            colors.borderWidth,
-            colors.textLink,
-            colors.textLinkHover,
           ),
-      linked: disabled
-        ? cn(
-            disabledColorStyles,
-            'bg-transparent hover:bg-transparent border-none ',
-          )
-        : cn('bg-transparent ', colors.textLink, colors.textLinkHover),
-      textlink: disabled
-        ? cn(
-            disabledColorStyles,
-            'bg-transparent hover:bg-transparent border-none underline ',
-          )
-        : cn('bg-transparent underline', colors.textLink, colors.textLinkHover),
     };
 
-    const content = (
-      <>
-        {variant === 'primary-icon' && icon && <span>{icon}</span>}
-        {children}
-        {variant === 'linked' && (
-          <span>
-            <ArrowRight className="h-5" />
-          </span>
-        )}
-      </>
-    );
+    const content = <>{children}</>;
 
-    // For textlink and linked, render as anchor if href is provided
-    if ((variant === 'textlink' || variant === 'linked') && href && !disabled) {
+    if (href && !disabled) {
       const LinkElement = LinkComponent || 'a';
       return (
         <LinkElement

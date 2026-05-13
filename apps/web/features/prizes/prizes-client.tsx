@@ -5,7 +5,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { prizesApi, type Prize } from '@repo/api-client';
 import { Button } from '@repo/ui/button';
 
-import { clientFetch } from '../../lib/fetch/client';
+import { clientFetch } from '@/lib/fetch/client';
 
 export const prizeKeys = {
   all: ['prizes'] as const,

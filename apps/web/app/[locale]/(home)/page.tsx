@@ -1,18 +1,17 @@
 export const dynamic = 'force-dynamic';
 
-import Image from 'next/image';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import type { ComponentType, SVGProps } from 'react';
 
-import { FaqsClient, getFaqs } from '../../../features/faqs';
-import { getLinks, LinksClient } from '../../../features/links';
-import { getPrizes, PrizesClient } from '../../../features/prizes';
-import { getRankings, RankingsClient } from '../../../features/rankings';
-import { FeatureBadge } from '../../../components/feature-badge';
-import { ButtonDemo } from '../../../components/button-demo';
-import { InputDemo } from '../../../components/input-demo';
-import { TextareaDemo } from '../../../components/textarea-demo';
-import { FormDemo } from '../../../components/form-demo';
+import { FaqsClient, getFaqs } from '@/features/faqs';
+import { getLinks, LinksClient } from '@/features/links';
+import { getPrizes, PrizesClient } from '@/features/prizes';
+import { getRankings, RankingsClient } from '@/features/rankings';
+import { FeatureBadge } from '@/components/feature-badge';
+import { ButtonDemo } from '@/components/button-demo';
+import { InputDemo } from '@/components/input-demo';
+import { TextareaDemo } from '@/components/textarea-demo';
+import { FormDemo } from '@/components/form-demo';
 import {
   AddFile,
   AddUser,
@@ -82,16 +81,6 @@ export default async function Home({ params }: Props) {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center p-8">
       <main className="w-full max-w-3xl">
-        {/* Logo */}
-        <Image
-          src="/turborepo-dark.svg"
-          alt={t('logoAlt')}
-          width={160}
-          height={34}
-          className="mb-8"
-          priority
-        />
-
         {/* Intro */}
         <h1 className="mb-4 text-3xl font-bold">{t('title')}</h1>
         <p className="text-primary-500 mb-8">{t('intro')}</p>
@@ -287,10 +276,6 @@ export default async function Home({ params }: Props) {
           <PrizesClient />
         </section>
       </main>
-
-      <footer className="border-surface text-foreground/50 mt-16 w-full max-w-3xl border-t pt-8 text-center text-sm">
-        {t('footer')}
-      </footer>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { FeatureBadge } from '../feature-badge';
+import { FeatureBadge } from '@/components/feature-badge';
 
 describe('FeatureBadge', () => {
   it('renders label correctly', () => {

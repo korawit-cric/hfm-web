@@ -3,6 +3,20 @@
     "title": "HFM Web",
     "description": "hfm-web monorepo — Next.js frontend"
   },
+  "NavigationBar": {
+    "logoAlt": "HF Markets",
+    "mainNavLabel": "Main navigation",
+    "navProducts": "Products",
+    "navAbout": "About",
+    "navResources": "Resources",
+    "navSupport": "Support",
+    "navContact": "Contact",
+    "utilityContactUs": "Contact us",
+    "utilityPartnerWithUs": "Partner with us",
+    "downloadApp": "Download App",
+    "localeSwitchToEnglish": "Switch to English",
+    "localeSwitchToThai": "Switch to Thai"
+  },
   "HomePage": {
     "logoAlt": "Turborepo",
     "title": "HFM web demo",

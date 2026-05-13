@@ -3,6 +3,20 @@
     "title": "HFM Web",
     "description": "โมโนรีโป hfm-web — ส่วนหน้า Next.js"
   },
+  "NavigationBar": {
+    "logoAlt": "HF Markets",
+    "mainNavLabel": "เมนูหลัก",
+    "navProducts": "ผลิตภัณฑ์",
+    "navAbout": "เกี่ยวกับเรา",
+    "navResources": "แหล่งข้อมูล",
+    "navSupport": "ช่วยเหลือ",
+    "navContact": "ติดต่อ",
+    "utilityContactUs": "ติดต่อเรา",
+    "utilityPartnerWithUs": "ร่วมเป็นพาร์ทเนอร์",
+    "downloadApp": "ดาวน์โหลดแอป",
+    "localeSwitchToEnglish": "เปลี่ยนเป็นภาษาอังกฤษ",
+    "localeSwitchToThai": "เปลี่ยนเป็นภาษาไทย"
+  },
   "HomePage": {
     "logoAlt": "Turborepo",
     "title": "ทดสอบ HFM web",
