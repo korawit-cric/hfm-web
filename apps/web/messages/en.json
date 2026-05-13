@@ -49,10 +49,10 @@
     "noRankings": "No rankings data.",
     "rankingsClientTitle": "Client-Side Demo: Rankings",
     "rankingMeta": "#{rank} • gain {gain}",
-    "noFaqs": "No FAQs.",
-    "faqSectionTitle": "Frequently asked questions",
-    "faqAccordionLoading": "Loading…",
-    "faqAccordionError": "Could not load FAQs.",
+    "faq": {
+      "sectionTitle": "FAQs",
+      "empty": "No FAQs."
+    },
     "prizesServerTitle": "Server-Side Demo: Prizes ({count})",
     "noPrizes": "No prizes.",
     "prizesClientTitle": "Client-Side Demo: Prizes",

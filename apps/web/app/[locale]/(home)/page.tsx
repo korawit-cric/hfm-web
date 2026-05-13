@@ -111,11 +111,7 @@ export default async function Home({ params }: Props) {
         </main>
       </div>
 
-      <FaqSection
-        faqs={faqs}
-        title={t('faqSectionTitle')}
-        emptyLabel={t('noFaqs')}
-      />
+      <FaqSection faqs={faqs} />
     </>
   );
 }
