@@ -4,6 +4,8 @@ import { headers } from 'next/headers';
 import '@repo/ui/styles.css';
 import './globals.css';
 
+import { SonnerToaster } from '@/components/sonner-toaster';
+
 const openSans = Open_Sans({
   variable: '--font-open-sans',
   subsets: ['latin'],
@@ -34,7 +36,10 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={fontVariables}>{children}</body>
+      <body className={fontVariables}>
+        {children}
+        <SonnerToaster />
+      </body>
     </html>
   );
 }
