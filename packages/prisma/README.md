@@ -8,8 +8,6 @@ Shared Prisma client and schema package with PostgreSQL support. This package pr
 npm install @repo/prisma
 # or
 yarn add @repo/prisma
-# or
-pnpm add @repo/prisma
 ```
 
 ## Prerequisites
