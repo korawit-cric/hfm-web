@@ -43,7 +43,7 @@ export async function NavigationBar() {
                 </div>
                 <Link
                   href={href}
-                  className="transition-colors hover:text-white hover:underline"
+                  className="transition-colors hover:text-white hover:underline!"
                 >
                   {t(translationKey)}
                 </Link>
@@ -69,7 +69,7 @@ export async function NavigationBar() {
                 <Link
                   key={href}
                   href={href}
-                  className="transition-colors hover:text-white"
+                  className="transition-colors hover:text-white! hover:underline!"
                 >
                   {t(translationKey)}
                 </Link>
