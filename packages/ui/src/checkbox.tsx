@@ -8,19 +8,11 @@ export interface CheckboxProps extends Omit<
   React.ComponentProps<'input'>,
   'type' | 'size'
 > {
-  /**
-   * Rich label next to the control (text, links, etc.).
-   */
   label?: ReactNode;
   error?: string;
   helperText?: string;
 }
 
-/**
- * Checkbox row — layout and states aligned with {@link Input} / {@link Select}.
- *
- * Ref is a normal prop (React 19).
- */
 export function Checkbox({
   label,
   error,
