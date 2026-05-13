@@ -71,3 +71,9 @@ export interface Country {
   name: string;
   phoneCode: string;
 }
+
+/** Experience / seniority row localized for the requested locale. */
+export interface Experience {
+  id: number;
+  name: string;
+}
