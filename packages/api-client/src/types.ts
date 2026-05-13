@@ -16,32 +16,6 @@ export interface ApiEndpointWithBody<
   body?: TBody;
 }
 
-/** Resolved link for the requested locale (API flattens translations). */
-export interface Link {
-  id: number;
-  url: string;
-  title: string;
-  description: string | null;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface LinkTranslationInput {
-  locale: Locale;
-  title: string;
-  description?: string;
-}
-
-export interface CreateLinkDto {
-  url: string;
-  translations: LinkTranslationInput[];
-}
-
-export interface UpdateLinkDto {
-  url?: string;
-  translations?: LinkTranslationInput[];
-}
-
 /** Leaderboard row for the requested locale (decimals as strings in JSON). */
 export interface Ranking {
   id: number;

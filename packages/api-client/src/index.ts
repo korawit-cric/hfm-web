@@ -1,5 +1,4 @@
 // API definitions
-export { linksApi } from './links.js';
 export { countriesApi } from './countries.js';
 export { experiencesApi } from './experiences.js';
 export { faqsApi } from './faqs.js';
@@ -10,14 +9,10 @@ export { prizesApi } from './prizes.js';
 export type {
   ApiEndpoint,
   ApiEndpointWithBody,
-  CreateLinkDto,
   Faq,
-  LinkTranslationInput,
-  Link,
   Country,
   Experience,
   Locale,
   Prize,
   Ranking,
-  UpdateLinkDto,
 } from './types.js';
