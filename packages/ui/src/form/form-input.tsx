@@ -8,10 +8,6 @@ type FormInputProps = Omit<InputProps, 'error'> & {
   error?: string;
 };
 
-/**
- * FormInput — Input integrated with React Hook Form.
- * Ref is a normal prop on {@link Input} (React 19).
- */
 export function FormInput({
   name,
   error: customError,
