@@ -2,21 +2,13 @@ import {
   BadRequestException,
   Injectable,
   InternalServerErrorException,
+  NotFoundException,
 } from '@nestjs/common';
+import type { Application } from '@prisma/client';
 
 import { PrismaService } from '../prisma/prisma.service';
-
-/** Request body for POST /applications (camelCase JSON). */
-export type CreateApplicationDto = {
-  firstName: string;
-  lastName: string;
-  countryId: number;
-  phoneCode: string;
-  phone: string;
-  email: string;
-  experienceId: number;
-  consent: boolean;
-};
+import { ApplicationResponseDto } from './dto/application-response.dto';
+import { CreateApplicationDto } from './dto/create-application.dto';
 
 const emailOk = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
@@ -24,7 +16,41 @@ const emailOk = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 export class ApplicationsService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(dto: CreateApplicationDto) {
+  private toResponse(row: Application): ApplicationResponseDto {
+    return {
+      id: row.id,
+      firstName: row.firstname,
+      lastName: row.lastname,
+      countryId: row.countryId,
+      codeId: row.codeId,
+      experienceId: row.experienceId,
+      phone: row.phone,
+      email: row.email,
+      consent: row.consent,
+    };
+  }
+
+  async findAll(): Promise<ApplicationResponseDto[]> {
+    const rows = await this.prisma.client.application.findMany({
+      orderBy: { id: 'asc' },
+    });
+    return rows.map((r) => this.toResponse(r));
+  }
+
+  async findOne(id: number): Promise<ApplicationResponseDto> {
+    if (!Number.isInteger(id) || id < 1) {
+      throw new BadRequestException({ error: 'VALIDATION' });
+    }
+    const row = await this.prisma.client.application.findUnique({
+      where: { id },
+    });
+    if (!row) {
+      throw new NotFoundException(`Application with ID ${id} not found`);
+    }
+    return this.toResponse(row);
+  }
+
+  async create(dto: CreateApplicationDto): Promise<ApplicationResponseDto> {
     if (!dto.consent) {
       throw new BadRequestException({ error: 'VALIDATION' });
     }
@@ -75,17 +101,7 @@ export class ApplicationsService {
           consent: true,
         },
       });
-      return {
-        id: row.id,
-        firstName: row.firstname,
-        lastName: row.lastname,
-        countryId: row.countryId,
-        codeId: row.codeId,
-        experienceId: row.experienceId,
-        phone: row.phone,
-        email: row.email,
-        consent: row.consent,
-      };
+      return this.toResponse(row);
     } catch {
       throw new InternalServerErrorException({ error: 'DB_ERROR' });
     }
