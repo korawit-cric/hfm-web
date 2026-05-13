@@ -1,10 +1,57 @@
 import { getTranslations } from 'next-intl/server';
+import NextLink from 'next/link';
 
-import { AppleAppStore, GooglePlayStore } from '@repo/icons';
+import {
+  AppleAppStore,
+  GooglePlayStore,
+  SocialFacebook,
+  SocialInstagram,
+  SocialLinkedin,
+  SocialMedium,
+  SocialTelegram,
+  SocialX,
+  SocialYoutube,
+} from '@repo/icons';
 
 import { Link } from '@/lib/i18n/navigation';
 
-const SOCIAL_PLACEHOLDER_SLOTS = 7;
+const FOOTER_SOCIAL_LINKS = [
+  {
+    href: 'https://www.facebook.com/hfmbroker',
+    Icon: SocialFacebook,
+    labelKey: 'socialFacebookAlt' as const,
+  },
+  {
+    href: 'https://x.com/hfmbroker',
+    Icon: SocialX,
+    labelKey: 'socialXAlt' as const,
+  },
+  {
+    href: 'https://t.me/hfmbroker',
+    Icon: SocialTelegram,
+    labelKey: 'socialTelegramAlt' as const,
+  },
+  {
+    href: 'https://www.instagram.com/hfmbroker/',
+    Icon: SocialInstagram,
+    labelKey: 'socialInstagramAlt' as const,
+  },
+  {
+    href: 'https://www.youtube.com/@hfmbroker',
+    Icon: SocialYoutube,
+    labelKey: 'socialYoutubeAlt' as const,
+  },
+  {
+    href: 'https://www.linkedin.com/company/hfmbroker',
+    Icon: SocialLinkedin,
+    labelKey: 'socialLinkedinAlt' as const,
+  },
+  {
+    href: 'https://hfmarkets.medium.com',
+    Icon: SocialMedium,
+    labelKey: 'socialMediumAlt' as const,
+  },
+] as const;
 
 export async function Footer() {
   const t = await getTranslations('Footer');
@@ -22,12 +69,21 @@ export async function Footer() {
                 className="text-lightest-gray flex flex-wrap items-center gap-4"
                 aria-label={t('socialListLabel')}
               >
-                {Array.from({ length: SOCIAL_PLACEHOLDER_SLOTS }, (_, i) => (
-                  <li key={i}>
-                    <span
-                      className="border-medium-gray/35 bg-bold-gray/20 block h-7 w-7 shrink-0 rounded border"
-                      aria-hidden
-                    />
+                {FOOTER_SOCIAL_LINKS.map(({ href, Icon, labelKey }) => (
+                  <li key={labelKey}>
+                    <NextLink
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      prefetch={false}
+                      className="inline-flex rounded transition-opacity hover:opacity-80"
+                      aria-label={t(labelKey)}
+                    >
+                      <Icon
+                        className="text-medium-gray h-5 w-auto"
+                        aria-hidden
+                      />
+                    </NextLink>
                   </li>
                 ))}
               </ul>

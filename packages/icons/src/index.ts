@@ -27,6 +27,13 @@ export { default as MobileDevice } from '../dist/MobileDevice';
 export { default as PhoneCall } from '../dist/PhoneCall';
 export { default as Search } from '../dist/Search';
 export { default as Send } from '../dist/Send';
+export { default as SocialFacebook } from '../dist/SocialFacebook';
+export { default as SocialInstagram } from '../dist/SocialInstagram';
+export { default as SocialLinkedin } from '../dist/SocialLinkedin';
+export { default as SocialMedium } from '../dist/SocialMedium';
+export { default as SocialTelegram } from '../dist/SocialTelegram';
+export { default as SocialX } from '../dist/SocialX';
+export { default as SocialYoutube } from '../dist/SocialYoutube';
 export { default as Trash } from '../dist/Trash';
 
 // Re-export types
