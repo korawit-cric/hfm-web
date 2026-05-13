@@ -67,11 +67,11 @@ export async function ShowcaseSection() {
               className={[
                 'flex gap-4',
                 'items-center justify-center',
-                'text-center md:w-fit md:max-w-[180px] md:flex-col md:items-start md:gap-3 md:text-left',
-                'md:-translate-y-20',
+                'text-center lg:w-fit lg:max-w-[180px] lg:flex-col lg:items-start lg:gap-3 lg:text-left',
+                'lg:-translate-y-20',
                 item.align === 'left'
-                  ? 'md:justify-self-end'
-                  : 'md:justify-self-start',
+                  ? 'lg:justify-self-end'
+                  : 'lg:justify-self-start',
               ].join(' ')}
             >
               <div className="relative h-16 w-16 shrink-0 self-center md:h-[100px] md:w-[100px]">
@@ -80,10 +80,10 @@ export async function ShowcaseSection() {
                   alt=""
                   fill
                   className="object-contain"
-                  sizes="(min-width: 768px) 100px, 64px"
+                  sizes="(min-width: 1024px) 100px, 64px"
                 />
               </div>
-              <p className="text-darkest-gray max-w-md text-base leading-relaxed md:text-base">
+              <p className="text-darkest-gray max-w-md text-base leading-relaxed">
                 {t(item.translationKey)}
               </p>
             </article>
