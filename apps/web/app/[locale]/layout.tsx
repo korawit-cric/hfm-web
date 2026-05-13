@@ -7,6 +7,7 @@ import {
 } from 'next-intl/server';
 import { hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
+import { Footer } from '@/components/footer';
 import { NavigationBar } from '@/components/navigation-bar';
 import { Providers } from '@/providers';
 import { routing } from '@/lib/i18n/routing';
@@ -48,6 +49,7 @@ export default async function LocaleLayout({ children, params }: Props) {
         <div className="flex min-h-screen flex-col">
           <NavigationBar />
           <main className="flex-1">{children}</main>
+          <Footer />
         </div>
       </Providers>
     </NextIntlClientProvider>
