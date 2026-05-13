@@ -1,8 +1,7 @@
 'use client';
 
 import { forwardRef, useId, type ReactNode } from 'react';
-import { Error } from '@repo/icons';
-
+import { FieldHelperText } from './field-helper-text';
 import { cn } from './utils';
 
 export interface CheckboxProps extends Omit<
@@ -48,11 +47,6 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       disabled && 'cursor-not-allowed',
     );
 
-    const helperStyles = cn(
-      'mt-2 text-mobile-caption md:text-desktop-caption',
-      error ? 'text-error-500' : 'text-darkest-gray',
-    );
-
     return (
       <div className={cn('w-full', className)}>
         <label htmlFor={inputId} className={labelRowStyles}>
@@ -71,22 +65,12 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           {label ? <span className="min-w-0 flex-1">{label}</span> : null}
         </label>
 
-        {(error || helperText) && (
-          <p
-            id={`${inputId}-helper`}
-            className={cn(helperStyles, error && 'flex items-center gap-1')}
-            role={error ? 'alert' : undefined}
-          >
-            {error ? (
-              <>
-                <Error className="h-4 w-4 shrink-0" aria-hidden />
-                {error}
-              </>
-            ) : (
-              helperText
-            )}
-          </p>
-        )}
+        <FieldHelperText
+          id={`${inputId}-helper`}
+          error={error}
+          helperText={helperText}
+          showErrorIcon
+        />
       </div>
     );
   },
