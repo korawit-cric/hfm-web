@@ -38,7 +38,6 @@
     "riskWarningBody": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. การซื้อขายผลิตภัณฑ์ที่มีเลเวอเรจมีความเสี่ยงสูง และอาจไม่เหมาะกับนักลงทุนทุกท่าน ผลการดำเนินงานในอดีตไม่ได้บ่งชี้ถึงผลในอนาคต"
   },
   "HomePage": {
-    "logoAlt": "Turborepo",
     "title": "ทดสอบ HFM web",
     "intro": "ดึงข้อมูลจาก PostgreSQL ผ่าน HFM API (NestJS) และ Prisma ORM",
     "badges": {
@@ -46,20 +45,14 @@
       "prisma": "Prisma 7",
       "localComponent": "คอมโพเนนต์ภายใน"
     },
-    "serverDemoTitle": "ดีโมฝั่งเซิร์ฟเวอร์: ลิงก์ที่ดึงได้ ({count})",
-    "noLinks": "ยังไม่มีลิงก์ เริ่ม API ที่พอร์ต 3001",
-    "serverFetchNote": "✓ ดึงฝั่งเซิร์ฟเวอร์ผ่าน serverFetch()",
-    "clientDemoTitle": "ดีโมฝั่งไคลเอนต์",
     "rankingsServerTitle": "ดีโมฝั่งเซิร์ฟเวอร์: อันดับ ({count})",
     "noRankings": "ยังไม่มีข้อมูลอันดับ",
     "rankingsClientTitle": "ดีโมฝั่งไคลเอนต์: อันดับ",
     "rankingMeta": "อันดับ {rank} • gain {gain}",
-    "faqsServerTitle": "ดีโมฝั่งเซิร์ฟเวอร์: FAQ ({count})",
     "noFaqs": "ยังไม่มี FAQ",
     "faqSectionTitle": "คำถามที่พบบ่อย",
     "faqAccordionLoading": "กำลังโหลด…",
     "faqAccordionError": "โหลด FAQ ไม่สำเร็จ",
-    "faqsClientTitle": "ดีโมฝั่งไคลเอนต์: FAQ",
     "prizesServerTitle": "ดีโมฝั่งเซิร์ฟเวอร์: รางวัล ({count})",
     "noPrizes": "ยังไม่มีรางวัล",
     "prizesClientTitle": "ดีโมฝั่งไคลเอนต์: รางวัล",
@@ -88,13 +81,6 @@
         "email": "อีเมลไม่ถูกต้อง",
         "acceptTerms": "กรุณายอมรับข้อกำหนดเพื่อดำเนินการต่อ"
       }
-    },
-    "footer": "HFM Web • พอร์ต 3000 • @repo/design-system",
-    "iconShowcase": {
-      "title": "แกลเลอรีไอคอน",
-      "description": "ไอคอนทั้งหมดจาก @repo/icons",
-      "loadingLabel": "กำลังโหลด"
-    },
-    "linkMeta": "ID: {id} • {date}"
+    }
   }
 }

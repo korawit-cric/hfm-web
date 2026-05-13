@@ -3,7 +3,7 @@ import { getLocale } from 'next-intl/server';
 
 import { serverFetch } from '@/lib/fetch/server';
 
-/** Server-side: use in Server Components (same pattern as {@link getLinks}). */
+/** Server-side: use in Server Components with {@link serverFetch}. */
 export async function getCountries(): Promise<Country[]> {
   try {
     const locale = await getLocale();

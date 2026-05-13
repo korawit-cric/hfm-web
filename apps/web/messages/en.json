@@ -38,7 +38,6 @@
     "riskWarningBody": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Trading leveraged products carries significant risk and may not be suitable for all investors. Past performance is not indicative of future results."
   },
   "HomePage": {
-    "logoAlt": "Turborepo",
     "title": "HFM web demo",
     "intro": "Fetching data from PostgreSQL via the HFM API (NestJS) and Prisma ORM.",
     "badges": {
@@ -46,20 +45,14 @@
       "prisma": "Prisma 7",
       "localComponent": "Local Component"
     },
-    "serverDemoTitle": "Server-Side Demo: Fetched Links ({count})",
-    "noLinks": "No links. Start the API on port 3001.",
-    "serverFetchNote": "✓ Server-side fetch via serverFetch()",
-    "clientDemoTitle": "Client-Side Demo",
     "rankingsServerTitle": "Server-Side Demo: Rankings ({count})",
     "noRankings": "No rankings data.",
     "rankingsClientTitle": "Client-Side Demo: Rankings",
     "rankingMeta": "#{rank} • gain {gain}",
-    "faqsServerTitle": "Server-Side Demo: FAQs ({count})",
     "noFaqs": "No FAQs.",
     "faqSectionTitle": "Frequently asked questions",
     "faqAccordionLoading": "Loading…",
     "faqAccordionError": "Could not load FAQs.",
-    "faqsClientTitle": "Client-Side Demo: FAQs",
     "prizesServerTitle": "Server-Side Demo: Prizes ({count})",
     "noPrizes": "No prizes.",
     "prizesClientTitle": "Client-Side Demo: Prizes",
@@ -88,13 +81,6 @@
         "email": "Enter a valid email",
         "acceptTerms": "You must accept the terms to continue"
       }
-    },
-    "footer": "HFM Web • Port 3000 • @repo/design-system",
-    "iconShowcase": {
-      "title": "Icon Showcase",
-      "description": "All available icons from @repo/icons",
-      "loadingLabel": "Loading"
-    },
-    "linkMeta": "ID: {id} • {date}"
+    }
   }
 }
