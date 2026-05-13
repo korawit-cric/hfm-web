@@ -106,6 +106,20 @@
       "termsAndConditions": "ข้อกำหนดและเงื่อนไข",
       "submit": "สมัครเลย",
       "submitSuccess": "ส่งใบสมัครเรียบร้อยแล้ว!",
+      "submitError": "ไม่สามารถส่งใบสมัครได้ กรุณาลองอีกครั้ง",
+      "submitInvalidCode": "รหัสโทรศัพท์ไม่ตรงกับประเทศที่เลือก",
+      "savedToast": {
+        "referenceId": "เลขอ้างอิง",
+        "fullName": "ชื่อ–นามสกุล",
+        "country": "ประเทศ",
+        "phone": "โทรศัพท์",
+        "email": "อีเมล",
+        "experience": "ประสบการณ์",
+        "termsAccepted": "ยอมรับข้อกำหนด",
+        "yes": "ใช่",
+        "unknownCountry": "ไม่พบชื่อ",
+        "unknownExperience": "ไม่พบชื่อ"
+      },
       "errors": {
         "required": "กรุณากรอกข้อมูล",
         "email": "อีเมลไม่ถูกต้อง",

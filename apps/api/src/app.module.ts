@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 
+import { ApplicationsModule } from './applications/applications.module';
 import { CountriesModule } from './countries/countries.module';
 import { ExperiencesModule } from './experiences/experiences.module';
 import { FaqsModule } from './faqs/faqs.module';
@@ -13,6 +14,7 @@ import { AppController } from './app.controller';
 @Module({
   imports: [
     PrismaModule,
+    ApplicationsModule,
     CountriesModule,
     ExperiencesModule,
     RankingsModule,

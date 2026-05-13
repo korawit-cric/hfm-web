@@ -1,7 +1,8 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useTranslations } from 'next-intl';
+import { toast } from 'sonner';
 import { z } from 'zod';
 import { ArrowRight } from '@repo/icons';
 import { useCustomForm, FormWrapper } from '@repo/ui/form/form-wrapper';
@@ -10,12 +11,19 @@ import { FormDropdownSelect } from '@repo/ui/form/form-dropdown-select';
 import { FormCheckbox } from '@repo/ui/form/form-checkbox';
 import { FormButton } from '@repo/ui/form/form-button';
 
-import type { Country, Experience } from '@repo/api-client';
+import type {
+  Country,
+  Experience,
+  CreateApplicationBody,
+  SavedApplication,
+} from '@repo/api-client';
 
+import { useSubmitApplicationMutation } from '@/features/applications';
 import { JOIN_NOW_PRIMARY_BUTTON_CLASSNAME } from '@/components/shared-classes/join-now-button-classes';
 import { Link } from '@/lib/i18n/navigation';
 
-/** Phone row: full width of each column, same height as default fields. */
+/** Success toasts stay on screen long enough to read the saved summary. */
+const SUBMIT_SUCCESS_TOAST_MS = 12_000;
 const PHONE_FIELD_CONTROL = 'h-[42px] w-full min-w-0';
 
 function buildSchema(t: (key: string) => string) {
@@ -39,6 +47,45 @@ function buildSchema(t: (key: string) => string) {
 
 export type ApplicationFormValues = z.infer<ReturnType<typeof buildSchema>>;
 
+function toCreateBody(data: ApplicationFormValues): CreateApplicationBody {
+  return {
+    firstName: data.firstName.trim(),
+    lastName: data.lastName.trim(),
+    countryId: Number(data.countryId),
+    phoneCode: data.phoneCode.trim(),
+    phone: data.phone.trim(),
+    email: data.email.trim(),
+    experienceId: Number(data.experienceId),
+    consent: data.acceptTerms,
+  };
+}
+
+function formatSubmitSuccessDescription(
+  data: SavedApplication,
+  countries: Country[],
+  experiences: Experience[],
+  label: (key: string) => string,
+): string {
+  const countryName =
+    countries.find((c) => c.id === data.countryId)?.name ??
+    `${label('applicationForm.savedToast.unknownCountry')} (${data.countryId})`;
+
+  const experienceName =
+    experiences.find((e) => e.id === data.experienceId)?.name ??
+    `${label('applicationForm.savedToast.unknownExperience')} (${data.experienceId})`;
+
+  const lines = [
+    `${label('applicationForm.savedToast.referenceId')}: ${data.id}`,
+    `${label('applicationForm.savedToast.fullName')}: ${data.firstName} ${data.lastName}`,
+    `${label('applicationForm.savedToast.country')}: ${countryName}`,
+    `${label('applicationForm.savedToast.phone')}: ${data.phone}`,
+    `${label('applicationForm.savedToast.email')}: ${data.email}`,
+    `${label('applicationForm.savedToast.experience')}: ${experienceName}`,
+    `${label('applicationForm.savedToast.termsAccepted')}: ${label('applicationForm.savedToast.yes')}`,
+  ];
+  return lines.join('\n');
+}
+
 type Props = {
   countries: Country[];
   experiences: Experience[];
@@ -46,8 +93,7 @@ type Props = {
 
 export function ApplicationFormSection({ countries, experiences }: Props) {
   const t = useTranslations('HomePage');
-  const [submittedData, setSubmittedData] =
-    useState<ApplicationFormValues | null>(null);
+  const submitMutation = useSubmitApplicationMutation();
 
   const schema = useMemo(() => buildSchema(t), [t]);
 
@@ -77,12 +123,30 @@ export function ApplicationFormSection({ countries, experiences }: Props) {
     <ArrowRight className="text-medium-gray h-4 w-4 rotate-90" aria-hidden />
   );
 
-  const handleSubmit = (data: ApplicationFormValues) => {
-    setSubmittedData(data);
-    setTimeout(() => {
+  async function runSubmit(data: ApplicationFormValues) {
+    const result = await submitMutation.mutateAsync(toCreateBody(data));
+    if (result.ok) {
+      toast.success(t('applicationForm.submitSuccess'), {
+        description: formatSubmitSuccessDescription(
+          result.data,
+          countries,
+          experiences,
+          t,
+        ),
+        duration: SUBMIT_SUCCESS_TOAST_MS,
+      });
       form.reset();
-      setSubmittedData(null);
-    }, 3000);
+      return;
+    }
+    if (result.error === 'invalid_code') {
+      toast.error(t('applicationForm.submitInvalidCode'));
+      return;
+    }
+    toast.error(t('applicationForm.submitError'));
+  }
+
+  const handleSubmit = (data: ApplicationFormValues) => {
+    void runSubmit(data);
   };
 
   return (
@@ -232,23 +296,13 @@ export function ApplicationFormSection({ countries, experiences }: Props) {
                     size="large"
                     className={JOIN_NOW_PRIMARY_BUTTON_CLASSNAME}
                     autoDisable={false}
+                    disabled={submitMutation.isPending}
                   >
                     {t('applicationForm.submit')}
                   </FormButton>
                 </div>
               </div>
             </FormWrapper>
-
-            {submittedData ? (
-              <div className="bg-success-100 border-success-800 rounded-lg border p-4">
-                <p className="text-success-800 mb-2 text-sm font-medium">
-                  {t('applicationForm.submitSuccess')}
-                </p>
-                <pre className="text-success-800 overflow-auto text-xs">
-                  {JSON.stringify(submittedData, null, 2)}
-                </pre>
-              </div>
-            ) : null}
           </div>
         </div>
       </div>
