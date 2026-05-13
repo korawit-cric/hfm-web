@@ -15,10 +15,11 @@
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
     "@repo/api-client": "*",
+    "@repo/icons": "*",
     "@repo/prisma": "*",
     "@repo/ui": "*",
-    "@repo/icons": "*",
     "@tanstack/react-query": "^5.80.7",
+    "@tanstack/react-table": "^8.21.3",
     "next": "^16.0.7",
     "next-intl": "^4.11.2",
     "react": "^19.1.0",
