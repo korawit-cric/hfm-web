@@ -1,4 +1,4 @@
-import { Open_Sans } from 'next/font/google';
+import { Open_Sans, Prompt } from 'next/font/google';
 import { headers } from 'next/headers';
 
 import '@repo/ui/styles.css';
@@ -10,6 +10,12 @@ const openSans = Open_Sans({
   weight: ['300', '400', '500', '600', '700', '800'],
 });
 
+const prompt = Prompt({
+  variable: '--font-prompt',
+  subsets: ['latin', 'thai'],
+  weight: ['300', '400', '500', '600', '700', '800'],
+});
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -17,9 +23,14 @@ export default async function RootLayout({
 }>) {
   const locale = (await headers()).get('x-next-intl-locale') ?? 'en';
 
+  const fontClass =
+    locale === 'th'
+      ? `${prompt.variable} font-prompt`
+      : `${openSans.variable} font-open-sans`;
+
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={`${openSans.variable} font-open-sans`}>{children}</body>
+      <body className={fontClass}>{children}</body>
     </html>
   );
 }
