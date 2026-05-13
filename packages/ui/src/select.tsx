@@ -82,11 +82,6 @@ function measureListCoords(triggerEl: HTMLElement): ListCoords {
   };
 }
 
-/**
- * Select — custom listbox aligned with {@link Input} states; keeps a native
- * &lt;select&gt; (visually hidden) for the same ref and change events as before.
- * Ref is forwarded to the visually hidden native &lt;select&gt; (React 19 prop).
- */
 export interface SelectProps extends Omit<
   React.ComponentProps<'select'>,
   'size'
@@ -96,7 +91,6 @@ export interface SelectProps extends Omit<
   icon?: ReactNode;
   error?: string;
   helperText?: string;
-  /** Classes merged onto the trigger (same role as the former native control). */
   controlClassName?: string;
 }
 
@@ -259,7 +253,6 @@ export function Select({
     parents.forEach((p) =>
       p.addEventListener('scroll', onScrollOrResize, scrollOpts),
     );
-    /* Main page scroll often fires on window/document, not only overflow ancestors. */
     window.addEventListener('scroll', onScrollOrResize, scrollOpts);
     document.addEventListener('scroll', onScrollOrResize, scrollOpts);
     window.addEventListener('resize', onScrollOrResize);
