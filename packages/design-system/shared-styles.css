@@ -49,6 +49,8 @@
 
   --color-light-border-gray: #e4e4e4;
   --color-border-gray: #b9b7b7;
+  --color-table-border-gray: #dedede;
+  --color-subtitle-gray: #ababab;
 
   /* Default essential colors */
   --color-inherit: inherit;
