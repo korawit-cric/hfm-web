@@ -1,50 +1,29 @@
 'use client';
 
-import { forwardRef } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { Button } from '../button';
 import type { ButtonProps } from '../button';
 
 type FormButtonProps = Omit<ButtonProps, 'type'> & {
-  /**
-   * Button type - defaults to "submit" for form buttons
-   * @default "submit"
-   */
   type?: 'button' | 'submit' | 'reset';
-  /**
-   * Whether to auto-disable based on form state
-   * @default true
-   */
+  /** @default true */
   autoDisable?: boolean;
 };
 
 /**
- * FormButton - A Button component that integrates with React Hook Form
- *
- * Automatically disables submit buttons when form is invalid or submitting.
- *
- * @example
- * ```tsx
- * <FormWrapper formInstance={form} onSubmit={handleSubmit}>
- *   <FormButton type="submit">Submit</FormButton>
- * </FormWrapper>
- * ```
- *
- * @example With auto-disable disabled
- * ```tsx
- * <FormButton type="submit" autoDisable={false}>
- *   Submit Anyway
- * </FormButton>
- * ```
+ * FormButton — Button integrated with React Hook Form.
+ * Ref is a normal prop on {@link Button} (React 19).
  */
-export const FormButton = forwardRef<
-  HTMLButtonElement | HTMLAnchorElement,
-  FormButtonProps
->(({ type = 'submit', autoDisable = true, disabled, ...buttonProps }, ref) => {
+export function FormButton({
+  ref,
+  type = 'submit',
+  autoDisable = true,
+  disabled,
+  ...buttonProps
+}: FormButtonProps) {
   const formContext = useFormContext();
   const { isValid = true, isSubmitting = false } = formContext?.formState || {};
 
-  // Auto-disable based on form state when type is submit and autoDisable is true
   const isFormDisabled =
     autoDisable &&
     type === 'submit' &&
@@ -59,6 +38,4 @@ export const FormButton = forwardRef<
       {...buttonProps}
     />
   );
-});
-
-FormButton.displayName = 'FormButton';
+}
