@@ -54,8 +54,8 @@
   --color-inherit: inherit;
   --color-transparent: transparent;
 
-  --background: #161616;
-  --foreground: #f8fafc;
+  --background: #f4f4f4;
+  --foreground: #161616;
 
   --surface: rgba(15, 23, 42, 0.05);
   --border: rgba(15, 23, 42, 0.15);
