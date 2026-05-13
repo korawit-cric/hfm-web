@@ -1,2 +1,27 @@
 @import 'tailwindcss';
 @import '@repo/design-system';
+
+.showcase-orbit-grid {
+  display: grid;
+  gap: 2.5rem;
+  grid-template-areas:
+    'slot-a'
+    'slot-b'
+    'slot-c'
+    'slot-d'
+    'device';
+}
+
+@media (min-width: 1024px) {
+  .showcase-orbit-grid {
+    /* minmax(0, 1fr) so side text does not inflate min-width and steal width from center */
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    column-gap: 2.5rem;
+    row-gap: 3.5rem;
+    align-items: center;
+    grid-template-areas:
+      'slot-a device slot-c'
+      'slot-b device slot-d';
+  }
+}

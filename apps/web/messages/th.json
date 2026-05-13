@@ -49,10 +49,17 @@
     "noRankings": "ยังไม่มีข้อมูลอันดับ",
     "rankingsClientTitle": "ดีโมฝั่งไคลเอนต์: อันดับ",
     "rankingMeta": "อันดับ {rank} • gain {gain}",
-    "noFaqs": "ยังไม่มี FAQ",
-    "faqSectionTitle": "คำถามที่พบบ่อย",
-    "faqAccordionLoading": "กำลังโหลด…",
-    "faqAccordionError": "โหลด FAQ ไม่สำเร็จ",
+    "faq": {
+      "sectionTitle": "คำถามที่พบบ่อย",
+      "empty": "ยังไม่มี FAQ"
+    },
+    "showcase": {
+      "title": "Quisque rutrum",
+      "deviceAlt": "แอปมือถือ HFM บนสมาร์ทโฟนสองเครื่อง",
+      "showcase1": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
+      "showcase2": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
+      "showcase3": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit."
+    },
     "prizesServerTitle": "ดีโมฝั่งเซิร์ฟเวอร์: รางวัล ({count})",
     "noPrizes": "ยังไม่มีรางวัล",
     "prizesClientTitle": "ดีโมฝั่งไคลเอนต์: รางวัล",

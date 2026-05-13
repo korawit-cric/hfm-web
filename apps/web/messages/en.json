@@ -49,10 +49,17 @@
     "noRankings": "No rankings data.",
     "rankingsClientTitle": "Client-Side Demo: Rankings",
     "rankingMeta": "#{rank} • gain {gain}",
-    "noFaqs": "No FAQs.",
-    "faqSectionTitle": "Frequently asked questions",
-    "faqAccordionLoading": "Loading…",
-    "faqAccordionError": "Could not load FAQs.",
+    "faq": {
+      "sectionTitle": "FAQs",
+      "empty": "No FAQs."
+    },
+    "showcase": {
+      "title": "Quisque rutrum",
+      "deviceAlt": "HFM mobile apps on two phones",
+      "showcase1": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
+      "showcase2": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
+      "showcase3": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit."
+    },
     "prizesServerTitle": "Server-Side Demo: Prizes ({count})",
     "noPrizes": "No prizes.",
     "prizesClientTitle": "Client-Side Demo: Prizes",

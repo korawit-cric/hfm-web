@@ -10,6 +10,7 @@ import { getRankings, RankingsClient } from '@/features/rankings';
 import { ApplicationFormSection } from '@/components/application-form-section';
 import { FaqSection } from '@/components/faq-section';
 import { FeatureBadge } from '@/components/feature-badge';
+import { ShowcaseSection } from '@/components/showcase-section';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -111,11 +112,9 @@ export default async function Home({ params }: Props) {
         </main>
       </div>
 
-      <FaqSection
-        faqs={faqs}
-        title={t('faqSectionTitle')}
-        emptyLabel={t('noFaqs')}
-      />
+      <ShowcaseSection />
+
+      <FaqSection faqs={faqs} />
     </>
   );
 }

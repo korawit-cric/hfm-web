@@ -1,30 +1,31 @@
 import type { Faq } from '@repo/api-client';
+import { getTranslations } from 'next-intl/server';
 
-import { FaqAccordion } from '@/features/faqs/faq-accordion';
+import { FaqAccordion } from '@/components/faq-accordion';
 
 type Props = {
   faqs: Faq[];
-  title: string;
-  emptyLabel: string;
 };
 
-export function FaqSection({ faqs, title, emptyLabel }: Props) {
+export async function FaqSection({ faqs }: Props) {
+  const t = await getTranslations('HomePage.faq');
+
   return (
     <section
-      className="bg-black text-white"
+      className="bg-light-gray text-black"
       aria-labelledby="faq-section-heading"
     >
-      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 md:py-16 lg:px-8">
+      <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-40 lg:px-8">
         <h2
           id="faq-section-heading"
-          className="mb-8 text-xl font-semibold tracking-tight text-white md:mb-10 md:text-2xl"
+          className="font-sofia-sans-condensed mb-10 text-center text-3xl font-normal md:mb-20 md:text-5xl"
         >
-          {title}
+          {t('sectionTitle')}
         </h2>
         {faqs.length > 0 ? (
           <FaqAccordion faqs={faqs} />
         ) : (
-          <p className="text-medium-gray text-sm">{emptyLabel}</p>
+          <p className="text-sm">{t('empty')}</p>
         )}
       </div>
     </section>
