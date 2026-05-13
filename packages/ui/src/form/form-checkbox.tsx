@@ -12,10 +12,6 @@ type FormCheckboxProps = Omit<
   error?: string;
 };
 
-/**
- * FormCheckbox — Checkbox integrated with React Hook Form (boolean fields).
- * Ref is a normal prop on {@link Checkbox} (React 19).
- */
 export function FormCheckbox({
   name,
   error: customError,
