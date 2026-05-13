@@ -1,7 +1,9 @@
 import Image from 'next/image';
 import type { Ranking } from '@repo/api-client';
+import { RankingTopThreeBadge } from '@repo/icons';
 import { getTranslations } from 'next-intl/server';
 
+import { JoinNowCtaLink } from '@/components/join-now-cta-link';
 import { RankingMoreTable } from '@/components/ranking-more-table';
 import { SectionEmptyMessage } from '@/components/section-empty-message';
 import { SectionHeader } from '@/components/section-header';
@@ -23,11 +25,14 @@ type Props = {
 };
 
 export async function RankingSection({ rankings }: Props) {
-  const t = await getTranslations('HomePage.rankingSection');
+  const [t, tHome] = await Promise.all([
+    getTranslations('HomePage.rankingSection'),
+    getTranslations('HomePage'),
+  ]);
 
   const sorted = [...rankings].sort((a, b) => a.rank - b.rank);
   const topThree = sorted.slice(0, 3);
-  const moreRanks = sorted.slice(3);
+  const moreRanks = sorted.slice(3, 13);
 
   const winnerLabels = [t('winner1'), t('winner2'), t('winner3')] as const;
 
@@ -43,52 +48,72 @@ export async function RankingSection({ rankings }: Props) {
         {sorted.length === 0 ? (
           <SectionEmptyMessage>{t('empty')}</SectionEmptyMessage>
         ) : (
-          <div className="flex flex-col gap-12 lg:grid lg:grid-cols-2 lg:items-start lg:gap-14">
-            <div className="flex flex-col gap-5">
-              {topThree.map((r, i) => (
-                <article
-                  key={r.id}
-                  className="flex gap-4 rounded-xl bg-white p-5 text-black md:gap-8 md:p-6"
-                >
-                  <div className="relative h-16 w-16 shrink-0 self-center md:h-[100px] md:w-[100px]">
-                    <Image
-                      src={trophyForPlace(i)}
-                      alt=""
-                      fill
-                      className="object-contain"
-                      sizes="(min-width: 768px) 100px, 80px"
-                    />
-                  </div>
-                  <div className="flex flex-1 flex-col gap-6 text-left">
-                    <p className="text-gold-gradient mb-2 font-bold tracking-wide uppercase md:text-lg">
-                      {winnerLabels[Math.min(i, 2)]}
-                    </p>
-                    <div className="flex flex-col gap-0">
-                      <p className="leading-tight font-normal uppercase md:text-lg">
-                        {r.name}
+          <>
+            <div className="flex flex-col gap-12 rounded-[20px] lg:grid lg:grid-cols-2 lg:items-start lg:gap-14">
+              <div className="flex flex-col gap-5">
+                {topThree.map((r, i) => (
+                  <article
+                    key={r.id}
+                    className="relative flex gap-4 overflow-hidden rounded-xl bg-white p-5 text-black md:gap-8 md:p-[30px]"
+                  >
+                    <div
+                      className="pointer-events-none absolute top-0 right-0 z-10 h-[88px] w-[90px] md:h-[117px] md:w-[119px]"
+                      aria-hidden
+                    >
+                      <RankingTopThreeBadge className="h-full w-full" />
+                    </div>
+                    <div className="relative h-16 w-16 shrink-0 self-center md:h-[100px] md:w-[100px]">
+                      <Image
+                        src={trophyForPlace(i)}
+                        alt=""
+                        fill
+                        className="object-contain"
+                        sizes="(min-width: 768px) 100px, 80px"
+                      />
+                    </div>
+                    <div className="flex flex-1 flex-col gap-6 text-left">
+                      <p className="text-gold-gradient font-bold tracking-wide uppercase md:text-lg">
+                        {winnerLabels[Math.min(i, 2)]}
                       </p>
-                      <p className="text-subtitle-gray leading-tight font-normal md:text-lg">
-                        {r.sn}
+                      <div className="flex flex-col gap-0">
+                        <p className="leading-tight font-normal uppercase md:text-lg">
+                          {r.name}
+                        </p>
+                        <p className="text-subtitle-gray leading-tight font-normal md:text-lg">
+                          {r.sn}
+                        </p>
+                      </div>
+                      <p className="font-bold md:text-lg">
+                        {t('totalGainPrefix')}{' '}
+                        <span className="text-secondary-500 text-lg font-bold">
+                          {r.gain}%
+                        </span>
                       </p>
                     </div>
-                    <p className="mt-3 font-bold md:text-lg">
-                      {t('totalGainPrefix')}{' '}
-                      <span className="text-secondary-500 text-lg font-bold">
-                        {r.gain}%
-                      </span>
-                    </p>
-                  </div>
-                </article>
-              ))}
+                  </article>
+                ))}
+              </div>
+
+              <div>
+                <h3 className="mb-16 text-2xl font-bold">
+                  {t('moreRanksTitle')}
+                </h3>
+                <RankingMoreTable rows={moreRanks} />
+                <p className="text-medium-gray text-xxs mt-4 font-normal md:text-xs">
+                  {t('moreRanksFootnote')}
+                </p>
+              </div>
             </div>
 
-            <div>
-              <h3 className="mb-12 text-2xl font-bold">
-                {t('moreRanksTitle')}
-              </h3>
-              <RankingMoreTable rows={moreRanks} />
+            <div className="mt-12 flex flex-col items-center gap-4 md:mt-16">
+              <JoinNowCtaLink href="#application-form">
+                {tHome('applicationForm.submit')}
+              </JoinNowCtaLink>
+              <p className="text-medium-gray text-xxs font-normal md:text-xs">
+                {t('tableRemark')}
+              </p>
             </div>
-          </div>
+          </>
         )}
       </div>
     </section>
