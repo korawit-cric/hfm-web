@@ -4,6 +4,7 @@
 import { forwardRef, type ReactNode } from 'react';
 import { Error } from '@repo/icons';
 
+import { FieldHelperText } from './field-helper-text';
 import { cn } from './utils';
 
 /**
@@ -18,6 +19,8 @@ export interface SelectProps extends Omit<
   icon?: ReactNode;
   error?: string;
   helperText?: string;
+  /** Classes merged onto the native &lt;select&gt; (overrides default 317×42). */
+  controlClassName?: string;
 }
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
@@ -31,6 +34,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       disabled = false,
       className,
       children,
+      controlClassName,
       ...selectProps
     },
     ref,
@@ -44,7 +48,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         String(selectProps.defaultValue) !== '');
 
     const baseSelectStyles = cn(
-      'h-14 w-full cursor-pointer rounded-lg bg-white px-4 transition-all duration-200 focus:outline-none text-mobile-body1 md:text-desktop-body1',
+      'h-[42px] w-[317px] max-w-full cursor-pointer rounded-lg bg-white px-4 transition-all duration-200 focus:outline-none text-mobile-body1 md:text-desktop-body1',
       'appearance-none',
       icon && 'pr-10',
     );
@@ -52,25 +56,25 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const stateStyles = disabled
       ? cn(
           'border-2 border-gray bg-lightest-gray cursor-not-allowed',
-          hasValue ? 'text-darkest-gray' : 'text-medium-gray ',
+          hasValue ? 'text-darkest-gray' : 'text-medium-gray',
         )
       : error
-        ? cn('border border-error-300 focus:border-2')
+        ? cn(
+            'border border-error-300 focus:border-2',
+            hasValue ? 'text-darkest-gray' : 'text-medium-gray',
+          )
         : hasValue
           ? cn(
               'border-2 border-medium-gray hover:border-2 hover:border-primary-300 focus:border-2 focus:border-primary-400',
+              'text-darkest-gray',
             )
           : cn(
               'border border-medium-gray hover:border-primary-300 focus:border-2 focus:border-primary-400 focus:ring-primary-400/20',
+              'text-medium-gray',
             );
 
     const labelStyles =
       'mb-2 block font-bold text-bold-gray text-mobile-caption md:text-desktop-caption';
-
-    const helperStyles = cn(
-      'mt-2 text-mobile-caption md:text-desktop-caption',
-      error ? 'text-error-500' : 'text-darkest-gray',
-    );
 
     return (
       <div className={cn('w-full', className)}>
@@ -93,7 +97,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             aria-describedby={
               error || helperText ? `${selectProps.id}-helper` : undefined
             }
-            className={cn(baseSelectStyles, stateStyles)}
+            className={cn(baseSelectStyles, stateStyles, controlClassName)}
             {...selectProps}
           >
             {children}
@@ -113,20 +117,16 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
                       : 'text-medium-gray',
               )}
             >
-              {error ? <Error className="text-error-500 h-6" /> : icon}
+              {error ? <Error className="text-error-500 h-4" /> : icon}
             </div>
           )}
         </div>
 
-        {(error || helperText) && (
-          <p
-            id={`${selectProps.id}-helper`}
-            className={helperStyles}
-            role={error ? 'alert' : undefined}
-          >
-            {error || helperText}
-          </p>
-        )}
+        <FieldHelperText
+          id={`${selectProps.id}-helper`}
+          error={error}
+          helperText={helperText}
+        />
       </div>
     );
   },
