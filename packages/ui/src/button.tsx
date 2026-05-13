@@ -7,25 +7,6 @@ import { cn } from './utils';
 type ButtonSize = 'large' | 'small';
 type ButtonVariant = 'primary' | 'secondary';
 
-/**
- * Button Component
- *
- * Ref is a normal prop (React 19).
- *
- * @example
- * <Button variant="primary">Click me</Button>
- * <Button variant="secondary" size="small">Text</Button>
- *
- * @example With Next.js Link
- * ```tsx
- * import Link from 'next/link';
- * import { Button } from '@repo/ui/button';
- *
- * <Button variant="linked" href="/page" as={Link}>
- *   Go to Page
- * </Button>
- * ```
- */
 export interface ButtonProps {
   ref?: Ref<HTMLButtonElement | HTMLAnchorElement>;
   children: ReactNode;
