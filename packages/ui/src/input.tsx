@@ -7,47 +7,15 @@ import { Error } from '@repo/icons';
 import { FieldHelperText } from './field-helper-text';
 import { cn } from './utils';
 
-/**
- * Input Component - Pure presentational component
- *
- * Supports all input states: rest, hover, error, active, filled, disabled
- *
- * Ref is a normal prop (React 19).
- *
- * @example
- * <Input label="Email" placeholder="Enter your email" />
- * <Input label="Email" required placeholder="Enter your email" />
- * <Input label="Email" icon={<Icon />} placeholder="Enter your email" />
- * <Input label="Email" error="Invalid email" placeholder="Enter your email" />
- * <Input label="Email" disabled placeholder="Enter your email" />
- */
 export interface InputProps extends Omit<
   React.ComponentProps<'input'>,
   'size'
 > {
-  /**
-   * Label text displayed above the input
-   */
   label?: string;
-  /**
-   * Whether the field is required (shows asterisk)
-   */
   required?: boolean;
-  /**
-   * Icon displayed on the right side of the input
-   */
   icon?: ReactNode;
-  /**
-   * Error message (triggers error state)
-   */
   error?: string;
-  /**
-   * Helper text displayed below the input
-   */
   helperText?: string;
-  /**
-   * Classes merged onto the native &lt;input&gt; (overrides default 317×42).
-   */
   controlClassName?: string;
 }
 
