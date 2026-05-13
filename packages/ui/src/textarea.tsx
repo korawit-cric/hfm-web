@@ -4,17 +4,6 @@
 import { FieldHelperText } from './field-helper-text';
 import { cn } from './utils';
 
-/**
- * Textarea Component - Pure presentational component
- *
- * Ref is a normal prop (React 19).
- *
- * @example
- * <Textarea label="Note" placeholder="Enter your note" />
- * <Textarea label="Note" required placeholder="Enter your note" />
- * <Textarea label="Note" error="Invalid note" placeholder="Enter your note" />
- * <Textarea label="Note" disabled placeholder="Enter your note" />
- */
 export interface TextareaProps extends Omit<
   React.ComponentProps<'textarea'>,
   'size'
