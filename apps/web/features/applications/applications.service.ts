@@ -4,7 +4,7 @@ import {
   type SavedApplication,
 } from '@repo/api-client';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+import { clientFetch } from '@/lib/fetch/client';
 
 export type SubmitApplicationResult =
   | { ok: true; data: SavedApplication }
@@ -28,43 +28,40 @@ function parseErrorCode(body: unknown): string | undefined {
 export async function createApplication(
   body: CreateApplicationBody,
 ): Promise<SubmitApplicationResult> {
-  const endpoint = applicationsApi.create(body);
+  return clientFetch(applicationsApi.create(body), {
+    async parseResponse(res) {
+      if (res.status === 201) {
+        let raw: unknown;
+        try {
+          raw = await res.json();
+        } catch {
+          return { ok: false, error: 'db' };
+        }
+        const data = raw as SavedApplication;
+        if (
+          typeof data?.id !== 'number' ||
+          typeof data.firstName !== 'string' ||
+          typeof data.lastName !== 'string'
+        ) {
+          return { ok: false, error: 'db' };
+        }
+        return { ok: true, data };
+      }
 
-  const res = await fetch(`${API_BASE_URL}${endpoint.url}`, {
-    method: endpoint.method,
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
+      if (res.status === 400) {
+        let data: unknown;
+        try {
+          data = await res.json();
+        } catch {
+          return { ok: false, error: 'invalid' };
+        }
+        const code = parseErrorCode(data);
+        if (code === 'INVALID_CODE')
+          return { ok: false, error: 'invalid_code' };
+        return { ok: false, error: 'invalid' };
+      }
+
+      return { ok: false, error: 'db' };
+    },
   });
-
-  if (res.status === 201) {
-    let raw: unknown;
-    try {
-      raw = await res.json();
-    } catch {
-      return { ok: false, error: 'db' };
-    }
-    const data = raw as SavedApplication;
-    if (
-      typeof data?.id !== 'number' ||
-      typeof data.firstName !== 'string' ||
-      typeof data.lastName !== 'string'
-    ) {
-      return { ok: false, error: 'db' };
-    }
-    return { ok: true, data };
-  }
-
-  if (res.status === 400) {
-    let data: unknown;
-    try {
-      data = await res.json();
-    } catch {
-      return { ok: false, error: 'invalid' };
-    }
-    const code = parseErrorCode(data);
-    if (code === 'INVALID_CODE') return { ok: false, error: 'invalid_code' };
-    return { ok: false, error: 'invalid' };
-  }
-
-  return { ok: false, error: 'db' };
 }

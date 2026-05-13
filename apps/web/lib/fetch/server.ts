@@ -24,7 +24,7 @@ export async function serverFetch<TResponse>(
       'Content-Type': 'application/json',
     },
     body: body ? JSON.stringify(body) : undefined,
-    cache: 'no-store', // Server components default to no caching
+    next: { revalidate: 1800 }, // 30 minutes
   });
 
   if (!response.ok) {

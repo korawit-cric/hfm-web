@@ -1,17 +1,16 @@
-import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
-import {
-  getMessages,
-  getTranslations,
-  setRequestLocale,
-} from 'next-intl/server';
+import { getMessages, setRequestLocale } from 'next-intl/server';
 import { hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { Footer } from '@/components/layout/footer';
 import { NavigationBar } from '@/components/layout/navigation-bar';
 import { Providers } from '@/providers';
 import { DocumentLocaleSync } from '@/components/document-locale-sync';
-import { Locale } from '@/lib/i18n/navigation';
+import { createMetadata } from '@/lib/metadata/create-metadata';
+import {
+  createOrganizationSchema,
+  organizationSchemaToJsonLd,
+} from '@/lib/metadata/create-organization-schema';
 import { routing } from '@/lib/i18n/routing';
 
 type Props = {
@@ -23,17 +22,10 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale } = await params;
-  const safeLocale = hasLocale(routing.locales, locale)
-    ? locale
-    : routing.defaultLocale;
-  const t = await getTranslations({ locale: safeLocale, namespace: 'Root' });
-  return {
-    title: t('title'),
-    description: t('description'),
-  };
-}
+export const generateMetadata = createMetadata({
+  namespace: 'Root',
+  pathname: '/',
+});
 
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
@@ -46,10 +38,18 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages();
 
   const localeFontClass =
-    locale === Locale.TH ? 'font-prompt' : 'font-open-sans';
+    locale === 'th' ? 'font-ibm-plex-sans-thai' : 'font-open-sans';
+
+  const organizationJsonLd = organizationSchemaToJsonLd(
+    createOrganizationSchema(locale),
+  );
 
   return (
     <NextIntlClientProvider messages={messages}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: organizationJsonLd }}
+      />
       <DocumentLocaleSync />
       <Providers>
         <div className={`flex min-h-screen flex-col ${localeFontClass}`}>

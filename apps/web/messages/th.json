@@ -3,6 +3,15 @@
     "title": "HFM Web",
     "description": "โมโนรีโป hfm-web — ส่วนหน้า Next.js"
   },
+  "ErrorPage": {
+    "notFoundCode": "404",
+    "notFoundTitle": "ไม่พบหน้านี้",
+    "notFoundDescription": "หน้าที่คุณกำลังมองหาไม่มีอยู่ หรือกำลังอยู่ในการพัฒนา",
+    "errorTitle": "เกิดข้อผิดพลาด",
+    "errorDescription": "มีข้อผิดพลาดที่ไม่คาดคิด กรุณาลองอีกครั้ง",
+    "backHome": "กลับหน้าแรก",
+    "tryAgain": "ลองอีกครั้ง"
+  },
   "NavigationBar": {
     "logoAlt": "HF Markets",
     "mainNavLabel": "เมนูหลัก",

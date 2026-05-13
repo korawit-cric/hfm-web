@@ -68,9 +68,9 @@
 /* next/font `variable:` on body; `inline` maps utilities to those vars. */
 @theme inline {
   --font-open-sans: var(--font-open-sans);
-  --font-prompt: var(--font-prompt);
+  --font-ibm-plex-sans-thai: var(--font-ibm-plex-sans-thai);
   --font-sofia-sans-condensed:
-    var(--font-sofia-sans-condensed), var(--font-prompt);
+    var(--font-sofia-sans-condensed), var(--font-ibm-plex-sans-thai);
 }
 
 @utility text-gold-gradient {

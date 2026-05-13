@@ -6,22 +6,22 @@ import { LocaleSwitcherEn, LocaleSwitcherTh } from '@repo/icons';
 
 import { Link, Locale, usePathname } from '@/lib/i18n/navigation';
 
+export type NavigationBarLocaleLabels = {
+  switchToEnglish: string;
+  switchToThai: string;
+};
+
 type Props = {
-  labelSwitchToEnglish: string;
-  labelSwitchToThai: string;
+  labels: NavigationBarLocaleLabels;
   onClick?: () => void;
 };
 
-export function NavigationBarLocaleSwitch({
-  labelSwitchToEnglish,
-  labelSwitchToThai,
-  onClick,
-}: Props) {
+export function NavigationBarLocaleSwitch({ labels, onClick }: Props) {
   const pathname = usePathname();
-  const locale = useLocale();
+  const locale = useLocale() as Locale;
   const targetLocale = locale === Locale.EN ? Locale.TH : Locale.EN;
   const ariaLabel =
-    targetLocale === Locale.TH ? labelSwitchToThai : labelSwitchToEnglish;
+    targetLocale === Locale.TH ? labels.switchToThai : labels.switchToEnglish;
 
   return (
     <Link
@@ -32,7 +32,7 @@ export function NavigationBarLocaleSwitch({
       className="text-lightest-gray rounded-sm transition-opacity hover:opacity-80"
       onClick={onClick}
     >
-      {locale === 'en' ? (
+      {locale === Locale.EN ? (
         <LocaleSwitcherEn className="h-4 w-auto" aria-hidden />
       ) : (
         <LocaleSwitcherTh className="h-4 w-auto" aria-hidden />

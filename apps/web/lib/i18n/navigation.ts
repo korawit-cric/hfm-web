@@ -7,5 +7,8 @@ export enum Locale {
   EN = 'en',
 }
 
+export const locales = routing.locales;
+export const defaultLocale = routing.defaultLocale;
+
 export const { Link, redirect, usePathname, useRouter, getPathname } =
   createNavigation(routing);

@@ -3,6 +3,15 @@
     "title": "HFM Web",
     "description": "hfm-web monorepo — Next.js frontend"
   },
+  "ErrorPage": {
+    "notFoundCode": "404",
+    "notFoundTitle": "Page not found",
+    "notFoundDescription": "The page you are looking for does not exist or may have been on maintenance.",
+    "errorTitle": "Something went wrong",
+    "errorDescription": "An unexpected error occurred. Please try again.",
+    "backHome": "Back to home",
+    "tryAgain": "Try again"
+  },
   "NavigationBar": {
     "logoAlt": "HF Markets",
     "mainNavLabel": "Main navigation",
