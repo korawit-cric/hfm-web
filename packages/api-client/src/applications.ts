@@ -1,4 +1,4 @@
-import type { ApiEndpointWithBody } from './types.js';
+import type { ApiEndpoint, ApiEndpointWithBody } from './types.js';
 
 export type CreateApplicationBody = {
   firstName: string;
@@ -25,9 +25,19 @@ export type SavedApplication = {
 };
 
 /**
- * Applications API — create a marketing / signup application row.
+ * Applications API — list, read, and create marketing signup rows.
  */
 export const applicationsApi = {
+  list: (): ApiEndpoint<SavedApplication[]> => ({
+    url: '/applications',
+    method: 'GET',
+  }),
+
+  getById: (id: number): ApiEndpoint<SavedApplication> => ({
+    url: `/applications/${id}`,
+    method: 'GET',
+  }),
+
   create: (
     body: CreateApplicationBody,
   ): ApiEndpointWithBody<CreateApplicationBody, SavedApplication> => ({
