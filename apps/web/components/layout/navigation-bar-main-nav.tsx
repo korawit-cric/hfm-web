@@ -20,7 +20,7 @@ export function NavigationBarMainNav({ items, navAriaLabel }: Props) {
         <Link
           key={href}
           href={href}
-          className="transition-colors hover:text-white! hover:underline!"
+          className="text-lightest-gray transition-colors hover:text-white hover:underline"
         >
           {label}
         </Link>
