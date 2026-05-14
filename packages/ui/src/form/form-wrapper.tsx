@@ -15,16 +15,6 @@ type GenericOnSubmit = (
   event?: React.BaseSyntheticEvent,
 ) => void;
 
-/**
- * @example:
- * const form = useCustomForm<LoginFormType>({
- *   defaultValues: {
- *     email: '',
- *     password: '',
- *   },
- *   schema: loginFormSchema,
- * });
- */
 export const useCustomForm = <TFormData extends Record<string, unknown>>({
   defaultValues,
   schema,

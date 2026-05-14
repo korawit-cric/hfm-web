@@ -1,13 +1,26 @@
 import { Module } from '@nestjs/common';
 
-import { LinksModule } from './links/links.module';
+import { ApplicationsModule } from './applications/applications.module';
+import { CountriesModule } from './countries/countries.module';
+import { ExperiencesModule } from './experiences/experiences.module';
+import { FaqsModule } from './faqs/faqs.module';
+import { PrizesModule } from './prizes/prizes.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { RankingsModule } from './rankings/rankings.module';
 
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
 
 @Module({
-  imports: [PrismaModule, LinksModule],
+  imports: [
+    PrismaModule,
+    ApplicationsModule,
+    CountriesModule,
+    ExperiencesModule,
+    RankingsModule,
+    FaqsModule,
+    PrizesModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -8,8 +8,6 @@ Shared Prisma client and schema package with PostgreSQL support. This package pr
 npm install @repo/prisma
 # or
 yarn add @repo/prisma
-# or
-pnpm add @repo/prisma
 ```
 
 ## Prerequisites
@@ -32,7 +30,7 @@ pnpm add @repo/prisma
    The `.env` file in the root directory should contain:
 
    ```env
-   DATABASE_URL="postgresql://postgres:postgres@localhost:5433/monex-root-template-v2-db?schema=public"
+   DATABASE_URL="postgresql://postgres:postgres@localhost:5433/hfm-db?schema=public"
    ```
 
    **How Prisma loads environment variables:**

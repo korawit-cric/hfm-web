@@ -1,5 +1,6 @@
-// Re-export Prisma types for convenience
-export type { Link } from '@repo/prisma';
+import type { Locale } from '@repo/prisma';
+
+export type { Locale };
 
 // API request/response types
 export interface ApiEndpoint<TResponse = unknown> {
@@ -15,15 +16,38 @@ export interface ApiEndpointWithBody<
   body?: TBody;
 }
 
-// Link DTOs
-export interface CreateLinkDto {
-  title: string;
-  url: string;
-  description?: string;
+/** Leaderboard row for the requested locale (decimals as strings in JSON). */
+export interface Ranking {
+  id: number;
+  sn: string;
+  gain: string;
+  bonus: string;
+  rank: number;
+  name: string;
 }
 
-export interface UpdateLinkDto {
-  title?: string;
-  url?: string;
-  description?: string;
+export interface Faq {
+  id: number;
+  q: string;
+  a: string;
+}
+
+export interface Prize {
+  id: number;
+  amount: string;
+  rank: number;
+  description: string | null;
+}
+
+/** Country row localized for the requested locale; includes primary dialing prefix when linked in DB. */
+export interface Country {
+  id: number;
+  name: string;
+  phoneCode: string;
+}
+
+/** Experience / seniority row localized for the requested locale. */
+export interface Experience {
+  id: number;
+  name: string;
 }

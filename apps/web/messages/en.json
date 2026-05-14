@@ -1,0 +1,139 @@
+{
+  "Root": {
+    "title": "HFM Web",
+    "description": "hfm-web monorepo — Next.js frontend"
+  },
+  "ErrorPage": {
+    "notFoundCode": "404",
+    "notFoundTitle": "Page not found",
+    "notFoundDescription": "The page you are looking for does not exist or may have been on maintenance.",
+    "errorTitle": "Something went wrong",
+    "errorDescription": "An unexpected error occurred. Please try again.",
+    "backHome": "Back to home",
+    "tryAgain": "Try again"
+  },
+  "NavigationBar": {
+    "logoAlt": "HF Markets",
+    "mainNavLabel": "Main navigation",
+    "mainNavOpenMenu": "Open main menu",
+    "mainNavCloseMenu": "Close main menu",
+    "navProducts": "Products",
+    "navAbout": "About",
+    "navResources": "Resources",
+    "navSupport": "Support",
+    "navContact": "Contact",
+    "utilityContactUs": "Contact us",
+    "utilityPartnerWithUs": "Partner with us",
+    "downloadApp": "Download App",
+    "localeSwitchToEnglish": "Switch to English",
+    "localeSwitchToThai": "Switch to Thai",
+    "login": "Login",
+    "register": "Register"
+  },
+  "Footer": {
+    "findUsOn": "Find us on",
+    "socialListLabel": "Social media links",
+    "socialFacebookAlt": "HFM on Facebook",
+    "socialXAlt": "HFM on X",
+    "socialTelegramAlt": "HFM on Telegram",
+    "socialInstagramAlt": "HFM on Instagram",
+    "socialYoutubeAlt": "HFM on YouTube",
+    "socialLinkedinAlt": "HFM on LinkedIn",
+    "socialMediumAlt": "HFM on Medium",
+    "downloadHfmApp": "Download HFM App",
+    "appStoreBadgeAlt": "Download on the App Store",
+    "googlePlayBadgeAlt": "Get it on Google Play",
+    "riskWarning": "Risk Warning",
+    "riskWarningBody": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Trading leveraged products carries significant risk and may not be suitable for all investors. Past performance is not indicative of future results."
+  },
+  "HomePage": {
+    "title": "HFM web demo",
+    "intro": "Fetching data from PostgreSQL via the HFM API (NestJS) and Prisma ORM.",
+    "badges": {
+      "nextjs": "Next.js 16",
+      "prisma": "Prisma 7",
+      "localComponent": "Local Component"
+    },
+    "rankingsServerTitle": "Server-Side Demo: Rankings ({count})",
+    "noRankings": "No rankings data.",
+    "rankingsClientTitle": "Client-Side Demo: Rankings",
+    "rankingMeta": "#{rank} • gain {gain}",
+    "rankingSection": {
+      "title": "Rankings",
+      "empty": "No rankings yet.",
+      "moreRanksTitle": "More ranks",
+      "moreRanksFootnote": "Figures are indicative and updated periodically according to official rules.",
+      "emptyTable": "No additional ranks.",
+      "winner1": "This month's 1st winner",
+      "winner2": "This month's 2nd winner",
+      "winner3": "This month's 3rd winner",
+      "totalGainPrefix": "Total gain of",
+      "colRank": "Rank",
+      "colName": "Name",
+      "colSn": "SN",
+      "colGain": "Gain",
+      "tableRemark": "Terms and Conditions apply"
+    },
+    "faq": {
+      "sectionTitle": "FAQs",
+      "empty": "No FAQs."
+    },
+    "showcase": {
+      "title": "Quisque rutrum",
+      "deviceAlt": "HFM mobile apps on two phones",
+      "showcase1": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
+      "showcase2": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
+      "showcase3": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit."
+    },
+    "prizes": {
+      "title": "Prizes",
+      "empty": "No prizes available.",
+      "termsDisclaimer": "Terms and Conditions apply",
+      "medalAriaLabel": "Prize tier {rank}",
+      "descriptionFallback": "Cras dapibus"
+    },
+    "prizesServerTitle": "Server-Side Demo: Prizes ({count})",
+    "noPrizes": "No prizes.",
+    "prizesClientTitle": "Client-Side Demo: Prizes",
+    "prizeLine": "Rank tier {rank} — {amount}",
+    "applicationForm": {
+      "titleLine1": "LOREM IPSUM DOLOR",
+      "titleLine2": "SIT AMET TOSIK",
+      "formTitle": "Lorem ipsum dolor sit amet",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "countryLabel": "Country",
+      "countryPlaceholder": "Select country",
+      "code": "Code",
+      "phone": "Phone",
+      "email": "Email",
+      "experienceLabel": "Experience",
+      "experiencePlaceholder": "Select experience",
+      "acceptTermsLabel": "I have read and accepted the ",
+      "privacyPolicy": "Privacy Policy",
+      "and": " and ",
+      "termsAndConditions": "Terms and Conditions",
+      "submit": "JOIN NOW",
+      "submitSuccess": "Application submitted successfully!",
+      "submitError": "Could not submit your application. Please try again.",
+      "submitInvalidCode": "The phone code does not match the selected country.",
+      "savedToast": {
+        "referenceId": "Reference no.",
+        "fullName": "Full name",
+        "country": "Country",
+        "phone": "Phone",
+        "email": "Email",
+        "experience": "Experience",
+        "termsAccepted": "Terms accepted",
+        "yes": "Yes",
+        "unknownCountry": "Unknown",
+        "unknownExperience": "Unknown"
+      },
+      "errors": {
+        "required": "This field is required",
+        "email": "Enter a valid email",
+        "acceptTerms": "You must accept the terms to continue"
+      }
+    }
+  }
+}

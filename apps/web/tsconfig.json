@@ -1,6 +1,10 @@
 {
   "extends": "@repo/typescript-config/nextjs.json",
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    },
     "types": ["jest", "@testing-library/jest-dom"],
     "plugins": [
       {
@@ -8,6 +12,12 @@
       }
     ]
   },
-  "include": ["**/*.ts", "**/*.tsx", "next-env.d.ts", "next.config.js"],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "next-env.d.ts",
+    "next.config.js",
+    "scripts/**/*.js"
+  ],
   "exclude": ["node_modules", ".next"]
 }

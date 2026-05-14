@@ -9,8 +9,8 @@ async function bootstrap() {
 
   // Swagger setup
   const config = new DocumentBuilder()
-    .setTitle('API')
-    .setDescription('NestJS API with Prisma')
+    .setTitle('HFM API')
+    .setDescription('REST API for hfm-web (NestJS, Prisma)')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);

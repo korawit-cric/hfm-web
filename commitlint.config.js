@@ -1,6 +1,6 @@
 module.exports = {
   extends: ['@commitlint/config-conventional'],
-  // example commit name: feat(monex-root): add prettier, commit-lint, husky and pre-commit
+  // example commit name: feat(hfm-web): add lint and husky
   rules: {
     // Ensure commit type is one of the specified values
     'type-enum': [

@@ -1,0 +1,139 @@
+{
+  "Root": {
+    "title": "HFM Web",
+    "description": "โมโนรีโป hfm-web — ส่วนหน้า Next.js"
+  },
+  "ErrorPage": {
+    "notFoundCode": "404",
+    "notFoundTitle": "ไม่พบหน้านี้",
+    "notFoundDescription": "หน้าที่คุณกำลังมองหาไม่มีอยู่ หรือกำลังอยู่ในการพัฒนา",
+    "errorTitle": "เกิดข้อผิดพลาด",
+    "errorDescription": "มีข้อผิดพลาดที่ไม่คาดคิด กรุณาลองอีกครั้ง",
+    "backHome": "กลับหน้าแรก",
+    "tryAgain": "ลองอีกครั้ง"
+  },
+  "NavigationBar": {
+    "logoAlt": "HF Markets",
+    "mainNavLabel": "เมนูหลัก",
+    "mainNavOpenMenu": "เปิดเมนูหลัก",
+    "mainNavCloseMenu": "ปิดเมนูหลัก",
+    "navProducts": "ผลิตภัณฑ์",
+    "navAbout": "เกี่ยวกับเรา",
+    "navResources": "แหล่งข้อมูล",
+    "navSupport": "ช่วยเหลือ",
+    "navContact": "ติดต่อ",
+    "utilityContactUs": "ติดต่อเรา",
+    "utilityPartnerWithUs": "ร่วมเป็นพาร์ทเนอร์",
+    "downloadApp": "ดาวน์โหลดแอป",
+    "localeSwitchToEnglish": "เปลี่ยนเป็นภาษาอังกฤษ",
+    "localeSwitchToThai": "เปลี่ยนเป็นภาษาไทย",
+    "login": "เข้าสู่ระบบ",
+    "register": "สมัครสมาชิก"
+  },
+  "Footer": {
+    "findUsOn": "ติดตามเราได้ที่",
+    "socialListLabel": "ลิงก์โซเชียลมีเดีย",
+    "socialFacebookAlt": "HFM บน Facebook",
+    "socialXAlt": "HFM บน X",
+    "socialTelegramAlt": "HFM บน Telegram",
+    "socialInstagramAlt": "HFM บน Instagram",
+    "socialYoutubeAlt": "HFM บน YouTube",
+    "socialLinkedinAlt": "HFM บน LinkedIn",
+    "socialMediumAlt": "HFM บน Medium",
+    "downloadHfmApp": "ดาวน์โหลดแอป HFM",
+    "appStoreBadgeAlt": "ดาวน์โหลดบน App Store",
+    "googlePlayBadgeAlt": "รับได้ที่ Google Play",
+    "riskWarning": "คำเตือนความเสี่ยง",
+    "riskWarningBody": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. การซื้อขายผลิตภัณฑ์ที่มีเลเวอเรจมีความเสี่ยงสูง และอาจไม่เหมาะกับนักลงทุนทุกท่าน ผลการดำเนินงานในอดีตไม่ได้บ่งชี้ถึงผลในอนาคต"
+  },
+  "HomePage": {
+    "title": "ทดสอบ HFM web",
+    "intro": "ดึงข้อมูลจาก PostgreSQL ผ่าน HFM API (NestJS) และ Prisma ORM",
+    "badges": {
+      "nextjs": "Next.js 16",
+      "prisma": "Prisma 7",
+      "localComponent": "คอมโพเนนต์ภายใน"
+    },
+    "rankingsServerTitle": "ดีโมฝั่งเซิร์ฟเวอร์: อันดับ ({count})",
+    "noRankings": "ยังไม่มีข้อมูลอันดับ",
+    "rankingsClientTitle": "ดีโมฝั่งไคลเอนต์: อันดับ",
+    "rankingMeta": "อันดับ {rank} • gain {gain}",
+    "rankingSection": {
+      "title": "อันดับ",
+      "empty": "ยังไม่มีข้อมูลอันดับ",
+      "moreRanksTitle": "อันดับถัดไป",
+      "moreRanksFootnote": "ตัวเลขเป็นเพียงข้อมูลอ้างอิงและอัปเดตเป็นช่วงๆ ตามกฎที่ประกาศอย่างเป็นทางการ",
+      "emptyTable": "ไม่มีอันดับเพิ่มเติม",
+      "winner1": "ผู้ชนะอันดับ 1 ประจำเดือนนี้",
+      "winner2": "ผู้ชนะอันดับ 2 ประจำเดือนนี้",
+      "winner3": "ผู้ชนะอันดับ 3 ประจำเดือนนี้",
+      "totalGainPrefix": "กำไรรวม",
+      "colRank": "อันดับ",
+      "colName": "ชื่อ",
+      "colSn": "SN",
+      "colGain": "กำไร",
+      "tableRemark": "มีข้อกำหนดและเงื่อนไข"
+    },
+    "faq": {
+      "sectionTitle": "คำถามที่พบบ่อย",
+      "empty": "ยังไม่มี FAQ"
+    },
+    "showcase": {
+      "title": "ไฮไลท์ที่คุณไม่ควรพลาด",
+      "deviceAlt": "แอปมือถือ HFM บนสมาร์ทโฟนสองเครื่อง",
+      "showcase1": "เทรดได้ทุกที่ทุกเวลาผ่านแอปที่ออกแบบมาให้ใช้งานง่ายและรวดเร็ว เหมาะกับทั้งมือใหม่และเทรดเดอร์มือโปร",
+      "showcase2": "เข้าถึงตลาดโลก สเปรดแคบ และเครื่องมือวิเคราะห์ครบชุดเพื่อช่วยให้คุณตัดสินใจได้มั่นใจยิ่งขึ้น",
+      "showcase3": "ฝากถอนสะดวก รองรับหลายช่องทาง พร้อมทีมซัพพอร์ตภาษาไทยเพื่อช่วยเหลือคุณตลอดเส้นทางการลงทุน"
+    },
+    "prizes": {
+      "title": "รางวัล",
+      "empty": "ยังไม่มีรางวัล",
+      "termsDisclaimer": "มีข้อกำหนดและเงื่อนไข",
+      "medalAriaLabel": "รางวัลอันดับ {rank}",
+      "descriptionFallback": "Cras dapibus"
+    },
+    "prizesServerTitle": "ดีโมฝั่งเซิร์ฟเวอร์: รางวัล ({count})",
+    "noPrizes": "ยังไม่มีรางวัล",
+    "prizesClientTitle": "ดีโมฝั่งไคลเอนต์: รางวัล",
+    "prizeLine": "ระดับ {rank} — {amount}",
+    "applicationForm": {
+      "titleLine1": "พร้อมแล้วหรือยัง",
+      "titleLine2": "สมัครเทรดกับ HFM",
+      "formTitle": "กรอกข้อมูลด้านล่างเพื่อเริ่มต้น",
+      "firstName": "ชื่อจริง",
+      "lastName": "นามสกุล",
+      "countryLabel": "ประเทศ",
+      "countryPlaceholder": "เลือกประเทศ",
+      "code": "รหัส",
+      "phone": "โทรศัพท์",
+      "email": "อีเมล",
+      "experienceLabel": "ประสบการณ์",
+      "experiencePlaceholder": "เลือกระดับประสบการณ์",
+      "acceptTermsLabel": "ข้าพเจ้าได้อ่านและยอมรับ ",
+      "privacyPolicy": "นโยบายความเป็นส่วนตัว",
+      "and": " และ ",
+      "termsAndConditions": "ข้อกำหนดและเงื่อนไข",
+      "submit": "สมัครเลย",
+      "submitSuccess": "ส่งใบสมัครเรียบร้อยแล้ว!",
+      "submitError": "ไม่สามารถส่งใบสมัครได้ กรุณาลองอีกครั้ง",
+      "submitInvalidCode": "รหัสโทรศัพท์ไม่ตรงกับประเทศที่เลือก",
+      "savedToast": {
+        "referenceId": "เลขอ้างอิง",
+        "fullName": "ชื่อ–นามสกุล",
+        "country": "ประเทศ",
+        "phone": "โทรศัพท์",
+        "email": "อีเมล",
+        "experience": "ประสบการณ์",
+        "termsAccepted": "ยอมรับข้อกำหนด",
+        "yes": "ใช่",
+        "unknownCountry": "ไม่พบชื่อ",
+        "unknownExperience": "ไม่พบชื่อ"
+      },
+      "errors": {
+        "required": "กรุณากรอกข้อมูล",
+        "email": "อีเมลไม่ถูกต้อง",
+        "acceptTerms": "กรุณายอมรับข้อกำหนดเพื่อดำเนินการต่อ"
+      }
+    }
+  }
+}
