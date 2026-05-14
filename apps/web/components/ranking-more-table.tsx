@@ -25,7 +25,7 @@ export function RankingMoreTable({ rows }: Props) {
       columnHelper.accessor('name', {
         header: () => t('colName'),
         cell: (info) => (
-          <span className="text-darkest-gray font-normal">
+          <span className="text-darkest-gray font-normal break-words">
             {info.getValue()}
           </span>
         ),
@@ -54,8 +54,8 @@ export function RankingMoreTable({ rows }: Props) {
   }
 
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full table-fixed border-collapse text-left text-sm">
+    <div className="w-full min-w-0">
+      <table className="w-full min-w-0 table-fixed border-collapse text-left text-sm">
         <colgroup>
           {table.getAllLeafColumns().map((column) => (
             <col
@@ -74,7 +74,7 @@ export function RankingMoreTable({ rows }: Props) {
                 <th
                   key={header.id}
                   scope="col"
-                  className="border-table-border-gray text-secondary-500 border-b px-4 py-3 text-xs font-bold uppercase"
+                  className="border-table-border-gray text-secondary-500 min-w-0 border-b px-4 py-3 text-base font-bold uppercase"
                 >
                   {header.isPlaceholder
                     ? null
@@ -89,11 +89,14 @@ export function RankingMoreTable({ rows }: Props) {
         </thead>
         <tbody>
           {table.getRowModel().rows.map((row) => (
-            <tr key={row.id} className="text-medium-gray">
+            <tr
+              key={row.id}
+              className="text-medium-gray hover:bg-lightest-gray transition-colors duration-150 ease-in-out"
+            >
               {row.getVisibleCells().map((cell) => (
                 <td
                   key={cell.id}
-                  className="border-table-border-gray border-b px-4 py-3 align-top"
+                  className="border-table-border-gray min-w-0 border-b px-4 py-3 align-top text-base"
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
