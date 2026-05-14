@@ -7,22 +7,24 @@ import { NavigationBarLocaleSwitch } from './navigation-bar-locale-switch';
 import { NavigationBarMainNav } from './navigation-bar-main-nav';
 import { NavigationBarMobileDrawer } from './navigation-bar-mobile-drawer';
 import { Link } from '@/lib/i18n/navigation';
+import { getAuthPortalUrls, ROUTES } from '@/lib/sitemap/registry';
 
 const MAIN_NAV_ITEMS = [
-  { href: '/products', translationKey: 'navProducts' },
-  { href: '/about', translationKey: 'navAbout' },
-  { href: '/resources', translationKey: 'navResources' },
-  { href: '/support', translationKey: 'navSupport' },
-  { href: '/contact', translationKey: 'navContact' },
+  { href: ROUTES.PRODUCTS, translationKey: 'navProducts' },
+  { href: ROUTES.ABOUT, translationKey: 'navAbout' },
+  { href: ROUTES.RESOURCES, translationKey: 'navResources' },
+  { href: ROUTES.SUPPORT, translationKey: 'navSupport' },
+  { href: ROUTES.CONTACT, translationKey: 'navContact' },
 ] as const;
 
 const TOP_UTILITY_LINKS = [
-  { href: '/contact', translationKey: 'utilityContactUs' },
-  { href: '/partner', translationKey: 'utilityPartnerWithUs' },
+  { href: ROUTES.CONTACT, translationKey: 'utilityContactUs' },
+  { href: ROUTES.PARTNER, translationKey: 'utilityPartnerWithUs' },
 ] as const;
 
 export async function NavigationBar() {
   const t = await getTranslations('NavigationBar');
+  const { login: loginHref, register: registerHref } = getAuthPortalUrls();
 
   const mainNavItems = MAIN_NAV_ITEMS.map(({ href, translationKey }) => ({
     href,
@@ -97,15 +99,26 @@ export async function NavigationBar() {
             />
           </div>
           <div className="flex shrink-0 items-center gap-2 sm:gap-[17px]">
-            <Button variant="secondary" size="small">
+            <Button
+              variant="secondary"
+              size="small"
+              href={loginHref}
+              className="text-white!"
+            >
               {t('login')}
             </Button>
-            <Button variant="primary" size="small">
+            <Button
+              variant="primary"
+              size="small"
+              href={registerHref}
+              className="text-white!"
+            >
               {t('register')}
             </Button>
             <NavigationBarMobileDrawer
               items={mainNavItems}
               utilityLinks={drawerUtilityLinks}
+              downloadHref={ROUTES.DOWNLOAD}
               labels={drawerLabels}
             />
           </div>

@@ -69,6 +69,7 @@ export async function ShowcaseSection() {
                 'items-center justify-center',
                 'text-center lg:w-fit lg:max-w-[180px] lg:flex-col lg:items-start lg:gap-3 lg:text-left',
                 'lg:-translate-y-20',
+                'origin-center scale-100 transform-gpu transition-all duration-100 ease-in-out hover:scale-[1.02] motion-reduce:transition-none motion-reduce:hover:scale-100',
                 item.align === 'left'
                   ? 'lg:justify-self-end'
                   : 'lg:justify-self-start',

@@ -45,7 +45,7 @@ export async function PrizesSection({ prizes }: Props) {
               {ordered.map((p, index) => (
                 <li
                   key={p.id}
-                  className="bg-light-gray flex flex-col items-center rounded-2xl px-6 py-10 text-center md:px-8 md:py-12"
+                  className="bg-light-gray flex origin-center scale-100 transform-gpu flex-col items-center rounded-2xl px-6 py-10 text-center shadow-sm transition-all duration-100 ease-in-out hover:scale-[1.02] hover:shadow-lg motion-reduce:transition-none motion-reduce:hover:scale-100 motion-reduce:hover:shadow-sm md:px-8 md:py-12"
                 >
                   <div
                     className="relative mb-6 h-[72px] w-[72px] shrink-0"

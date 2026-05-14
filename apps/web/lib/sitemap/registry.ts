@@ -136,6 +136,22 @@ export const ROUTES = {
   DOWNLOAD: SITEMAP.DOWNLOAD.path,
 } as const;
 
+const DEFAULT_LOGIN_URL = 'https://www.hfm.com/';
+const DEFAULT_REGISTER_URL = 'https://www.hfm.com/en/open-live-account';
+
+/**
+ * External client portal targets for header CTAs. Override in `.env` for each
+ * environment; defaults point at the public HF Markets site.
+ */
+export function getAuthPortalUrls(): { login: string; register: string } {
+  const login = process.env.NEXT_PUBLIC_LOGIN_URL?.trim();
+  const register = process.env.NEXT_PUBLIC_REGISTER_URL?.trim();
+  return {
+    login: login && login.length > 0 ? login : DEFAULT_LOGIN_URL,
+    register: register && register.length > 0 ? register : DEFAULT_REGISTER_URL,
+  };
+}
+
 function routeEntries(): RouteInfo[] {
   return Object.values(SITEMAP) as RouteInfo[];
 }

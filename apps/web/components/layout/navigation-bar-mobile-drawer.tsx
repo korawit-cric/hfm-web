@@ -4,6 +4,7 @@ import { useEffect, useId, useState } from 'react';
 import { HamburgerMenu, MobileDevice } from '@repo/icons';
 
 import { Link, usePathname } from '@/lib/i18n/navigation';
+import { cn } from '@repo/ui/utils';
 
 import type { NavigationBarMainNavItem } from './navigation-bar-main-nav';
 import type { NavigationBarLocaleLabels } from './navigation-bar-locale-switch';
@@ -25,12 +26,15 @@ export type NavigationBarDrawerLabels = {
 type Props = {
   items: NavigationBarMainNavItem[];
   utilityLinks: UtilityLink[];
+  /** From sitemap `ROUTES.DOWNLOAD` — single source of truth for app paths. */
+  downloadHref: string;
   labels: NavigationBarDrawerLabels;
 };
 
 export function NavigationBarMobileDrawer({
   items,
   utilityLinks,
+  downloadHref,
   labels,
 }: Props) {
   const [open, setOpen] = useState(false);
@@ -73,9 +77,10 @@ export function NavigationBarMobileDrawer({
       </button>
 
       <div
-        className={`fixed inset-0 z-40 bg-black/50 transition-opacity duration-300 ease-out lg:hidden ${
-          open ? 'opacity-100' : 'pointer-events-none opacity-0'
-        }`}
+        className={cn(
+          'fixed inset-0 z-40 bg-black/50 transition-opacity duration-300 ease-out lg:hidden',
+          open ? 'opacity-100' : 'pointer-events-none opacity-0',
+        )}
         aria-hidden={!open}
         onClick={() => setOpen(false)}
       />
@@ -86,11 +91,11 @@ export function NavigationBarMobileDrawer({
         aria-modal={open ? true : undefined}
         aria-hidden={!open}
         aria-labelledby={titleId}
-        className={`border-bold-gray/60 bg-darkest-gray fixed top-0 right-0 z-50 flex h-full max-w-full flex-col border-l shadow-2xl transition-transform duration-300 ease-out lg:hidden ${
-          open
-            ? 'w-[min(100vw,22rem)] translate-x-0'
-            : 'pointer-events-none w-[min(100vw,22rem)] translate-x-full'
-        }`}
+        className={cn(
+          'border-bold-gray/60 bg-darkest-gray text-lightest-gray fixed top-0 right-0 z-50 flex h-full max-w-full flex-col border-l shadow-2xl transition-transform duration-300 ease-out lg:hidden',
+          'w-[min(100vw,22rem)]',
+          open ? 'translate-x-0' : 'pointer-events-none translate-x-full',
+        )}
       >
         <div className="border-bold-gray/40 flex shrink-0 items-center justify-between gap-4 border-b px-4 py-3">
           <h2 id={titleId} className="text-base font-bold text-white">
@@ -125,7 +130,7 @@ export function NavigationBarMobileDrawer({
           </nav>
           <div className="border-bold-gray/40 shrink-0 border-t px-2 py-2">
             <Link
-              href="/download"
+              href={downloadHref}
               className="text-lightest-gray hover:bg-bold-gray/50 inline-flex w-full items-center gap-2 rounded px-3 py-3 text-base transition-colors hover:text-white"
               onClick={() => setOpen(false)}
             >
@@ -137,7 +142,7 @@ export function NavigationBarMobileDrawer({
                 <li key={href}>
                   <Link
                     href={href}
-                    className="text-lightest-gray hover:bg-bold-gray/50 block rounded px-3 py-3 text-base transition-colors hover:text-white hover:underline!"
+                    className="text-lightest-gray hover:bg-bold-gray/50 block rounded px-3 py-3 text-base transition-colors hover:text-white hover:underline"
                     onClick={() => setOpen(false)}
                   >
                     {label}

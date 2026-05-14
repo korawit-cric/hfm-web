@@ -54,7 +54,7 @@ export async function RankingSection({ rankings }: Props) {
                 {topThree.map((r, i) => (
                   <article
                     key={r.id}
-                    className="relative flex gap-4 overflow-hidden rounded-xl bg-white p-5 text-black md:gap-8 md:p-[30px]"
+                    className="relative flex origin-center scale-100 transform-gpu gap-4 overflow-hidden rounded-xl bg-white p-5 text-black shadow-sm transition-all duration-300 ease-in-out hover:scale-[1.02] hover:shadow-lg motion-reduce:transition-none motion-reduce:hover:scale-100 motion-reduce:hover:shadow-sm md:gap-8 md:p-[30px]"
                   >
                     <div
                       className="pointer-events-none absolute top-0 right-0 z-10 h-[88px] w-[90px] md:h-[117px] md:w-[119px]"
@@ -94,7 +94,7 @@ export async function RankingSection({ rankings }: Props) {
                 ))}
               </div>
 
-              <div>
+              <div className="min-w-0">
                 <h3 className="mb-16 text-2xl font-bold">
                   {t('moreRanksTitle')}
                 </h3>
